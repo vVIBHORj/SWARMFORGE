@@ -20,8 +20,8 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 - `runs/`: Execution runs, checkpoints, and benchmark artifacts
 
 ## Milestones
-- [x] **M0: Environment & GPU setup** (In Progress)
-- [ ] **M1: Vectorized 3D physics & CPA**
+- [x] **M0: Environment & GPU setup** (Done)
+- [ ] **M1: Vectorized 3D physics & CPA** (In Progress: kinematics + CPA done; scenario generator + vectorized env still to do)
 - [ ] **M2: Classical baselines (Greedy/Hungarian/Auction + PN)**
 - [ ] **M3: Sensor noise & Kalman filtering**
 - [ ] **M4: Cross-attention MAPPO & curriculum learning**
