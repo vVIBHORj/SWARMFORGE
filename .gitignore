@@ -1,0 +1,49 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Unit test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# PyTorch checkpoints and model weights
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# Run artifacts & telemetry (preserve .gitkeep)
+runs/*
+!runs/.gitkeep
+
+# Node / Three.js
+node_modules/
+dist-viewer/
+
+# IDE and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Documents / local notes
+*.docx

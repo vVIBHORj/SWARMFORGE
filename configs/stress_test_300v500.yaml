@@ -1,0 +1,11 @@
+extends: default_sim.yaml
+
+environment:
+  num_parallel_envs: 1
+
+entities:
+  drones:
+    num_interceptors: 240
+    num_scouts: 60
+  missiles:
+    num_missiles: 500

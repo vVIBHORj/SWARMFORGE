@@ -1,0 +1,40 @@
+environment:
+  seed: 42
+  num_parallel_envs: 4
+  max_episode_steps: 400
+  dt: 0.05
+  world_bounds_meters: [10000, 10000, 3000]
+  num_defended_hvas: 2
+  max_neighbors_observed: 15
+
+entities:
+  drones:
+    num_interceptors: 16
+    num_scouts: 4
+    max_speed: 350.0
+    max_accel_g: 12.0
+    linear_drag: 0.015
+    collision_radius: 5.0
+    cbf_safe_radius: 40.0
+    intercept_radius: 25.0
+    interceptor_sensor_range: 4500.0
+    scout_sensor_range: 9000.0
+  missiles:
+    num_missiles: 30
+    decoy_fraction: 0.15
+    max_speed: 450.0
+    max_accel_g: 8.0
+    weave_amplitude_g: 4.0
+    weave_frequency_rad_s: 1.5
+    max_salvo_owners_k: 1
+
+estimation:
+  enable_sensor_noise: true
+  position_noise_std_meters: 15.0
+  use_kalman_filter: true
+
+guidance:
+  base_guidance: true_proportional_navigation
+  navigation_gain_N: 4.0
+  allocator: hybrid_auction_attention
+  hysteresis_bonus: 2.5
