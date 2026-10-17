@@ -6,6 +6,8 @@ environment:
   world_bounds_meters: [10000, 10000, 3000]
   num_defended_hvas: 2
   max_neighbors_observed: 15
+  interceptor_expended_on_intercept: false
+  expire_margin_m: 1000.0
 
 entities:
   drones:
@@ -13,6 +15,8 @@ entities:
     num_scouts: 4
     max_speed: 350.0
     max_accel_g: 12.0
+    scout_speed_fraction: 0.6
+    scout_accel_fraction: 0.6
     linear_drag: 0.015
     collision_radius: 5.0
     cbf_safe_radius: 40.0
@@ -24,9 +28,24 @@ entities:
     decoy_fraction: 0.15
     max_speed: 450.0
     max_accel_g: 8.0
+    linear_drag: 0.0
     weave_amplitude_g: 4.0
     weave_frequency_rad_s: 1.5
     max_salvo_owners_k: 1
+
+scenario:
+  hva_region_fraction: 0.25          # HVAs placed within +-fraction of world half-extent in x,y
+  drone_ring_radius: [300.0, 1500.0] # drones spawn around HVA centroid, radius range (m)
+  drone_altitude_range: [100.0, 800.0]
+  missile_altitude_range: [1500.0, 3000.0]
+  missile_speed_fraction: [0.7, 0.95] # initial speed as fraction of missile max_speed
+  patterns: [saturation, pincer, wave]
+  wave_interval_s: 2.0               # spawn_time stagger between waves
+  num_waves: 3
+  hva_impact_radius: 50.0
+  mode: "3d"                         # "3d" or "2d" (2d => every z = 0 and no vertical motion)
+  weave_enabled: true
+
 
 estimation:
   enable_sensor_noise: true

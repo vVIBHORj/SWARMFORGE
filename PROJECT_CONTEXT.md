@@ -21,9 +21,23 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 
 ## Milestones
 - [x] **M0: Environment & GPU setup** (Done)
-- [ ] **M1: Vectorized 3D physics & CPA** (In Progress: kinematics + CPA done; scenario generator + vectorized env still to do)
+- [x] **M1: Vectorized 3D physics & CPA** (Done)
 - [ ] **M2: Classical baselines (Greedy/Hungarian/Auction + PN)**
 - [ ] **M3: Sensor noise & Kalman filtering**
 - [ ] **M4: Cross-attention MAPPO & curriculum learning**
 - [ ] **M5: Three.js 3D viewer**
 - [ ] **M6: Ablations & release**
+
+## Env API (`VectorizedSwarmEnv`)
+- Public methods:
+  - `reset(seed=None, num_interceptors=None, num_scouts=None, num_missiles=None, mode=None, weave_enabled=None, sigma_obs=None) -> None`
+  - `reset_envs(env_mask: bool [E]) -> None`
+  - `step(drone_accel_cmd: float32 [E,N,3]) -> dict`
+  - `missile_live() -> bool [E,M]`
+  - `metrics() -> dict of [E] float tensors`
+- Missile Status Codes:
+  - `0`: In flight / unresolved
+  - `1`: Intercepted by defending drone
+  - `2`: Impacted an HVA
+  - `3`: Expired (out of bounds or ground impact)
+
