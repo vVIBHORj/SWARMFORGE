@@ -6,6 +6,7 @@ environment:
   world_bounds_meters: [10000, 10000, 3000]
   num_defended_hvas: 2
   max_neighbors_observed: 15
+  max_allies_observed: 10
   interceptor_expended_on_intercept: false
   expire_margin_m: 1000.0
 
@@ -50,10 +51,45 @@ scenario:
 estimation:
   enable_sensor_noise: true
   position_noise_std_meters: 15.0
+  scout_noise_multiplier: 0.4          # Scouts broadcast cleaner tracks than interceptors
+  range_noise_scale: 0.5               # Noise grows with (dist / sensor_range)
   use_kalman_filter: true
+  kf_process_accel_std: 35.0           # Process noise sigma_a (m/s^2) for maneuvering targets
+  kf_init_pos_var: 225.0               # Initial position variance (m^2)
+  kf_init_vel_var: 10000.0             # Initial velocity variance ((m/s)^2)
+  kf_init_acc_var: 2500.0              # Initial acceleration variance ((m/s^2)^2)
 
 guidance:
   base_guidance: true_proportional_navigation
   navigation_gain_N: 4.0
   allocator: hybrid_auction_attention
   hysteresis_bonus: 2.5
+
+guidance_and_allocation:
+  base_guidance: true_proportional_navigation
+  navigation_gain_N: 4.0
+  v_min_closing: 20.0
+  tgo_cap: 120.0
+  cbf_gain: 500.0
+  cost_weights: {w_tgo: 1.0, w_zem: 0.02, w_urgency: 50.0, w_hysteresis: 2.5, w_logit: 1.0}
+  auction_num_iters: 10
+  auction_eps: 0.05
+  invalid_cost: 1.0e6
+
+rewards:
+  intercept_assigned_bonus: 10.0
+  intercept_team_bonus: 5.0
+  hva_leaker_penalty: 15.0
+  duplicate_penalty: 2.0
+  collision_penalty: 10.0
+  effort_weight: 0.01
+  shaping_gamma: 0.99
+  shaping_zem_weight: 1.0
+  shaping_dist_weight: 0.5
+
+curriculum:
+  window_size: 50
+  stage1: {num_interceptors: 6, num_scouts: 0, num_missiles: 8, mode: "2d", weave_enabled: false, decoy_fraction: 0.0, sigma_obs: 0.0, linear_drag: 0.0, win_threshold: 0.90}
+  stage2: {num_interceptors: 12, num_scouts: 3, num_missiles: 25, mode: "3d", weave_enabled: true, decoy_fraction: 0.0, sigma_obs: 0.0, linear_drag: 0.02, win_threshold: 0.85}
+  stage3: {num_interceptors: 16, num_scouts: 4, num_missiles: 30, mode: "3d", weave_enabled: true, decoy_fraction: 0.15, sigma_obs: 15.0, linear_drag: 0.015, win_threshold: 1.0}
+

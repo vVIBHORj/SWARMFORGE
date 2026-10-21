@@ -21,8 +21,14 @@ from typing import Optional
 import torch
 
 from src.config import get
+from src.envs.observations import build_observations
+from src.envs.rewards import RewardComputer
 from src.envs.scenario_generator import generate_scenario
 from src.envs.threat_models import missile_accel_cmd
+from src.estimation.kalman_tracker import (
+    VectorizedKalmanTracker,
+    compute_detections_and_measurements,
+)
 from src.physics.cpa_collisions import friendly_collision_mask, pairwise_cpa
 from src.physics.kinematics_3d import g_to_ms2, step_kinematics
 
@@ -39,9 +45,14 @@ class VectorizedSwarmEnv:
         self.num_interceptors = int(get(cfg, "entities.drones.num_interceptors", 16))
         self.num_scouts = int(get(cfg, "entities.drones.num_scouts", 4))
         self.num_missiles = int(get(cfg, "entities.missiles.num_missiles", 30))
+        self.M = self.num_missiles
+        self.N = self.num_interceptors + self.num_scouts
         self.mode = get(cfg, "scenario.mode", "3d")
         self.weave_enabled = get(cfg, "scenario.weave_enabled", True)
-        self.sigma_obs = float(get(cfg, "estimation.position_noise_std_meters", 0.0))
+
+        self.enable_sensor_noise = bool(get(cfg, "estimation.enable_sensor_noise", True))
+        pos_noise = float(get(cfg, "estimation.position_noise_std_meters", 15.0))
+        self.sigma_obs = pos_noise if self.enable_sensor_noise else 0.0
 
         self.dt = float(get(cfg, "environment.dt", 0.05))
         self.max_episode_steps = int(get(cfg, "environment.max_episode_steps", 400))
@@ -54,6 +65,7 @@ class VectorizedSwarmEnv:
         self.world_bounds = [float(v) for v in get(cfg, "environment.world_bounds_meters", [10000.0, 10000.0, 3000.0])]
 
         self._rng = torch.Generator(device="cpu").manual_seed(self.seed)
+        self.reward_computer = RewardComputer(self.cfg, self.device)
         self.reset()
 
     def reset(self, seed: Optional[int] = None, num_interceptors: Optional[int] = None, num_scouts: Optional[int] = None,
@@ -65,6 +77,8 @@ class VectorizedSwarmEnv:
         if num_interceptors is not None: self.num_interceptors = num_interceptors
         if num_scouts is not None: self.num_scouts = num_scouts
         if num_missiles is not None: self.num_missiles = num_missiles
+        self.M = self.num_missiles
+        self.N = self.num_interceptors + self.num_scouts
         if mode is not None: self.mode = mode
         if weave_enabled is not None: self.weave_enabled = weave_enabled
         if sigma_obs is not None: self.sigma_obs = sigma_obs
@@ -99,6 +113,10 @@ class VectorizedSwarmEnv:
         self.delta_v = torch.zeros(E, dtype=torch.float32, device=self.device)
         self.friendly_collisions = torch.zeros(E, dtype=torch.float32, device=self.device)
 
+        self.tracker = VectorizedKalmanTracker(self.cfg, self.num_envs, self.M, self.device)
+        self.update_tracker()
+        self._prev_phi = self.reward_computer.compute_potential(self)
+
     def reset_envs(self, env_mask: torch.Tensor) -> None:
         sub_seed = int(torch.randint(0, 2**31 - 1, (1,), generator=self._rng).item())
         scen = generate_scenario(self.cfg, self.num_envs, self.num_interceptors, self.num_scouts, self.num_missiles,
@@ -128,6 +146,11 @@ class VectorizedSwarmEnv:
         self.missile_exists = torch.where(m2, scen["missile_active"], self.missile_exists)
         self.missile_status = torch.where(m2, torch.zeros_like(self.missile_status), self.missile_status)
         self.z = torch.where(m3, torch.zeros_like(self.z), self.z)
+
+        self.tracker.reset(env_mask)
+        self.update_tracker(env_mask=env_mask)
+        new_phi = self.reward_computer.compute_potential(self)
+        self._prev_phi = torch.where(env_mask.unsqueeze(-1), new_phi, self._prev_phi)
 
     def missile_live(self) -> torch.Tensor:
         time_sec = self.t.unsqueeze(-1).float() * self.dt
@@ -239,6 +262,9 @@ class VectorizedSwarmEnv:
         self.truncated = self.truncated | (time_out & (~all_resolved) & running)
         self.done = self.done | done_new
 
+        # 11. Estimation / tracker update for active envs
+        self.update_tracker(env_mask=running)
+
         return {
             "intercept_event": ev_intercept,
             "interceptor_of_missile": torch.where(run_m, interceptor_of_m, torch.tensor(-1, device=self.device, dtype=torch.int64)),
@@ -279,3 +305,56 @@ class VectorizedSwarmEnv:
             "delta_v_per_intercept": dv_per_int,
             "steps": self.t.float(),
         }
+
+    def update_tracker(self, env_mask: Optional[torch.Tensor] = None) -> dict:
+        """Compute detections and step the multi-target Kalman tracker."""
+        meas = compute_detections_and_measurements(self, rng=self._rng)
+        track_dict = self.tracker.step(
+            z_pos=meas["z_pos"],
+            detected=meas["detected"],
+            sigma_m=meas["sigma_m"],
+            missile_live=self.missile_live(),
+            env_mask=env_mask,
+        )
+        if env_mask is not None and hasattr(self, "track_state"):
+            m = env_mask.unsqueeze(-1)
+            m_drone = env_mask.unsqueeze(-1).unsqueeze(-1)
+            track_dict["sigma_m"] = torch.where(m, meas["sigma_m"], self.track_state.get("sigma_m", meas["sigma_m"]))
+            track_dict["drone_detects"] = torch.where(m_drone, meas["drone_detects"], self.track_state.get("drone_detects", meas["drone_detects"]))
+        else:
+            track_dict["sigma_m"] = meas["sigma_m"]
+            track_dict["drone_detects"] = meas["drone_detects"]
+
+        self.track_state = track_dict
+        return track_dict
+
+    def get_observations(
+        self,
+        K_threat: Optional[int] = None,
+        K_ally: Optional[int] = None,
+        use_estimated_state: bool = True,
+    ) -> dict:
+        """Build permutation-invariant set observations."""
+        return build_observations(
+            self,
+            K_threat=K_threat,
+            K_ally=K_ally,
+            use_estimated_state=use_estimated_state,
+        )
+
+    def compute_rewards(
+        self,
+        info: dict,
+        prev_z: Optional[torch.Tensor] = None,
+        rl_residual_accel: Optional[torch.Tensor] = None,
+    ) -> tuple[torch.Tensor, dict]:
+        """Compute multi-component rewards with potential-based shaping."""
+        rewards, comps, new_phi = self.reward_computer.compute_step_reward(
+            self,
+            self._prev_phi,
+            prev_z=prev_z,
+            info=info,
+            rl_residual_accel=rl_residual_accel,
+        )
+        self._prev_phi = new_phi
+        return rewards, comps

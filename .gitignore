@@ -25,6 +25,7 @@ htmlcov/
 *.pth
 *.bin
 *.onnx
+checkpoints/
 
 # Run artifacts & telemetry (preserve .gitkeep)
 runs/*
@@ -33,6 +34,8 @@ runs/*
 # Node / Three.js
 node_modules/
 dist-viewer/
+dist/
+.vite/
 
 # IDE and editors
 .vscode/
@@ -45,7 +48,9 @@ dist-viewer/
 Thumbs.db
 desktop.ini
 
-# Documents / local notes
+# Documents / local notes & scratch
+*.tmp
+*.log
 *.docx
-
-start.txt
+scratch/
+project_spec.txt
