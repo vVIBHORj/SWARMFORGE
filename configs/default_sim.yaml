@@ -93,3 +93,26 @@ curriculum:
   stage2: {num_interceptors: 12, num_scouts: 3, num_missiles: 25, mode: "3d", weave_enabled: true, decoy_fraction: 0.0, sigma_obs: 0.0, linear_drag: 0.02, win_threshold: 0.85}
   stage3: {num_interceptors: 16, num_scouts: 4, num_missiles: 30, mode: "3d", weave_enabled: true, decoy_fraction: 0.15, sigma_obs: 15.0, linear_drag: 0.015, win_threshold: 1.0}
 
+training:
+  algorithm: attention_mappo_ctde
+  device: cuda
+  mixed_precision_amp: true
+  d_model: 64
+  num_attention_heads: 2
+  mlp_hidden_sizes: [64, 64]
+  residual_accel_max_g: 4.0
+  logit_scale: 5.0
+  learning_rate: 0.0003
+  gamma: 0.99
+  gae_lambda: 0.95
+  clip_epsilon: 0.2
+  entropy_coef: 0.01
+  value_loss_coef: 0.5
+  max_grad_norm: 0.5
+  rollout_steps: 256
+  ppo_epochs: 4
+  num_minibatches: 4
+  total_env_steps: 10000000
+  eval_interval_updates: 25
+  num_eval_seeds: 5
+

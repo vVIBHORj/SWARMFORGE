@@ -10,6 +10,8 @@ training:
   d_model: 64
   num_attention_heads: 2
   mlp_hidden_sizes: [64, 64]
+  residual_accel_max_g: 4.0
+  logit_scale: 5.0
   learning_rate: 0.0003
   gamma: 0.99
   gae_lambda: 0.95
