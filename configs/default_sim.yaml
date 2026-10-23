@@ -116,3 +116,10 @@ training:
   eval_interval_updates: 25
   num_eval_seeds: 5
 
+visualization:
+  enabled_during_training: false
+  host: "0.0.0.0"
+  websocket_port: 8765
+  protocol: binary_float32
+  target_fps: 60
+  renderer: threejs_instanced

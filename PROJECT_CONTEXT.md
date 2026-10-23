@@ -26,7 +26,8 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 - [x] **M2: Classical baselines (Greedy/Hungarian/Auction + PN)** (Done)
 - [x] **M3: Sensor noise & Kalman filtering** (Done)
 - [x] **M4: Cross-attention MAPPO & curriculum learning** (Done)
-- [ ] **M5: Three.js 3D viewer**
+- [x] **M5 Part 1: FastAPI Packed Binary WebSocket Server, SandboxSession & Live Red-Team Spawner** (Done)
+- [ ] **M5 Part 2: Three.js 3D viewer**
 - [ ] **M6: Ablations & release**
 
 ## Env API (`VectorizedSwarmEnv`)
@@ -34,6 +35,7 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
   - `reset(seed=None, num_interceptors=None, num_scouts=None, num_missiles=None, mode=None, weave_enabled=None, sigma_obs=None) -> None`
   - `reset_envs(env_mask: bool [E]) -> None`
   - `step(drone_accel_cmd: float32 [E,N,3]) -> dict`
+  - `spawn_salvo(count=10, speed=None, weave_frequency_rad_s=None, decoy_fraction=None) -> int`: Live red-team threat salvo spawner dynamically expanding `M -> M + count` across env and tracker tensors.
   - `missile_live() -> bool [E,M]`
   - `metrics() -> dict of [E] float tensors`
   - `update_tracker(env_mask=None) -> dict`: Steps multi-target Kalman tracker with current sensor detections, updating `env.track_state`.
@@ -112,5 +114,26 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 - `scripts/train.py`:
   - Full CLI training entrypoint with `--config`, `--smoke-test`, `--total-steps`, `--updates`, `--num-envs`, `--rollout-steps`, `--seed`, `--device`, `--model-type`, `--no-curriculum`, and `--save-dir`.
   - Streams JSONL metrics (`metrics.jsonl`), logs TensorBoard scalars, and auto-saves `latest.pt` / `best.pt` checkpoints.
+
+## Server & WebSocket Binary Telemetry API (Milestone M5 Part 1)
+- `src.server.ws_binary_server`:
+  - `pack_binary_frame(env, algo_id=1, fps=60.0) -> bytes`:
+    - Deterministic little-endian `float32` packing assembled directly on GPU with 0 host-synchronization before bulk CPU buffer transfer.
+    - Header: 16 floats (64 bytes) including `magic=2026.0`, `timestamp`, `step`, `N`, `M`, `P`, `intercept_rate`, `leaker_rate`, `duplicate_conflicts`, `delta_v_total`, `friendly_collisions`, `algo_id`, `sigma_obs`, `fps`, `world_w`, `world_h`.
+    - HVA Block: `P * 4` floats (`[id, x, y, z]`).
+    - Entity Block: `(N + M) * 10` floats (`[id, type, x, y, z, vx, vy, vz, status, assigned_id]`).
+    - Total frame bytes: `(16 + 4*P + 10*(N+M)) * 4` (2096 bytes for N=20, M=30; ~12.1 KB for N=100, M=200; ~32.1 KB for N=300, M=500).
+  - `unpack_binary_frame(raw_bytes: bytes) -> dict`: Zero-copy deserialization returning header, HVAs, drones, and missiles.
+  - `SandboxSession(cfg, checkpoint_path=None, algorithm="auction", device=None)`:
+    - Interactive simulation controller with mid-episode algorithm hot-swapping across `greedy`, `hungarian`, `auction`, and `attention_mappo`.
+    - Live threat salvo injection (`spawn_salvo`), sensor noise and playback control (`set_params`), and scenario reset (`reset`).
+    - `step_and_pack() -> bytes`: Steps simulation with active algorithm and returns binary packed frame.
+  - `create_app(cfg, checkpoint_path=None, viewer_dir="viewer3d") -> FastAPI`:
+    - `GET /api/status`: JSON summary of session state and metrics.
+    - `POST /api/command`: JSON endpoint executing control commands (`set_algorithm`, `spawn_salvo`, `set_params`, `reset`).
+    - `WS /ws`: 60 Hz binary `Float32Array` frame streaming WebSocket with concurrent JSON bidirectional command parsing.
+    - Static file mount serving `viewer3d/` at `/`.
+- `scripts/demo_server.py`:
+  - Full CLI entrypoint supporting `--config`, `--checkpoint`, `--host`, `--port`, `--algorithm`, and `--smoke-test` (10-step frame size & latency validator).
 
 

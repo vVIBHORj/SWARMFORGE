@@ -9,3 +9,13 @@ entities:
     num_scouts: 60
   missiles:
     num_missiles: 500
+
+guidance:
+  allocator: auction
+
+guidance_and_allocation:
+  allocator: auction
+  auction_num_iters: 4
+
+visualization:
+  target_fps: 60

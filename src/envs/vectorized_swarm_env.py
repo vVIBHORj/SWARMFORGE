@@ -17,6 +17,7 @@ Conventions:
     9. Delta-v accumulation and episode termination checks.
 """
 
+import math
 from typing import Optional
 import torch
 
@@ -155,6 +156,144 @@ class VectorizedSwarmEnv:
     def missile_live(self) -> torch.Tensor:
         time_sec = self.t.unsqueeze(-1).float() * self.dt
         return self.missile_exists & (self.missile_status == 0) & (time_sec >= self.missile_spawn_time) & (~self.done.unsqueeze(-1))
+
+    def spawn_salvo(
+        self,
+        count: int = 10,
+        speed: Optional[float] = None,
+        weave_frequency_rad_s: Optional[float] = None,
+        decoy_fraction: Optional[float] = None,
+    ) -> int:
+        """Spawn a live salvo of incoming threats at the perimeter/high altitude.
+
+        Strategy:
+        Dynamically expands the missile dimension M -> M + count across all [E, M, ...]
+        missile tensors, assignment tensor z [E, N, M], and tracker state tensors.
+        This provides clean, host-sync-free vectorization across parallel environments,
+        preserves the historical metrics of already resolved threats, and keeps
+        the state tensors consistent across all components.
+
+        Args:
+            count: Number of new missiles to spawn.
+            speed: Optional speed override (m/s).
+            weave_frequency_rad_s: Optional weave frequency override (rad/s).
+            decoy_fraction: Optional decoy probability fraction.
+
+        Returns:
+            int: Number of newly spawned live missiles.
+        """
+        if count <= 0:
+            return 0
+
+        E = self.num_envs
+        device = self.device
+
+        # Update weave frequency in config if provided
+        if weave_frequency_rad_s is not None:
+            if "entities" not in self.cfg:
+                self.cfg["entities"] = {}
+            if "missiles" not in self.cfg["entities"]:
+                self.cfg["entities"]["missiles"] = {}
+            self.cfg["entities"]["missiles"]["weave_frequency_rad_s"] = float(weave_frequency_rad_s)
+
+        # Target HVA selection
+        P = self.hva_pos.shape[1]
+        new_target = torch.randint(0, P, (E, count), generator=self._rng, device="cpu").to(device=device, dtype=torch.int64)
+
+        # Target positions for direction vector
+        target_idx = new_target.unsqueeze(-1).expand(E, count, 3)
+        target_hva_pos = torch.gather(self.hva_pos, dim=1, index=target_idx)
+
+        # Perimeter position sampling
+        W, L, H = self.world_bounds
+        azimuth = torch.rand((E, count), generator=self._rng, device="cpu").to(device=device, dtype=torch.float32) * (2.0 * math.pi)
+        tx = (W / 2.0) / (torch.abs(torch.cos(azimuth)) + 1e-8)
+        ty = (L / 2.0) / (torch.abs(torch.sin(azimuth)) + 1e-8)
+        t = torch.minimum(tx, ty)
+        mx = torch.clamp(t * torch.cos(azimuth), -W / 2.0, W / 2.0)
+        my = torch.clamp(t * torch.sin(azimuth), -L / 2.0, L / 2.0)
+
+        if self.mode == "2d":
+            mz = torch.zeros((E, count, 1), device=device, dtype=torch.float32)
+        else:
+            alt_m_min, alt_m_max = get(self.cfg, "scenario.missile_altitude_range", [1500.0, 3000.0])
+            mz_cpu = alt_m_min + torch.rand((E, count, 1), generator=self._rng, device="cpu") * (alt_m_max - alt_m_min)
+            mz = mz_cpu.to(device=device, dtype=torch.float32)
+
+        new_pos = torch.cat([mx.unsqueeze(-1), my.unsqueeze(-1), mz], dim=-1)
+
+        # Direction and velocity
+        diff = target_hva_pos - new_pos
+        unit_dir = diff / (torch.linalg.norm(diff, dim=-1, keepdim=True) + 1e-8)
+        if speed is not None:
+            new_speed = float(speed)
+        else:
+            spd_min_frac, spd_max_frac = get(self.cfg, "scenario.missile_speed_fraction", [0.7, 0.95])
+            max_speed = float(get(self.cfg, "entities.missiles.max_speed", 450.0))
+            spd_frac_cpu = spd_min_frac + torch.rand((E, count, 1), generator=self._rng, device="cpu") * (spd_max_frac - spd_min_frac)
+            new_speed = spd_frac_cpu.to(device=device, dtype=torch.float32) * max_speed
+        new_vel = unit_dir * new_speed
+
+        # Missile type: 0=ballistic, 1=dive, 2=weave
+        if weave_frequency_rad_s is not None:
+            new_type = torch.full((E, count), 2, device=device, dtype=torch.int64)
+        else:
+            type_upper = 3 if self.weave_enabled else 2
+            new_type = torch.randint(0, type_upper, (E, count), generator=self._rng, device="cpu").to(device=device, dtype=torch.int64)
+
+        # Decoy status
+        decoy_p = float(decoy_fraction) if decoy_fraction is not None else float(get(self.cfg, "entities.missiles.decoy_fraction", 0.15))
+        decoy_rand = torch.rand((E, count), generator=self._rng, device="cpu").to(device=device)
+        new_is_decoy = decoy_rand < decoy_p
+
+        max_salvo_k = int(get(self.cfg, "entities.missiles.max_salvo_owners_k", 1))
+        new_K = torch.full((E, count), max_salvo_k, device=device, dtype=torch.int64)
+        phase_cpu = torch.rand((E, count), generator=self._rng, device="cpu") * (2.0 * math.pi)
+        new_phase = phase_cpu.to(device=device, dtype=torch.float32)
+
+        curr_time_sec = (self.t.float() * self.dt).unsqueeze(-1)
+        new_spawn_time = curr_time_sec.expand(E, count).clone()
+        new_exists = torch.ones((E, count), device=device, dtype=torch.bool)
+        new_status = torch.zeros((E, count), device=device, dtype=torch.int64)
+
+        # Dynamically expand env missile tensors [E, M + count, ...]
+        self.missile_pos = torch.cat([self.missile_pos, new_pos], dim=1)
+        self.missile_vel = torch.cat([self.missile_vel, new_vel], dim=1)
+        self.missile_type = torch.cat([self.missile_type, new_type], dim=1)
+        self.missile_target_hva = torch.cat([self.missile_target_hva, new_target], dim=1)
+        self.missile_K = torch.cat([self.missile_K, new_K], dim=1)
+        self.missile_is_decoy = torch.cat([self.missile_is_decoy, new_is_decoy], dim=1)
+        self.missile_weave_phase = torch.cat([self.missile_weave_phase, new_phase], dim=1)
+        self.missile_spawn_time = torch.cat([self.missile_spawn_time, new_spawn_time], dim=1)
+        self.missile_exists = torch.cat([self.missile_exists, new_exists], dim=1)
+        self.missile_status = torch.cat([self.missile_status, new_status], dim=1)
+
+        self.M = self.missile_pos.shape[1]
+        self.num_missiles = self.M
+
+        # Expand assignment tensor z [E, N, M + count]
+        self.z = torch.cat([self.z, torch.zeros((E, self.N, count), dtype=torch.bool, device=device)], dim=2)
+
+        # Expand Kalman tracker state tensors
+        self.tracker.num_missiles = self.M
+        self.tracker.x_hat = torch.cat([self.tracker.x_hat, torch.zeros((E, count, 3, 3), device=device, dtype=torch.float32)], dim=1)
+        self.tracker.P = torch.cat([self.tracker.P, torch.zeros((E, count, 3, 3), device=device, dtype=torch.float32)], dim=1)
+        self.tracker.initialized = torch.cat([self.tracker.initialized, torch.zeros((E, count), device=device, dtype=torch.bool)], dim=1)
+        self.tracker.steps_since_seen = torch.cat([self.tracker.steps_since_seen, torch.zeros((E, count), device=device, dtype=torch.int64)], dim=1)
+        self.tracker.prev_z_pos = torch.cat([self.tracker.prev_z_pos, torch.zeros((E, count, 3), device=device, dtype=torch.float32)], dim=1)
+        self.tracker.has_prev_z = torch.cat([self.tracker.has_prev_z, torch.zeros((E, count), device=device, dtype=torch.bool)], dim=1)
+        self.tracker.raw_pos = torch.cat([self.tracker.raw_pos, torch.zeros((E, count, 3), device=device, dtype=torch.float32)], dim=1)
+        self.tracker.raw_vel = torch.cat([self.tracker.raw_vel, torch.zeros((E, count, 3), device=device, dtype=torch.float32)], dim=1)
+        self.tracker.detected = torch.cat([self.tracker.detected, torch.zeros((E, count), device=device, dtype=torch.bool)], dim=1)
+
+        # Update tracker with detections for new threats
+        self.update_tracker()
+
+        # Un-done the environment so newly spawned threats can be engaged
+        self.done[:] = False
+        self.truncated[:] = False
+
+        return count
 
     def step(self, drone_accel_cmd: torch.Tensor) -> dict:
         running = ~self.done

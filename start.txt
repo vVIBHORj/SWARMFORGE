@@ -1,0 +1,35 @@
+After a restart
+Open Antigravity.
+Reconnect to WSL and open the project folder. Either:
+Use File → Open Recent and choose swarmforge [WSL: Ubuntu-24.04], or
+Open an Ubuntu 24.04 terminal from the Start menu, then run cd ~/swarmforge and antigravity ..
+Open a terminal in Antigravity (Ctrl+`). If it isn’t a WSL shell, use the ▾ next to + and pick Ubuntu-24.04 (WSL).
+Run these two lines:
+bash
+   cd ~/swarmforge
+   source .venv/bin/activate
+
+The prompt should start with (.venv).
+5. Optional sanity check, which takes a few seconds:
+
+bash
+   python scripts/check_gpu.py && pytest -q
+Optional shortcut
+
+To skip step 4’s typing, add an alias to your shell. Run this once:
+
+bash
+echo "alias sf='cd ~/swarmforge && source .venv/bin/activate'" >> ~/.bashrc
+source ~/.bashrc
+
+After that, typing sf in any new terminal does both steps.
+
+When something does need fixing
+nvidia-smi or the GPU check fails after a restart: run wsl --shutdown in Windows PowerShell, reopen the terminal and try again. If it still fails, update your NVIDIA driver on Windows.
+(.venv) missing from the prompt: you forgot source .venv/bin/activate.
+No module named ...: you’re either outside ~/swarmforge or the venv isn’t active.
+Venv ever corrupted: delete and rebuild it with rm -rf .venv && bash scripts/setup_wsl.sh.
+
+Use the same swarmforge folder in WSL each time. The old Windows copy on your Desktop is now unused, so don’t open it by accident. You can rename it to SWARMFORGE_old or delete it once everything works.
+
+Whenever you’re ready, run Prompt 2 and send me the output.
