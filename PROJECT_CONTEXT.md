@@ -26,8 +26,7 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 - [x] **M2: Classical baselines (Greedy/Hungarian/Auction + PN)** (Done)
 - [x] **M3: Sensor noise & Kalman filtering** (Done)
 - [x] **M4: Cross-attention MAPPO & curriculum learning** (Done)
-- [x] **M5 Part 1: FastAPI Packed Binary WebSocket Server, SandboxSession & Live Red-Team Spawner** (Done)
-- [ ] **M5 Part 2: Three.js 3D viewer**
+- [x] **M5: Three.js Instanced 3D Tactical Viewer & Binary WebSocket Server** (Done)
 - [ ] **M6: Ablations & release**
 
 ## Env API (`VectorizedSwarmEnv`)
@@ -135,5 +134,31 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
     - Static file mount serving `viewer3d/` at `/`.
 - `scripts/demo_server.py`:
   - Full CLI entrypoint supporting `--config`, `--checkpoint`, `--host`, `--port`, `--algorithm`, and `--smoke-test` (10-step frame size & latency validator).
+
+## Three.js 3D Tactical Viewer Architecture (`viewer3d/`) (Milestone M5 Part 2)
+- Zero-build-step ES Module architecture with CDN `importmap` for Three.js (also supports `npm`/`vite`).
+- Coordinate convention: maps simulation `(x, y, z)` (z=altitude) to Three.js `(x, z, -y)` (Y-up, 1 sim meter = 1 Three.js unit).
+- Key Modules:
+  - `viewer3d/index.html`: Tactical obsidian HUD layout, full-viewport canvas, telemetry overlay, and red-team control panel.
+  - `viewer3d/src/InstancedSwarmRenderer.js`:
+    - Renders up to 1,000 drones and 1,000 missiles in **2 GPU draw calls** via `THREE.InstancedMesh`.
+    - Role-based dynamic instance coloring (Interceptors: Cyan `#00f0ff`, Scouts: Emerald `#10b981`, Threats: Crimson `#ff3344`, Decoys: Gold `#ffcc00`).
+    - Ground HVA pads with translucent cyan hemispheric defense domes.
+    - Zero per-frame heap allocations using pre-allocated `THREE.Object3D` dummy.
+  - `viewer3d/src/TrailAndLockRenderer.js`:
+    - Pre-allocated ring-buffer trajectory trails (`THREE.LineSegments`, `Float32Array` positions and fading vertex colors).
+    - Dynamic assignment lock-on lines connecting defending interceptors to assigned targets with zero per-frame garbage collection.
+  - `viewer3d/src/SandboxHUD.js`:
+    - Real-time telemetry display (client/server FPS, clock, active entity counts, intercept/leaker rates, Delta-V).
+    - Red-team salvo threat spawner with live sliders (salvo size, speed, weave frequency, decoy fraction).
+    - Mid-episode algorithm hot-swapper, sensor noise slider, pause/resume, and scale presets (`6v8`, `20v30`, `60v100`, `300v500`).
+  - `viewer3d/src/main.js`:
+    - Pure `parseBinaryFrame(arrayBuffer)` zero-copy decoder parsing `Float32Array` packets with `magic === 2026.0`.
+    - OrbitControls, tactical ground grid, 10km x 10km x 3km airspace boundary wireframe, render loop, and auto-reconnecting WebSocket client.
+- **Launching the Live Viewer**:
+  ```bash
+  .venv/bin/python scripts/demo_server.py --port 8765
+  # Open browser at http://localhost:8765
+  ```
 
 

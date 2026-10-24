@@ -15,7 +15,7 @@ guidance:
 
 guidance_and_allocation:
   allocator: auction
-  auction_num_iters: 4
+  auction_num_iters: 3
 
 visualization:
   target_fps: 60

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwarmForge — 3D Tactical Swarm Viewer</title>
+  
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.165.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.165.0/examples/jsm/"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg-space: #060a12;
+      --panel-bg: rgba(10, 16, 28, 0.78);
+      --panel-border: rgba(14, 165, 233, 0.28);
+      --panel-glow: rgba(0, 240, 255, 0.12);
+      --accent-cyan: #00f0ff;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-crimson: #ef4444;
+      --text-main: #f1f5f9;
+      --text-dim: #94a3b8;
+      --text-muted: #64748b;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-space);
+      color: var(--text-main);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    #tactical-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      z-index: 1;
+    }
+
+    /* UI Glass Panels */
+    .glass-panel {
+      position: absolute;
+      z-index: 10;
+      background: var(--panel-bg);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid var(--panel-border);
+      border-radius: 6px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45), 0 0 16px 0 var(--panel-glow);
+      padding: 14px 16px;
+      pointer-events: auto;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(14, 165, 233, 0.2);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .panel-title::before {
+      content: "";
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent-cyan);
+    }
+
+    /* Top Left: Telemetry HUD */
+    #hud-telemetry {
+      top: 16px;
+      left: 16px;
+      width: 330px;
+    }
+
+    .hud-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 11px;
+    }
+
+    .hud-label {
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hud-val {
+      font-weight: 600;
+      color: var(--text-main);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hud-val.cyan { color: var(--accent-cyan); }
+    .hud-val.amber { color: var(--accent-amber); }
+    .hud-val.crimson { color: var(--accent-crimson); }
+    .hud-val.emerald { color: var(--accent-emerald); }
+
+    .meter-bar {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 4px 0 10px 0;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      transition: width 0.15s ease-out;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      color: var(--accent-emerald);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      box-shadow: 0 0 6px var(--accent-emerald);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Top Right: Red-Team Sandbox Panel */
+    #hud-sandbox {
+      top: 16px;
+      right: 16px;
+      width: 330px;
+    }
+
+    .control-group {
+      margin-bottom: 12px;
+    }
+
+    .control-label {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-dim);
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    select, input[type="range"], button {
+      font-family: inherit;
+    }
+
+    select {
+      width: 100%;
+      padding: 6px 10px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--panel-border);
+      border-radius: 4px;
+      color: var(--text-main);
+      font-size: 11px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 2px;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+      cursor: pointer;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      box-shadow: 0 0 8px var(--accent-cyan);
+      cursor: pointer;
+    }
+
+    .btn-salvo {
+      width: 100%;
+      padding: 9px;
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.8), rgba(185, 28, 28, 0.95));
+      border: 1px solid #f87171;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.4);
+      transition: all 0.15s ease-in-out;
+      margin-top: 6px;
+    }
+
+    .btn-salvo:hover {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      box-shadow: 0 0 22px rgba(239, 68, 68, 0.7);
+      transform: translateY(-1px);
+    }
+
+    .btn-salvo:active {
+      transform: translateY(1px);
+    }
+
+    /* Bottom: Playback & Preset Bar */
+    #hud-playback {
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 16px;
+    }
+
+    .btn-ctrl {
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid var(--panel-border);
+      border-radius: 4px;
+      color: var(--text-main);
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.12s;
+    }
+
+    .btn-ctrl:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(14, 165, 233, 0.15);
+      color: #fff;
+    }
+
+    .btn-ctrl.active {
+      background: rgba(14, 165, 233, 0.25);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+      box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
+    }
+
+    .btn-preset {
+      padding: 5px 8px;
+      font-size: 10px;
+      color: var(--text-dim);
+    }
+
+    .divider {
+      width: 1px;
+      height: 20px;
+      background: rgba(14, 165, 233, 0.2);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-dim);
+      cursor: pointer;
+    }
+
+    .checkbox-label input {
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fullscreen WebGL Canvas -->
+  <canvas id="tactical-canvas"></canvas>
+
+  <!-- Top-Left: Telemetry HUD -->
+  <div id="hud-telemetry" class="glass-panel">
+    <div class="panel-header">
+      <div class="panel-title">SwarmForge Tactical</div>
+      <div id="conn-badge" class="status-badge">
+        <span class="status-dot"></span>
+        <span id="conn-text">ONLINE</span>
+      </div>
+    </div>
+
+    <div class="hud-row">
+      <span class="hud-label">Algorithm</span>
+      <span id="tel-algo" class="hud-val cyan">GPU Auction + TPN</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Client / Server FPS</span>
+      <span class="hud-val"><span id="tel-fps-client">60</span> / <span id="tel-fps-server" class="cyan">60</span></span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Sim Time (Step)</span>
+      <span class="hud-val"><span id="tel-time">0.00</span>s (<span id="tel-step">0</span>)</span>
+    </div>
+
+    <div style="height: 1px; background: rgba(14, 165, 233, 0.15); margin: 8px 0;"></div>
+
+    <div class="hud-row">
+      <span class="hud-label">Defenders (N)</span>
+      <span id="tel-drones" class="hud-val cyan">20 (16 Int / 4 Scout)</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Threats (M)</span>
+      <span id="tel-missiles" class="hud-val crimson">30</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">High-Value Assets (P)</span>
+      <span id="tel-hvas" class="hud-val emerald">2 Ground HVAs</span>
+    </div>
+
+    <div style="height: 1px; background: rgba(14, 165, 233, 0.15); margin: 8px 0;"></div>
+
+    <div class="hud-row">
+      <span class="hud-label">Intercept Rate</span>
+      <span id="tel-intercept-rate" class="hud-val emerald">0.0%</span>
+    </div>
+    <div class="meter-bar">
+      <div id="tel-intercept-bar" class="meter-fill" style="width: 0%;"></div>
+    </div>
+
+    <div class="hud-row">
+      <span class="hud-label">Leaker Rate</span>
+      <span id="tel-leaker-rate" class="hud-val crimson">0.0%</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Duplicate Conflicts</span>
+      <span id="tel-dup-conflicts" class="hud-val amber">0</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Friendly Collisions</span>
+      <span id="tel-friendly-cols" class="hud-val amber">0</span>
+    </div>
+    <div class="hud-row">
+      <span class="hud-label">Swarm Total &Delta;V</span>
+      <span id="tel-delta-v" class="hud-val">0.0 m/s</span>
+    </div>
+  </div>
+
+  <!-- Top-Right: Interactive Red-Team Sandbox Panel -->
+  <div id="hud-sandbox" class="glass-panel">
+    <div class="panel-header">
+      <div class="panel-title">Red-Team Sandbox</div>
+      <span style="font-size: 10px; color: var(--text-muted);">LIVE CONTROL</span>
+    </div>
+
+    <!-- Algorithm Hot-Swap -->
+    <div class="control-group">
+      <div class="control-label">
+        <span>Allocation Algorithm</span>
+      </div>
+      <select id="select-algo">
+        <option value="auction" selected>GPU Parallel Auction + TPN</option>
+        <option value="hungarian">Hungarian Matching + TPN</option>
+        <option value="greedy">Greedy Nearest + TPN</option>
+        <option value="attention_mappo">Attention-MAPPO Neuro-Symbolic</option>
+      </select>
+    </div>
+
+    <!-- Red-Team Salvo Controls -->
+    <div class="control-group">
+      <div class="control-label">
+        <span>Salvo Threat Count</span>
+        <span id="val-salvo-count" class="hud-val crimson">15</span>
+      </div>
+      <input type="range" id="input-salvo-count" min="1" max="100" value="15" step="1">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span>Missile Speed (m/s)</span>
+        <span id="val-salvo-speed" class="hud-val">450</span>
+      </div>
+      <input type="range" id="input-salvo-speed" min="200" max="650" value="450" step="10">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span>Weave Frequency (rad/s)</span>
+        <span id="val-salvo-weave" class="hud-val">1.5</span>
+      </div>
+      <input type="range" id="input-salvo-weave" min="0.0" max="4.0" value="1.5" step="0.1">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span>Decoy Fraction</span>
+        <span id="val-salvo-decoy" class="hud-val amber">15%</span>
+      </div>
+      <input type="range" id="input-salvo-decoy" min="0.0" max="0.5" value="0.15" step="0.05">
+    </div>
+
+    <button id="btn-spawn-salvo" class="btn-salvo">Launch Threat Salvo</button>
+
+    <div style="height: 1px; background: rgba(14, 165, 233, 0.15); margin: 12px 0;"></div>
+
+    <!-- Sensor Noise -->
+    <div class="control-group" style="margin-bottom: 0;">
+      <div class="control-label">
+        <span>Sensor Noise &sigma;<sub>obs</sub> (m)</span>
+        <span id="val-noise" class="hud-val cyan">15m</span>
+      </div>
+      <input type="range" id="input-noise" min="0" max="50" value="15" step="1">
+    </div>
+  </div>
+
+  <!-- Bottom: Playback & Scale Preset Bar -->
+  <div id="hud-playback" class="glass-panel">
+    <button id="btn-pause-play" class="btn-ctrl">
+      <span id="pause-icon">⏸</span>
+      <span id="pause-text">Pause</span>
+    </button>
+    <button id="btn-reset" class="btn-ctrl">🔄 Reset</button>
+
+    <div class="divider"></div>
+
+    <span class="hud-label" style="margin-right: 2px;">Presets:</span>
+    <button class="btn-ctrl btn-preset" data-preset="stage1">6v8 (2D)</button>
+    <button class="btn-ctrl btn-preset" data-preset="standard">20v30</button>
+    <button class="btn-ctrl btn-preset" data-preset="swarm">60v100</button>
+    <button class="btn-ctrl btn-preset" data-preset="stress">300v500</button>
+
+    <div class="divider"></div>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="chk-trails" checked>
+      <span>Trails</span>
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="chk-locks" checked>
+      <span>Lock-Lines</span>
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="chk-domes" checked>
+      <span>HVA Domes</span>
+    </label>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

@@ -74,68 +74,61 @@ def pack_binary_frame(env: VectorizedSwarmEnv, algo_id: int = 1, fps: float = 60
     M = int(env.M)
     P = int(env.hva_pos.shape[1])
 
-    header_tensor = torch.empty(16, dtype=torch.float32, device=device)
-    header_tensor[0] = 2026.0
-    header_tensor[1] = timestamp
-    header_tensor[2] = t_val
-    header_tensor[3] = float(N)
-    header_tensor[4] = float(M)
-    header_tensor[5] = float(P)
-    header_tensor[6] = metrics["intercept_rate"][0]
-    header_tensor[7] = metrics["leaker_rate"][0]
-    header_tensor[8] = (env.z[0].sum(dim=0) > env.missile_K[0]).sum().float()
-    header_tensor[9] = metrics["delta_v_total"][0]
-    header_tensor[10] = metrics["friendly_collisions"][0]
-    header_tensor[11] = float(algo_id)
-    header_tensor[12] = float(env.sigma_obs)
-    header_tensor[13] = float(fps)
-    header_tensor[14] = float(env.world_bounds[0])
-    header_tensor[15] = float(env.world_bounds[2])
+    total_len = 16 + 4 * P + 10 * (N + M)
+    total_frame = torch.empty(total_len, dtype=torch.float32, device=device)
+
+    total_frame[0] = 2026.0
+    total_frame[1] = timestamp
+    total_frame[2] = t_val
+    total_frame[3] = float(N)
+    total_frame[4] = float(M)
+    total_frame[5] = float(P)
+    total_frame[6] = metrics["intercept_rate"][0]
+    total_frame[7] = metrics["leaker_rate"][0]
+    total_frame[8] = (env.z[0].sum(dim=0) > env.missile_K[0]).sum().float()
+    total_frame[9] = metrics["delta_v_total"][0]
+    total_frame[10] = metrics["friendly_collisions"][0]
+    total_frame[11] = float(algo_id)
+    total_frame[12] = float(env.sigma_obs)
+    total_frame[13] = float(fps)
+    total_frame[14] = float(env.world_bounds[0])
+    total_frame[15] = float(env.world_bounds[2])
 
     # 1. HVA Block: P * 4 floats
-    hva_ids = torch.arange(P, dtype=torch.float32, device=device).unsqueeze(-1)
-    hva_block = torch.cat([hva_ids, env.hva_pos[0]], dim=-1).reshape(-1)
+    hva_slice = total_frame[16 : 16 + 4 * P].view(P, 4)
+    hva_slice[:, 0] = torch.arange(P, dtype=torch.float32, device=device)
+    hva_slice[:, 1:4] = env.hva_pos[0]
 
     # 2. Drone Entities Block: N * 10 floats
-    drone_ids = torch.arange(N, dtype=torch.float32, device=device).unsqueeze(-1)
-    drone_types = env.drone_role[0].float().unsqueeze(-1)  # 0.0=interceptor, 1.0=scout
-    drone_p = env.drone_pos[0]
-    drone_v = env.drone_vel[0]
-    drone_status = env.drone_active[0].float().unsqueeze(-1)  # 1.0 if active else 0.0
+    d_start = 16 + 4 * P
+    d_slice = total_frame[d_start : d_start + 10 * N].view(N, 10)
+    d_slice[:, 0] = torch.arange(N, dtype=torch.float32, device=device)
+    d_slice[:, 1] = env.drone_role[0].float()
+    d_slice[:, 2:5] = env.drone_pos[0]
+    d_slice[:, 5:8] = env.drone_vel[0]
+    d_slice[:, 8] = env.drone_active[0].float()
 
     z0 = env.z[0]  # [N, M]
     has_target = z0.any(dim=-1)
     target_idx = torch.argmax(z0.float(), dim=-1).float()
-    drone_assigned = torch.where(has_target, target_idx, torch.full_like(target_idx, -1.0)).unsqueeze(-1)
-    drones_block = torch.cat(
-        [drone_ids, drone_types, drone_p, drone_v, drone_status, drone_assigned],
-        dim=-1,
-    ).reshape(-1)
+    d_slice[:, 9] = torch.where(has_target, target_idx, -1.0)
 
     # 3. Missile Entities Block: M * 10 floats
-    missile_ids = torch.arange(M, dtype=torch.float32, device=device).unsqueeze(-1)
-    missile_types = torch.where(
-        env.missile_is_decoy[0],
-        torch.tensor(3.0, device=device),
-        torch.tensor(2.0, device=device),
-    ).unsqueeze(-1)
-    missile_p = env.missile_pos[0]
-    missile_v = env.missile_vel[0]
+    m_start = d_start + 10 * N
+    m_slice = total_frame[m_start : m_start + 10 * M].view(M, 10)
+    m_slice[:, 0] = torch.arange(M, dtype=torch.float32, device=device)
+    m_slice[:, 1] = torch.where(env.missile_is_decoy[0], 3.0, 2.0)
+    m_slice[:, 2:5] = env.missile_pos[0]
+    m_slice[:, 5:8] = env.missile_vel[0]
 
     t_sec = env.t[0].float() * env.dt
     unspawned = env.missile_spawn_time[0] > t_sec
     inactive = (~env.missile_exists[0]) | unspawned
     m_status = env.missile_status[0].float()
-    missile_status = torch.where(inactive, torch.full_like(m_status, -1.0), m_status).unsqueeze(-1)
-    missile_assigned = env.missile_target_hva[0].float().unsqueeze(-1)
-    missiles_block = torch.cat(
-        [missile_ids, missile_types, missile_p, missile_v, missile_status, missile_assigned],
-        dim=-1,
-    ).reshape(-1)
+    m_slice[:, 8] = torch.where(inactive, -1.0, m_status)
+    m_slice[:, 9] = env.missile_target_hva[0].float()
 
-    # Total contiguous frame
-    total_frame = torch.cat([header_tensor, hva_block, drones_block, missiles_block], dim=0)
-    return total_frame.to(torch.float32).cpu().numpy().tobytes()
+    return total_frame.cpu().numpy().tobytes()
 
 
 def unpack_binary_frame(raw_bytes: bytes) -> dict:
@@ -509,6 +502,10 @@ def create_app(
 
     # Serve static viewer client if available
     vpath = Path(viewer_dir)
+    if not vpath.is_absolute() and not vpath.exists():
+        cand = Path(__file__).resolve().parent.parent.parent / viewer_dir
+        if cand.exists():
+            vpath = cand
     if vpath.exists():
         app.mount("/", StaticFiles(directory=str(vpath), html=True), name="viewer3d")
 

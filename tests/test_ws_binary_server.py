@@ -278,6 +278,10 @@ def test_300v500_frame_budget_latency(stress_cfg):
         frame = session.step_and_pack()
         assert len(frame) == expected_bytes
 
+    if torch.cuda.is_available():
+        torch.cuda.synchronize()
+        torch.cuda.empty_cache()
+
     # 20 timed steps
     latencies = []
     for _ in range(20):
