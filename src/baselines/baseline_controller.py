@@ -10,6 +10,7 @@ from src.config import get
 from src.physics.guidance_laws import (
     build_cost_matrix,
     cbf_repulsion_accel,
+    engagement_kinematics,
     tpn_guidance_accel,
 )
 
@@ -47,15 +48,6 @@ class BaselineController:
     @torch.no_grad()
     def act(self, env) -> Tuple[torch.Tensor, torch.Tensor]:
         """Compute coordination actions and assignment for the current env state."""
-        C, _ = build_cost_matrix(
-            env,
-            prev_z=env.z,
-            v_min=self.v_min,
-            tgo_cap=self.tgo_cap,
-            invalid_cost=self.invalid_cost,
-            use_estimated_state=self.use_estimated_state,
-        )
-
         valid_drone = env.drone_active & (env.drone_role == 0)
         if self.use_estimated_state and hasattr(env, "track_state") and env.track_state is not None:
             valid_m_init = env.track_state.get("initialized", torch.ones_like(env.missile_live()))
@@ -69,8 +61,37 @@ class BaselineController:
             m_vel = env.missile_vel
             m_acc = None
 
-        # Retain active valid commitments to prevent mid-flight chatter and aborted intercepts
-        active_commit = env.z & valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1)
+        kin = engagement_kinematics(
+            env.drone_pos,
+            env.drone_vel,
+            m_pos,
+            m_vel,
+            missile_accel=m_acc,
+            v_min=self.v_min,
+            tgo_cap=self.tgo_cap,
+        )
+        dist = kin["dist"]
+        Vc = kin["Vc"]
+
+        if self.allocator == "greedy":
+            # True uncoordinated nearest-target baseline: cost is purely range dist
+            C = dist.clone()
+            valid_pair = valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1)
+            C = torch.where(valid_pair, C, torch.full_like(C, self.invalid_cost))
+        else:
+            C, _ = build_cost_matrix(
+                env,
+                prev_z=env.z,
+                v_min=self.v_min,
+                tgo_cap=self.tgo_cap,
+                invalid_cost=self.invalid_cost,
+                use_estimated_state=self.use_estimated_state,
+            )
+
+        # Dynamic terminal endgame commitment lock:
+        # Only hard-lock targets when inside terminal engagement (dist < 800m and Vc > 0)
+        is_terminal = (dist < 800.0) & (Vc > 0.0)
+        active_commit = env.z & valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1) & is_terminal
         free_drone = valid_drone & (~active_commit.any(dim=-1))
         assigned_per_m = active_commit.sum(dim=1)
         rem_K = torch.clamp(env.missile_K - assigned_per_m, min=0)
@@ -92,6 +113,16 @@ class BaselineController:
             )
 
         z = active_commit | z_alloc
+
+        # Enforce strict single-missile ownership per drone: if assigned to multiple, keep minimum cost
+        multi_assigned = z.sum(dim=-1) > 1  # [E, N]
+        if multi_assigned.any():
+            masked_c = torch.where(z, C, torch.tensor(float('inf'), device=env.device, dtype=C.dtype))
+            best_m = torch.argmin(masked_c, dim=-1, keepdim=True)
+            clean_z = torch.zeros_like(z)
+            clean_z.scatter_(dim=-1, index=best_m, src=z.any(dim=-1, keepdim=True))
+            z = clean_z
+
         env.z = z
 
         # Compute TPN guidance acceleration

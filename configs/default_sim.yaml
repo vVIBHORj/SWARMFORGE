@@ -71,7 +71,7 @@ guidance_and_allocation:
   v_min_closing: 20.0
   tgo_cap: 120.0
   cbf_gain: 500.0
-  cost_weights: {w_tgo: 1.0, w_zem: 0.02, w_urgency: 50.0, w_hysteresis: 2.5, w_logit: 1.0}
+  cost_weights: {w_tgo: 1.0, w_zem: 0.02, w_urgency: 50.0, w_hysteresis: 4.0, w_logit: 1.0}
   auction_num_iters: 6
   auction_eps: 0.05
   invalid_cost: 1.0e6

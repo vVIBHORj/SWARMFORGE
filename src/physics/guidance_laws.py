@@ -53,7 +53,8 @@ def engagement_kinematics(
     ZEM = r + v_rel * t_go_3d + 0.5 * a_m * (t_go_3d ** 2)  # [E, N, M, 3]
     zem_norm = torch.linalg.norm(ZEM, dim=-1)  # [E, N, M]
 
-    dist_sq = (dist.unsqueeze(-1)).square() + EPS
+    dist_eff = torch.clamp(dist.unsqueeze(-1), min=25.0)
+    dist_sq = dist_eff.square()
     omega = torch.linalg.cross(r, v_rel, dim=-1) / dist_sq  # [E, N, M, 3]
 
     return {
@@ -78,6 +79,8 @@ def tpn_guidance_accel(
     missile_accel: Optional[torch.Tensor] = None,
     nav_gain: float = 4.0,
     v_min: float = 20.0,
+    a_max: float = 117.68,
+    drone_max_speed: float = 350.0,
 ) -> torch.Tensor:
     """Compute 3D True/Augmented Proportional Navigation acceleration command for assigned drones.
 
@@ -99,13 +102,27 @@ def tpn_guidance_accel(
     else:
         a_m = torch.zeros_like(r)
 
-    r_hat = r / (dist.unsqueeze(-1) + EPS)
-    cross_term = torch.linalg.cross(omega, r, dim=-1) / (dist.unsqueeze(-1) + EPS)
-    a_lat = nav_gain * Vc.unsqueeze(-1).clamp(min=v_min) * cross_term + 0.5 * nav_gain * a_m  # [E, N, M, 3]
+    u_r = r / (dist.unsqueeze(-1) + EPS)
+    cross_term = torch.linalg.cross(omega, u_r, dim=-1)  # [E, N, M, 3]
+    a_m_dot_ur = (a_m * u_r).sum(dim=-1, keepdim=True)
+    a_m_perp = a_m - a_m_dot_ur * u_r  # Pure lateral target acceleration compensation
+
+    Vc_eff = Vc.unsqueeze(-1).clamp(min=v_min)
+    a_lat = nav_gain * Vc_eff * cross_term + 0.5 * nav_gain * a_m_perp  # [E, N, M, 3]
+
+    # Prioritize lateral intercept authority up to a_max (12G)
+    a_lat_norm = torch.linalg.norm(a_lat, dim=-1, keepdim=True)
+    a_lat = torch.where(a_lat_norm > a_max, a_lat * (a_max / (a_lat_norm + EPS)), a_lat)
     a_lat_sq = (a_lat ** 2).sum(dim=-1, keepdim=True)
+    remaining_auth = torch.sqrt(torch.clamp(a_max ** 2 - a_lat_sq, min=0.0))
+
+    # Longitudinal acceleration along u_r: only use remaining authority when drone speed along u_r is below max_speed
+    # Lateral APN has strict priority up to a_max; a_fwd only uses orthogonal remaining authority
+    v_drone_along_ur = (drone_vel.unsqueeze(2) * u_r).sum(dim=-1, keepdim=True)
+    needs_fwd = v_drone_along_ur < drone_max_speed
     scale = torch.clamp((dist.unsqueeze(-1) - 10.0) / 50.0, min=0.0, max=1.0)
-    a_fwd_mag = torch.sqrt(torch.clamp(117.6 ** 2 - a_lat_sq, min=0.0)) * scale
-    a_pair = a_lat + a_fwd_mag * r_hat  # [E, N, M, 3]
+    a_fwd = torch.where(needs_fwd, remaining_auth * scale, torch.zeros_like(remaining_auth))
+    a_pair = a_lat + a_fwd * u_r  # [E, N, M, 3]
 
     # Select assigned target acceleration per drone
     z_f = assignment_z.unsqueeze(-1).to(a_pair.dtype)
@@ -161,12 +178,12 @@ def build_cost_matrix(
         weights = get(
             env.cfg,
             "guidance_and_allocation.cost_weights",
-            {"w_tgo": 1.0, "w_zem": 0.02, "w_urgency": 50.0, "w_hysteresis": 2.5, "w_logit": 1.0},
+            {"w_tgo": 1.0, "w_zem": 0.02, "w_urgency": 50.0, "w_hysteresis": 4.0, "w_logit": 1.0},
         )
     w_tgo = float(weights.get("w_tgo", 1.0))
     w_zem = float(weights.get("w_zem", 0.02))
     w_urgency = float(weights.get("w_urgency", 50.0))
-    w_hysteresis = float(weights.get("w_hysteresis", 2.5))
+    w_hysteresis = float(weights.get("w_hysteresis", 4.0))
     w_logit = float(weights.get("w_logit", 1.0))
 
     if use_estimated_state and hasattr(env, "track_state") and env.track_state is not None:
@@ -184,6 +201,8 @@ def build_cost_matrix(
     kin = engagement_kinematics(env.drone_pos, env.drone_vel, m_pos, m_vel, missile_accel=m_acc, v_min=v_min, tgo_cap=tgo_cap)
     t_go = kin["t_go"]
     zem_norm = kin["zem_norm"]
+    dist = kin["dist"]
+    Vc = kin["Vc"]
 
     # Compute HVA threat urgency [E, M]
     r_jp = env.hva_pos.unsqueeze(1) - m_pos.unsqueeze(2)  # [E, M, P, 3]
@@ -193,10 +212,26 @@ def build_cost_matrix(
     tgo_hva = (d_jp / torch.clamp(Vc_jp, min=v_min)).min(dim=-1).values  # [E, M]
     urgency = 1.0 / (tgo_hva + 1.0)  # [E, M]
 
+    # Lead-Intercept Geometry:
+    # When closing on an intercept course, effective closing speed accounts for drone turning authority
+    drone_max_speed = float(get(env.cfg, "entities.drones.max_speed", 350.0))
+    Vc_lead = torch.clamp(Vc, min=drone_max_speed * 0.7)
+    t_go_lead = torch.clamp(dist / Vc_lead, max=tgo_cap)
+    t_go_eff = torch.where(Vc >= -20.0, t_go_lead, t_go)
+
     prev_z_f = prev_z.float() if prev_z is not None else 0.0
     rl_logits_f = rl_logits.float() if rl_logits is not None else 0.0
 
-    C = w_tgo * t_go + w_zem * zem_norm - w_urgency * urgency.unsqueeze(1) - w_hysteresis * prev_z_f - w_logit * rl_logits_f
+    C = w_tgo * t_go_eff + w_zem * zem_norm - w_urgency * urgency.unsqueeze(1) - w_hysteresis * prev_z_f - w_logit * rl_logits_f
+
+    # Penalize uncatchable / receding targets where missile has passed drone (Vc < -20.0 and dist > 100.0)
+    receding_penalty = torch.where((Vc < -20.0) & (dist > 100.0), 500.0 + 2.0 * dist, torch.zeros_like(dist))
+    C = C + receding_penalty
+
+    # Decoy deprioritization: Real threats must be engaged first
+    if hasattr(env, "missile_is_decoy") and env.missile_is_decoy is not None:
+        decoy_mask = env.missile_is_decoy.unsqueeze(1)  # [E, 1, M]
+        C = torch.where(decoy_mask, C + 5000.0, C)
 
     valid_drone = env.drone_active & (env.drone_role == 0)  # active interceptors only
     valid_pair = valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1)

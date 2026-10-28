@@ -32,6 +32,7 @@ from src.physics.cpa_collisions import friendly_collision_mask
 from src.physics.guidance_laws import (
     build_cost_matrix,
     cbf_repulsion_accel,
+    engagement_kinematics,
     tpn_guidance_accel,
 )
 
@@ -203,13 +204,29 @@ class MAPPOTrainer:
             valid_missile = self.env.missile_live() & valid_m_init
             m_pos = self.env.track_state.get("pos_est", self.env.missile_pos)
             m_vel = self.env.track_state.get("vel_est", self.env.missile_vel)
+            m_acc = self.env.track_state.get("acc_est", None)
         else:
             valid_missile = self.env.missile_live()
             m_pos = self.env.missile_pos
             m_vel = self.env.missile_vel
+            m_acc = None
 
-        # Retain active in-flight commitments to prevent uncoordinated chattering
-        active_commit = self.env.z & valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1)
+        kin = engagement_kinematics(
+            self.env.drone_pos,
+            self.env.drone_vel,
+            m_pos,
+            m_vel,
+            missile_accel=m_acc,
+            v_min=self.v_min,
+            tgo_cap=self.tgo_cap,
+        )
+        dist = kin["dist"]
+        Vc = kin["Vc"]
+
+        # Dynamic terminal endgame commitment lock:
+        # Only hard-lock targets when inside terminal engagement (dist < 800m and Vc > 0)
+        is_terminal = (dist < 800.0) & (Vc > 0.0)
+        active_commit = self.env.z & valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1) & is_terminal
         free_drone = valid_drone & (~active_commit.any(dim=-1))
         assigned_per_m = active_commit.sum(dim=1)
         rem_K = torch.clamp(self.env.missile_K - assigned_per_m, min=0)

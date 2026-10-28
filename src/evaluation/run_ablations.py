@@ -249,9 +249,9 @@ def run_benchmark_suite(
         active_episodes = 2
         num_parallel_envs = 2
         scales = {
-            "Small (6v8)": {"num_interceptors": 5, "num_scouts": 1, "num_missiles": 8, "max_episode_steps": 250},
-            "Medium (12v18)": {"num_interceptors": 10, "num_scouts": 2, "num_missiles": 18, "max_episode_steps": 250},
-            "Large (24v36)": {"num_interceptors": 20, "num_scouts": 4, "num_missiles": 36, "max_episode_steps": 250},
+            "Small (6v8)": {"num_interceptors": 6, "num_scouts": 1, "num_missiles": 8, "max_episode_steps": 350},
+            "Medium (12v18)": {"num_interceptors": 12, "num_scouts": 2, "num_missiles": 18, "max_episode_steps": 350},
+            "Large (24v36)": {"num_interceptors": 24, "num_scouts": 4, "num_missiles": 36, "max_episode_steps": 350},
         }
         medium_scale_key = "Medium (12v18)"
     else:
@@ -259,9 +259,9 @@ def run_benchmark_suite(
         active_episodes = episodes_per_seed
         num_parallel_envs = min(10, episodes_per_seed * len(seeds))
         scales = {
-            "Small (10v15)": {"num_interceptors": 8, "num_scouts": 2, "num_missiles": 15, "max_episode_steps": 280},
-            "Medium (30v50)": {"num_interceptors": 24, "num_scouts": 6, "num_missiles": 50, "max_episode_steps": 280},
-            "Large (100v150)": {"num_interceptors": 80, "num_scouts": 20, "num_missiles": 150, "max_episode_steps": 280},
+            "Small (10v15)": {"num_interceptors": 10, "num_scouts": 2, "num_missiles": 15, "max_episode_steps": 400},
+            "Medium (30v50)": {"num_interceptors": 30, "num_scouts": 5, "num_missiles": 50, "max_episode_steps": 400},
+            "Large (100v150)": {"num_interceptors": 100, "num_scouts": 15, "num_missiles": 150, "max_episode_steps": 400},
         }
         medium_scale_key = "Medium (30v50)"
 

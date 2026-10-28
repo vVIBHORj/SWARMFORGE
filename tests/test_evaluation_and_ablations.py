@@ -185,11 +185,11 @@ def test_run_benchmark_suite_quick_mode_artifacts(tmp_path):
         assert os.path.exists(file_path), f"Missing artifact: {filename}"
         assert os.path.getsize(file_path) > 0, f"Artifact is empty: {filename}"
 
-    # Verify non-zero intercept rates (> 50%) for attention_mappo and hungarian_tpn on Small scale
+    # Verify high intercept rates (>= 70.0%) for attention_mappo and hungarian_tpn on Small scale (6v8)
     scale_gen = result["results"]["scale_generalization"]
     small_scale_key = "Small (6v8)"
     attn_intercept = scale_gen[small_scale_key]["attention_mappo"]["summary"]["intercept_rate_pct"]["mean"]
     hung_intercept = scale_gen[small_scale_key]["hungarian_tpn"]["summary"]["intercept_rate_pct"]["mean"]
-    assert attn_intercept > 50.0, f"attention_mappo intercept rate was {attn_intercept:.1f}%, expected > 50.0%"
-    assert hung_intercept > 50.0, f"hungarian_tpn intercept rate was {hung_intercept:.1f}%, expected > 50.0%"
+    assert attn_intercept >= 70.0, f"attention_mappo intercept rate was {attn_intercept:.1f}%, expected >= 70.0%"
+    assert hung_intercept >= 70.0, f"hungarian_tpn intercept rate was {hung_intercept:.1f}%, expected >= 70.0%"
 

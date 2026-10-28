@@ -32,6 +32,7 @@ from src.learning.attention_nets import (
 from src.physics.guidance_laws import (
     build_cost_matrix,
     cbf_repulsion_accel,
+    engagement_kinematics,
     tpn_guidance_accel,
 )
 
@@ -206,19 +207,35 @@ def _compute_mappo_step_action(
         use_estimated_state=use_est,
     )
 
-    # 7. Auction assignment with active commitment preservation
+    # 7. Auction assignment with dynamic terminal endgame commitment lock
     valid_drone = env.drone_active & (env.drone_role == 0)
     if use_est and hasattr(env, "track_state") and env.track_state is not None:
         valid_m_init = env.track_state.get("initialized", torch.ones_like(env.missile_live()))
         valid_missile = env.missile_live() & valid_m_init
         m_pos = env.track_state.get("pos_est", env.missile_pos)
         m_vel = env.track_state.get("vel_est", env.missile_vel)
+        m_acc = env.track_state.get("acc_est", None)
     else:
         valid_missile = env.missile_live()
         m_pos = env.missile_pos
         m_vel = env.missile_vel
+        m_acc = None
 
-    active_commit = env.z & valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1)
+    kin = engagement_kinematics(
+        env.drone_pos,
+        env.drone_vel,
+        m_pos,
+        m_vel,
+        missile_accel=m_acc,
+        v_min=v_min,
+        tgo_cap=tgo_cap,
+    )
+    dist = kin["dist"]
+    Vc = kin["Vc"]
+
+    # Only hard-lock targets when inside terminal engagement (dist < 800m and Vc > 0)
+    is_terminal = (dist < 800.0) & (Vc > 0.0)
+    active_commit = env.z & valid_drone.unsqueeze(-1) & valid_missile.unsqueeze(1) & is_terminal
     free_drone = valid_drone & (~active_commit.any(dim=-1))
     assigned_per_m = active_commit.sum(dim=1)
     rem_K = torch.clamp(env.missile_K - assigned_per_m, min=0)
@@ -234,6 +251,16 @@ def _compute_mappo_step_action(
         invalid_cost=invalid_cost,
     )
     z = active_commit | z_alloc
+
+    # Enforce strict single-missile ownership per drone: if assigned to multiple, keep minimum cost
+    multi_assigned = z.sum(dim=-1) > 1  # [E, N]
+    if multi_assigned.any():
+        masked_c = torch.where(z, C, torch.tensor(float('inf'), device=env.device, dtype=C.dtype))
+        best_m = torch.argmin(masked_c, dim=-1, keepdim=True)
+        clean_z = torch.zeros_like(z)
+        clean_z.scatter_(dim=-1, index=best_m, src=z.any(dim=-1, keepdim=True))
+        z = clean_z
+
     env.z = z
 
     # 8. Base TPN guidance
@@ -328,14 +355,14 @@ def evaluate_policy_episodes(
         if "max_episode_steps" in scale_override:
             cfg_run["environment"]["max_episode_steps"] = int(scale_override["max_episode_steps"])
         else:
-            cfg_run["environment"]["max_episode_steps"] = max(250, int(get(cfg_run, "environment.max_episode_steps", 280)))
+            cfg_run["environment"]["max_episode_steps"] = max(400, int(get(cfg_run, "environment.max_episode_steps", 400)))
         if "sigma_obs" in scale_override:
             cfg_run["estimation"]["position_noise_std_meters"] = float(scale_override["sigma_obs"])
             cfg_run["estimation"]["enable_sensor_noise"] = (float(scale_override["sigma_obs"]) > 0.0)
         if "drone_ring_radius" in scale_override:
             cfg_run["scenario"]["drone_ring_radius"] = list(scale_override["drone_ring_radius"])
     else:
-        cfg_run["environment"]["max_episode_steps"] = max(250, int(get(cfg_run, "environment.max_episode_steps", 280)))
+        cfg_run["environment"]["max_episode_steps"] = max(400, int(get(cfg_run, "environment.max_episode_steps", 400)))
 
     # Baseline allocator parameters
     nav_gain = float(get(cfg_run, "guidance_and_allocation.navigation_gain_N", 4.0))

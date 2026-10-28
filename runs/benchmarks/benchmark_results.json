@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-10-28 14:18:08",
+    "timestamp": "2026-10-28 16:18:48",
     "quick_mode": false,
     "seeds": [
       42,
@@ -25,71 +25,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 53.8544807434082,
-            "leaker_rate_pct": 1.7857143878936768,
+            "intercept_rate_pct": 39.42057800292969,
+            "leaker_rate_pct": 46.23210144042969,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.724014282226562,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1472.9052734375,
-            "delta_v_total": 12362.4931640625,
-            "mean_step_latency_ms": 10.108980110697173,
-            "peak_vram_mb": 8.259765625
+            "false_target_waste_pct": 8.376710891723633,
+            "friendly_collision_count": 0.75,
+            "mean_delta_v_per_intercept": 2202.892333984375,
+            "delta_v_total": 14232.92578125,
+            "mean_step_latency_ms": 12.69278656748611,
+            "peak_vram_mb": 8.34619140625
           },
           "43": {
-            "intercept_rate_pct": 56.87063217163086,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 52.050453186035156,
+            "leaker_rate_pct": 27.504995346069336,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.905016899108887,
+            "false_target_waste_pct": 14.147869110107422,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1515.597412109375,
-            "delta_v_total": 12465.375,
-            "mean_step_latency_ms": 10.175630610706321,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1957.784912109375,
+            "delta_v_total": 13991.2265625,
+            "mean_step_latency_ms": 12.3750287675648,
+            "peak_vram_mb": 8.35009765625
           },
           "44": {
-            "intercept_rate_pct": 51.92307662963867,
-            "leaker_rate_pct": 7.142857551574707,
+            "intercept_rate_pct": 49.862640380859375,
+            "leaker_rate_pct": 44.368133544921875,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.27105712890625,
+            "false_target_waste_pct": 7.436783313751221,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1505.44677734375,
-            "delta_v_total": 12375.6796875,
-            "mean_step_latency_ms": 10.527480414280685,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1698.3729248046875,
+            "delta_v_total": 13435.1015625,
+            "mean_step_latency_ms": 12.918709017503716,
+            "peak_vram_mb": 8.35009765625
           },
           "45": {
-            "intercept_rate_pct": 52.907508850097656,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 39.53754425048828,
+            "leaker_rate_pct": 39.37729263305664,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.690411567687988,
+            "false_target_waste_pct": 10.501253128051758,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1448.603271484375,
-            "delta_v_total": 12248.134765625,
-            "mean_step_latency_ms": 11.41060474285658,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 2433.3974609375,
+            "delta_v_total": 14821.6796875,
+            "mean_step_latency_ms": 12.106960742512456,
+            "peak_vram_mb": 8.35009765625
           },
           "46": {
-            "intercept_rate_pct": 63.25091552734375,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 50.9523811340332,
+            "leaker_rate_pct": 27.289379119873047,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 6.373208045959473,
+            "false_target_waste_pct": 6.904761791229248,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1306.3583984375,
-            "delta_v_total": 12311.095703125,
-            "mean_step_latency_ms": 11.337293364298214,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1933.49951171875,
+            "delta_v_total": 14378.9365234375,
+            "mean_step_latency_ms": 12.31368125501831,
+            "peak_vram_mb": 8.35009765625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 55.761322784423825,
-            "std": 4.578127369820719,
-            "ci95": 4.012905571360007
+            "mean": 46.36471939086914,
+            "std": 6.333266935881639,
+            "ci95": 5.551353232206993
           },
           "leaker_rate_pct": {
-            "mean": 1.7857143878936768,
-            "std": 3.092948047638606,
-            "ci95": 2.711088497474911
+            "mean": 36.954380416870116,
+            "std": 9.07763012478023,
+            "ci95": 7.956893629174528
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -97,45 +97,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 11.592741584777832,
-            "std": 3.5380346188846916,
-            "ci95": 3.1012240785129026
+            "mean": 9.473475646972656,
+            "std": 2.9519307351315818,
+            "ci95": 2.587481373141056
           },
           "friendly_collision_count": {
-            "mean": 0.0,
-            "std": 0.0,
-            "ci95": 0.0
+            "mean": 0.15,
+            "std": 0.33541019662496846,
+            "ci95": 0.294
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1449.7822265625,
-            "std": 84.46395765078908,
-            "ci95": 74.0359231746845
+            "mean": 2045.1894287109376,
+            "std": 281.05673674488355,
+            "ci95": 246.35709180716245
           },
           "delta_v_total": {
-            "mean": 12352.5556640625,
-            "std": 80.59827746143252,
-            "ci95": 70.64750509107569
+            "mean": 14171.9740234375,
+            "std": 510.95907649855343,
+            "ci95": 447.875377678342
           },
           "mean_step_latency_ms": {
-            "mean": 10.711997848567794,
-            "std": 0.6253824758365956,
-            "ci95": 0.548171909339837
+            "mean": 12.481433270017078,
+            "std": 0.3223246136370113,
+            "ci95": 0.2825299807901755
           },
           "peak_vram_mb": {
-            "mean": 8.262890625,
+            "mean": 8.34931640625,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 55.761322784423825,
-          "std": 4.578127369820719,
-          "ci95": 4.012905571360007
+          "mean": 46.36471939086914,
+          "std": 6.333266935881639,
+          "ci95": 5.551353232206993
         },
         "leaker_rate_pct": {
-          "mean": 1.7857143878936768,
-          "std": 3.092948047638606,
-          "ci95": 2.711088497474911
+          "mean": 36.954380416870116,
+          "std": 9.07763012478023,
+          "ci95": 7.956893629174528
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -143,32 +143,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 11.592741584777832,
-          "std": 3.5380346188846916,
-          "ci95": 3.1012240785129026
+          "mean": 9.473475646972656,
+          "std": 2.9519307351315818,
+          "ci95": 2.587481373141056
         },
         "friendly_collision_count": {
-          "mean": 0.0,
-          "std": 0.0,
-          "ci95": 0.0
+          "mean": 0.15,
+          "std": 0.33541019662496846,
+          "ci95": 0.294
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1449.7822265625,
-          "std": 84.46395765078908,
-          "ci95": 74.0359231746845
+          "mean": 2045.1894287109376,
+          "std": 281.05673674488355,
+          "ci95": 246.35709180716245
         },
         "delta_v_total": {
-          "mean": 12352.5556640625,
-          "std": 80.59827746143252,
-          "ci95": 70.64750509107569
+          "mean": 14171.9740234375,
+          "std": 510.95907649855343,
+          "ci95": 447.875377678342
         },
         "mean_step_latency_ms": {
-          "mean": 10.711997848567794,
-          "std": 0.6253824758365956,
-          "ci95": 0.548171909339837
+          "mean": 12.481433270017078,
+          "std": 0.3223246136370113,
+          "ci95": 0.2825299807901755
         },
         "peak_vram_mb": {
-          "mean": 8.262890625,
+          "mean": 8.34931640625,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -184,71 +184,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 50.521148681640625,
-            "leaker_rate_pct": 1.7857143878936768,
+            "intercept_rate_pct": 52.46253967285156,
+            "leaker_rate_pct": 37.129539489746094,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.309587478637695,
+            "false_target_waste_pct": 7.379211902618408,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1567.2001953125,
-            "delta_v_total": 12537.6015625,
-            "mean_step_latency_ms": 11.616244696421875,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 2267.9423828125,
+            "delta_v_total": 14792.228515625,
+            "mean_step_latency_ms": 9.668960709918792,
+            "peak_vram_mb": 8.35009765625
           },
           "43": {
-            "intercept_rate_pct": 60.7167854309082,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 57.852149963378906,
+            "leaker_rate_pct": 26.613388061523438,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.714606285095215,
+            "false_target_waste_pct": 12.036340713500977,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1504.313232421875,
-            "delta_v_total": 12369.875,
-            "mean_step_latency_ms": 9.89017183214693,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 2353.64453125,
+            "delta_v_total": 15416.220703125,
+            "mean_step_latency_ms": 9.754861819988037,
+            "peak_vram_mb": 8.35009765625
           },
           "44": {
-            "intercept_rate_pct": 53.70879364013672,
-            "leaker_rate_pct": 7.142857551574707,
+            "intercept_rate_pct": 57.28022003173828,
+            "leaker_rate_pct": 37.087913513183594,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.890233993530273,
+            "false_target_waste_pct": 6.09482479095459,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1449.521728515625,
-            "delta_v_total": 12256.62109375,
-            "mean_step_latency_ms": 9.244796103585681,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 2025.197998046875,
+            "delta_v_total": 15115.4072265625,
+            "mean_step_latency_ms": 9.6382853275054,
+            "peak_vram_mb": 8.35009765625
           },
           "45": {
-            "intercept_rate_pct": 54.830589294433594,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 71.33699798583984,
+            "leaker_rate_pct": 7.875458717346191,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.082437515258789,
+            "false_target_waste_pct": 9.317042350769043,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1398.06640625,
-            "delta_v_total": 12198.3076171875,
-            "mean_step_latency_ms": 9.146291221434565,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1553.643310546875,
+            "delta_v_total": 14271.0966796875,
+            "mean_step_latency_ms": 10.835688877541543,
+            "peak_vram_mb": 8.35009765625
           },
           "46": {
-            "intercept_rate_pct": 61.46520233154297,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 62.097068786621094,
+            "leaker_rate_pct": 12.55494499206543,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 6.765233039855957,
+            "false_target_waste_pct": 4.392230987548828,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1408.7764892578125,
-            "delta_v_total": 12421.4658203125,
-            "mean_step_latency_ms": 9.942208757113999,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1794.6177978515625,
+            "delta_v_total": 15160.4599609375,
+            "mean_step_latency_ms": 10.242169702501087,
+            "peak_vram_mb": 8.35009765625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 56.248503875732425,
-            "std": 4.702198693034991,
-            "ci95": 4.121658881164068
+            "mean": 60.20579528808594,
+            "std": 7.098190497631648,
+            "ci95": 6.221838296219389
           },
           "leaker_rate_pct": {
-            "mean": 1.7857143878936768,
-            "std": 3.092948047638606,
-            "ci95": 2.711088497474911
+            "mean": 24.25224895477295,
+            "std": 13.612311087176048,
+            "ci95": 11.931716745345486
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -256,9 +256,9 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 11.552419662475586,
-            "std": 3.3881437458812282,
-            "ci95": 2.96983893546583
+            "mean": 7.8439301490783695,
+            "std": 2.955331013759969,
+            "ci95": 2.5904618487700173
           },
           "friendly_collision_count": {
             "mean": 0.0,
@@ -266,35 +266,35 @@
             "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1465.5756103515625,
-            "std": 70.47964165203365,
-            "ci95": 61.778129747398935
+            "mean": 1999.0092041015625,
+            "std": 331.24905618438225,
+            "ci95": 290.3525995874829
           },
           "delta_v_total": {
-            "mean": 12356.77421875,
-            "std": 134.34793847301492,
-            "ci95": 117.7611602405473
+            "mean": 14951.0826171875,
+            "std": 440.1165723682296,
+            "ci95": 385.7791849451102
           },
           "mean_step_latency_ms": {
-            "mean": 9.967942522140609,
-            "std": 0.9901593517264834,
-            "ci95": 0.8679129386548758
+            "mean": 10.027993287490972,
+            "std": 0.5132302571235134,
+            "ci95": 0.44986615527084567
           },
           "peak_vram_mb": {
-            "mean": 8.263671875,
+            "mean": 8.35009765625,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 56.248503875732425,
-          "std": 4.702198693034991,
-          "ci95": 4.121658881164068
+          "mean": 60.20579528808594,
+          "std": 7.098190497631648,
+          "ci95": 6.221838296219389
         },
         "leaker_rate_pct": {
-          "mean": 1.7857143878936768,
-          "std": 3.092948047638606,
-          "ci95": 2.711088497474911
+          "mean": 24.25224895477295,
+          "std": 13.612311087176048,
+          "ci95": 11.931716745345486
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -302,9 +302,9 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 11.552419662475586,
-          "std": 3.3881437458812282,
-          "ci95": 2.96983893546583
+          "mean": 7.8439301490783695,
+          "std": 2.955331013759969,
+          "ci95": 2.5904618487700173
         },
         "friendly_collision_count": {
           "mean": 0.0,
@@ -312,22 +312,22 @@
           "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1465.5756103515625,
-          "std": 70.47964165203365,
-          "ci95": 61.778129747398935
+          "mean": 1999.0092041015625,
+          "std": 331.24905618438225,
+          "ci95": 290.3525995874829
         },
         "delta_v_total": {
-          "mean": 12356.77421875,
-          "std": 134.34793847301492,
-          "ci95": 117.7611602405473
+          "mean": 14951.0826171875,
+          "std": 440.1165723682296,
+          "ci95": 385.7791849451102
         },
         "mean_step_latency_ms": {
-          "mean": 9.967942522140609,
-          "std": 0.9901593517264834,
-          "ci95": 0.8679129386548758
+          "mean": 10.027993287490972,
+          "std": 0.5132302571235134,
+          "ci95": 0.44986615527084567
         },
         "peak_vram_mb": {
-          "mean": 8.263671875,
+          "mean": 8.35009765625,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -343,71 +343,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 54.460540771484375,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 66.09224700927734,
+            "leaker_rate_pct": 21.227108001708984,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.5,
+            "false_target_waste_pct": 1.3042702674865723,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1516.7691650390625,
-            "delta_v_total": 12466.904296875,
-            "mean_step_latency_ms": 16.98181328213033,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1355.9205322265625,
+            "delta_v_total": 11996.294921875,
+            "mean_step_latency_ms": 12.906617742410162,
+            "peak_vram_mb": 8.35009765625
           },
           "43": {
-            "intercept_rate_pct": 54.02098083496094,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 80.74176025390625,
+            "leaker_rate_pct": 11.840660095214844,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.893817901611328,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1622.443359375,
-            "delta_v_total": 12534.49609375,
-            "mean_step_latency_ms": 15.61792817500743,
-            "peak_vram_mb": 8.263671875
+            "false_target_waste_pct": 7.017543792724609,
+            "friendly_collision_count": 0.75,
+            "mean_delta_v_per_intercept": 1265.7430419921875,
+            "delta_v_total": 12056.51171875,
+            "mean_step_latency_ms": 12.92928366248816,
+            "peak_vram_mb": 8.35009765625
           },
           "44": {
-            "intercept_rate_pct": 51.92307662963867,
-            "leaker_rate_pct": 7.142857551574707,
+            "intercept_rate_pct": 74.17582702636719,
+            "leaker_rate_pct": 24.038461685180664,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.483871459960938,
+            "false_target_waste_pct": 2.623779535293579,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1497.382080078125,
-            "delta_v_total": 12311.0,
-            "mean_step_latency_ms": 15.511310039273342,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1158.172119140625,
+            "delta_v_total": 11581.720703125,
+            "mean_step_latency_ms": 12.861389445006353,
+            "peak_vram_mb": 8.35009765625
           },
           "45": {
-            "intercept_rate_pct": 53.04487228393555,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 85.00457763671875,
+            "leaker_rate_pct": 7.577839374542236,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.629480361938477,
+            "false_target_waste_pct": 4.258116245269775,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1491.0728759765625,
-            "delta_v_total": 12253.994140625,
-            "mean_step_latency_ms": 15.578782821413435,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 1041.180908203125,
+            "delta_v_total": 11639.1826171875,
+            "mean_step_latency_ms": 12.864701000066816,
+            "peak_vram_mb": 8.35009765625
           },
           "46": {
-            "intercept_rate_pct": 54.79853820800781,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 81.55677795410156,
+            "leaker_rate_pct": 5.512820720672607,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 6.642024993896484,
+            "false_target_waste_pct": 1.3157894611358643,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1593.16748046875,
-            "delta_v_total": 12640.4169921875,
-            "mean_step_latency_ms": 15.73724221430309,
-            "peak_vram_mb": 8.263671875
+            "mean_delta_v_per_intercept": 988.9320068359375,
+            "delta_v_total": 11274.61328125,
+            "mean_step_latency_ms": 12.675680862566878,
+            "peak_vram_mb": 8.35009765625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 53.649601745605466,
-            "std": 1.168566025543411,
-            "ci95": 1.0242932831702343
+            "mean": 77.51423797607421,
+            "std": 7.491179531195155,
+            "ci95": 6.56630837205569
           },
           "leaker_rate_pct": {
-            "mean": 1.4285715103149415,
-            "std": 3.194383007783751,
-            "ci95": 2.800000160217285
+            "mean": 14.039377975463868,
+            "std": 8.230023663262912,
+            "ci95": 7.213933808055182
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -415,45 +415,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 11.229838943481445,
-            "std": 3.3664129121471125,
-            "ci95": 2.9507910198624363
+            "mean": 3.30389986038208,
+            "std": 2.403921030856958,
+            "ci95": 2.1071296883147106
           },
           "friendly_collision_count": {
-            "mean": 0.0,
-            "std": 0.0,
-            "ci95": 0.0
+            "mean": 0.15,
+            "std": 0.33541019662496846,
+            "ci95": 0.294
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1544.1669921875,
-            "std": 59.76347467649322,
-            "ci95": 52.38499524370462
+            "mean": 1161.9897216796876,
+            "std": 152.423937526999,
+            "ci95": 133.60547199775198
           },
           "delta_v_total": {
-            "mean": 12441.3623046875,
-            "std": 158.94198944375563,
-            "ci95": 139.3187964071143
+            "mean": 11709.6646484375,
+            "std": 321.3513909251784,
+            "ci95": 281.6769134709407
           },
           "mean_step_latency_ms": {
-            "mean": 15.885415306425525,
-            "std": 0.6183792088210704,
-            "ci95": 0.5420332751442088
+            "mean": 12.847534542507674,
+            "std": 0.10024230148229905,
+            "ci95": 0.08786625133149585
           },
           "peak_vram_mb": {
-            "mean": 8.263671875,
+            "mean": 8.35009765625,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 53.649601745605466,
-          "std": 1.168566025543411,
-          "ci95": 1.0242932831702343
+          "mean": 77.51423797607421,
+          "std": 7.491179531195155,
+          "ci95": 6.56630837205569
         },
         "leaker_rate_pct": {
-          "mean": 1.4285715103149415,
-          "std": 3.194383007783751,
-          "ci95": 2.800000160217285
+          "mean": 14.039377975463868,
+          "std": 8.230023663262912,
+          "ci95": 7.213933808055182
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -461,32 +461,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 11.229838943481445,
-          "std": 3.3664129121471125,
-          "ci95": 2.9507910198624363
+          "mean": 3.30389986038208,
+          "std": 2.403921030856958,
+          "ci95": 2.1071296883147106
         },
         "friendly_collision_count": {
-          "mean": 0.0,
-          "std": 0.0,
-          "ci95": 0.0
+          "mean": 0.15,
+          "std": 0.33541019662496846,
+          "ci95": 0.294
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1544.1669921875,
-          "std": 59.76347467649322,
-          "ci95": 52.38499524370462
+          "mean": 1161.9897216796876,
+          "std": 152.423937526999,
+          "ci95": 133.60547199775198
         },
         "delta_v_total": {
-          "mean": 12441.3623046875,
-          "std": 158.94198944375563,
-          "ci95": 139.3187964071143
+          "mean": 11709.6646484375,
+          "std": 321.3513909251784,
+          "ci95": 281.6769134709407
         },
         "mean_step_latency_ms": {
-          "mean": 15.885415306425525,
-          "std": 0.6183792088210704,
-          "ci95": 0.5420332751442088
+          "mean": 12.847534542507674,
+          "std": 0.10024230148229905,
+          "ci95": 0.08786625133149585
         },
         "peak_vram_mb": {
-          "mean": 8.263671875,
+          "mean": 8.35009765625,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -502,71 +502,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 54.460540771484375,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 75.26972961425781,
+            "leaker_rate_pct": 14.322345733642578,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.44399642944336,
+            "false_target_waste_pct": 1.5257374048233032,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1516.84326171875,
-            "delta_v_total": 12467.5283203125,
-            "mean_step_latency_ms": 21.512154671425574,
-            "peak_vram_mb": 9.24658203125
+            "mean_delta_v_per_intercept": 1137.702880859375,
+            "delta_v_total": 11522.234375,
+            "mean_step_latency_ms": 16.539779085028385,
+            "peak_vram_mb": 9.298828125
           },
           "43": {
-            "intercept_rate_pct": 56.29370880126953,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 85.16484069824219,
+            "leaker_rate_pct": 5.494505882263184,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.927419662475586,
+            "false_target_waste_pct": 7.437343120574951,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1518.0469970703125,
-            "delta_v_total": 12484.8349609375,
-            "mean_step_latency_ms": 21.928579039276233,
-            "peak_vram_mb": 9.25048828125
+            "mean_delta_v_per_intercept": 1171.854248046875,
+            "delta_v_total": 11833.205078125,
+            "mean_step_latency_ms": 16.56895738253297,
+            "peak_vram_mb": 9.302734375
           },
           "44": {
-            "intercept_rate_pct": 51.92307662963867,
-            "leaker_rate_pct": 7.142857551574707,
+            "intercept_rate_pct": 77.74725341796875,
+            "leaker_rate_pct": 22.25274658203125,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.360662460327148,
+            "false_target_waste_pct": 2.8742027282714844,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1497.2393798828125,
-            "delta_v_total": 12309.8681640625,
-            "mean_step_latency_ms": 22.634905192861815,
-            "peak_vram_mb": 9.25048828125
+            "mean_delta_v_per_intercept": 1092.15185546875,
+            "delta_v_total": 11404.0390625,
+            "mean_step_latency_ms": 16.44431869251548,
+            "peak_vram_mb": 9.302734375
           },
           "45": {
-            "intercept_rate_pct": 53.04487228393555,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 79.4871826171875,
+            "leaker_rate_pct": 9.363554000854492,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.629480361938477,
+            "false_target_waste_pct": 4.417293071746826,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1494.7486572265625,
-            "delta_v_total": 12283.40625,
-            "mean_step_latency_ms": 22.204893514273344,
-            "peak_vram_mb": 9.25048828125
+            "mean_delta_v_per_intercept": 1118.7188720703125,
+            "delta_v_total": 11837.146484375,
+            "mean_step_latency_ms": 17.146295600041412,
+            "peak_vram_mb": 9.302734375
           },
           "46": {
-            "intercept_rate_pct": 54.79853820800781,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 79.89010620117188,
+            "leaker_rate_pct": 7.179487228393555,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 6.630824089050293,
+            "false_target_waste_pct": 1.384711742401123,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1593.169921875,
-            "delta_v_total": 12640.44140625,
-            "mean_step_latency_ms": 23.33270932498895,
-            "peak_vram_mb": 9.25048828125
+            "mean_delta_v_per_intercept": 1021.5692138671875,
+            "delta_v_total": 11438.55859375,
+            "mean_step_latency_ms": 17.110981437535884,
+            "peak_vram_mb": 9.302734375
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 54.104147338867186,
-            "std": 1.679472196573304,
-            "ci95": 1.4721222871606483
+            "mean": 79.51182250976562,
+            "std": 3.6472378770989065,
+            "ci95": 3.19694495473563
           },
           "leaker_rate_pct": {
-            "mean": 1.4285715103149415,
-            "std": 3.194383007783751,
-            "ci95": 2.800000160217285
+            "mean": 11.722527885437012,
+            "std": 6.7571590353058255,
+            "ci95": 5.922911039586524
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -574,9 +574,9 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 11.198476600646973,
-            "std": 3.383909013479148,
-            "ci95": 2.9661270288549417
+            "mean": 3.5278576135635378,
+            "std": 2.505194434978986,
+            "ci95": 2.1958997409591383
           },
           "friendly_collision_count": {
             "mean": 0.0,
@@ -584,35 +584,35 @@
             "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1524.0096435546875,
-            "std": 40.13385919960726,
-            "ci95": 35.178878648933036
+            "mean": 1108.3994140625,
+            "std": 56.55786232278086,
+            "ci95": 49.57515212779837
           },
           "delta_v_total": {
-            "mean": 12437.2158203125,
-            "std": 145.2255818217281,
-            "ci95": 127.29583502593397
+            "mean": 11607.03671875,
+            "std": 212.65405919613522,
+            "ci95": 186.39950136509844
           },
           "mean_step_latency_ms": {
-            "mean": 22.32264834856519,
-            "std": 0.6970983314981611,
-            "ci95": 0.6110336284427758
+            "mean": 16.762066439530827,
+            "std": 0.338023715965005,
+            "ci95": 0.2962908507066942
           },
           "peak_vram_mb": {
-            "mean": 9.24970703125,
+            "mean": 9.301953125,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 54.104147338867186,
-          "std": 1.679472196573304,
-          "ci95": 1.4721222871606483
+          "mean": 79.51182250976562,
+          "std": 3.6472378770989065,
+          "ci95": 3.19694495473563
         },
         "leaker_rate_pct": {
-          "mean": 1.4285715103149415,
-          "std": 3.194383007783751,
-          "ci95": 2.800000160217285
+          "mean": 11.722527885437012,
+          "std": 6.7571590353058255,
+          "ci95": 5.922911039586524
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -620,9 +620,9 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 11.198476600646973,
-          "std": 3.383909013479148,
-          "ci95": 2.9661270288549417
+          "mean": 3.5278576135635378,
+          "std": 2.505194434978986,
+          "ci95": 2.1958997409591383
         },
         "friendly_collision_count": {
           "mean": 0.0,
@@ -630,22 +630,22 @@
           "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1524.0096435546875,
-          "std": 40.13385919960726,
-          "ci95": 35.178878648933036
+          "mean": 1108.3994140625,
+          "std": 56.55786232278086,
+          "ci95": 49.57515212779837
         },
         "delta_v_total": {
-          "mean": 12437.2158203125,
-          "std": 145.2255818217281,
-          "ci95": 127.29583502593397
+          "mean": 11607.03671875,
+          "std": 212.65405919613522,
+          "ci95": 186.39950136509844
         },
         "mean_step_latency_ms": {
-          "mean": 22.32264834856519,
-          "std": 0.6970983314981611,
-          "ci95": 0.6110336284427758
+          "mean": 16.762066439530827,
+          "std": 0.338023715965005,
+          "ci95": 0.2962908507066942
         },
         "peak_vram_mb": {
-          "mean": 9.24970703125,
+          "mean": 9.301953125,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -661,71 +661,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 54.460540771484375,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 69.30652618408203,
+            "leaker_rate_pct": 19.679487228393555,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.824820518493652,
+            "false_target_waste_pct": 1.1225659847259521,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1512.7900390625,
-            "delta_v_total": 12435.0732421875,
-            "mean_step_latency_ms": 24.994347828572113,
-            "peak_vram_mb": 10.462890625
+            "mean_delta_v_per_intercept": 1352.25146484375,
+            "delta_v_total": 12031.87109375,
+            "mean_step_latency_ms": 19.053453642518434,
+            "peak_vram_mb": 10.77392578125
           },
           "43": {
-            "intercept_rate_pct": 54.02098083496094,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 84.5879135131836,
+            "leaker_rate_pct": 6.0714287757873535,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.893817901611328,
+            "false_target_waste_pct": 6.6729326248168945,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1622.2061767578125,
-            "delta_v_total": 12532.5634765625,
-            "mean_step_latency_ms": 24.592020032126324,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1147.179443359375,
+            "delta_v_total": 11729.2998046875,
+            "mean_step_latency_ms": 18.344725577521785,
+            "peak_vram_mb": 10.77783203125
           },
           "44": {
-            "intercept_rate_pct": 51.92307662963867,
-            "leaker_rate_pct": 7.142857551574707,
+            "intercept_rate_pct": 74.03846740722656,
+            "leaker_rate_pct": 22.25274658203125,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.483871459960938,
+            "false_target_waste_pct": 2.821115016937256,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1496.54931640625,
-            "delta_v_total": 12303.8466796875,
-            "mean_step_latency_ms": 23.979668642843016,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1191.0654296875,
+            "delta_v_total": 11700.6015625,
+            "mean_step_latency_ms": 18.2067980775264,
+            "peak_vram_mb": 10.77783203125
           },
           "45": {
-            "intercept_rate_pct": 53.04487228393555,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 84.84432220458984,
+            "leaker_rate_pct": 5.494505882263184,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.629480361938477,
+            "false_target_waste_pct": 4.657809734344482,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1490.8865966796875,
-            "delta_v_total": 12252.5634765625,
-            "mean_step_latency_ms": 23.663005774977005,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1050.1220703125,
+            "delta_v_total": 11733.3046875,
+            "mean_step_latency_ms": 18.021323427487914,
+            "peak_vram_mb": 10.77783203125
           },
           "46": {
-            "intercept_rate_pct": 54.79853820800781,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 79.77106475830078,
+            "leaker_rate_pct": 5.512820720672607,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 6.642024993896484,
+            "false_target_waste_pct": 2.0175437927246094,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1592.857421875,
-            "delta_v_total": 12637.779296875,
-            "mean_step_latency_ms": 22.175141903588674,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1076.7197265625,
+            "delta_v_total": 11728.240234375,
+            "mean_step_latency_ms": 17.866215972508144,
+            "peak_vram_mb": 10.77783203125
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 53.649601745605466,
-            "std": 1.168566025543411,
-            "ci95": 1.0242932831702343
+            "mean": 78.50965881347656,
+            "std": 6.770404127827405,
+            "ci95": 5.934520875067163
           },
           "leaker_rate_pct": {
-            "mean": 1.4285715103149415,
-            "std": 3.194383007783751,
-            "ci95": 2.800000160217285
+            "mean": 11.80219783782959,
+            "std": 8.417995806131973,
+            "ci95": 7.378698655873139
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -733,9 +733,9 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 11.294803047180176,
-            "std": 3.400018346331693,
-            "ci95": 2.980247481680482
+            "mean": 3.458393430709839,
+            "std": 2.219804215084593,
+            "ci95": 1.945744183694528
           },
           "friendly_collision_count": {
             "mean": 0.0,
@@ -743,35 +743,35 @@
             "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1543.05791015625,
-            "std": 60.302319060874616,
-            "ci95": 52.85731317143079
+            "mean": 1163.467626953125,
+            "std": 119.41387536800099,
+            "ci95": 104.67087676957887
           },
           "delta_v_total": {
-            "mean": 12432.365234375,
-            "std": 158.97141970175034,
-            "ci95": 139.34459316564312
+            "mean": 11784.6634765625,
+            "std": 138.80242705710427,
+            "ci95": 121.66569163792336
           },
           "mean_step_latency_ms": {
-            "mean": 23.88083683642143,
-            "std": 1.0853918150459911,
-            "ci95": 0.9513878732205684
+            "mean": 18.298503339512536,
+            "std": 0.45940107250440604,
+            "ci95": 0.40268279460601525
           },
           "peak_vram_mb": {
-            "mean": 10.466015625,
+            "mean": 10.77705078125,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 53.649601745605466,
-          "std": 1.168566025543411,
-          "ci95": 1.0242932831702343
+          "mean": 78.50965881347656,
+          "std": 6.770404127827405,
+          "ci95": 5.934520875067163
         },
         "leaker_rate_pct": {
-          "mean": 1.4285715103149415,
-          "std": 3.194383007783751,
-          "ci95": 2.800000160217285
+          "mean": 11.80219783782959,
+          "std": 8.417995806131973,
+          "ci95": 7.378698655873139
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -779,9 +779,9 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 11.294803047180176,
-          "std": 3.400018346331693,
-          "ci95": 2.980247481680482
+          "mean": 3.458393430709839,
+          "std": 2.219804215084593,
+          "ci95": 1.945744183694528
         },
         "friendly_collision_count": {
           "mean": 0.0,
@@ -789,22 +789,22 @@
           "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1543.05791015625,
-          "std": 60.302319060874616,
-          "ci95": 52.85731317143079
+          "mean": 1163.467626953125,
+          "std": 119.41387536800099,
+          "ci95": 104.67087676957887
         },
         "delta_v_total": {
-          "mean": 12432.365234375,
-          "std": 158.97141970175034,
-          "ci95": 139.34459316564312
+          "mean": 11784.6634765625,
+          "std": 138.80242705710427,
+          "ci95": 121.66569163792336
         },
         "mean_step_latency_ms": {
-          "mean": 23.88083683642143,
-          "std": 1.0853918150459911,
-          "ci95": 0.9513878732205684
+          "mean": 18.298503339512536,
+          "std": 0.45940107250440604,
+          "ci95": 0.40268279460601525
         },
         "peak_vram_mb": {
-          "mean": 10.466015625,
+          "mean": 10.77705078125,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -822,71 +822,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 49.78682327270508,
-            "leaker_rate_pct": 1.6666667461395264,
+            "intercept_rate_pct": 32.824462890625,
+            "leaker_rate_pct": 50.13859558105469,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.231183052062988,
-            "friendly_collision_count": 0.75,
-            "mean_delta_v_per_intercept": 1460.973876953125,
-            "delta_v_total": 38473.0625,
-            "mean_step_latency_ms": 9.329600857159091,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 9.095446586608887,
+            "friendly_collision_count": 1.0,
+            "mean_delta_v_per_intercept": 2653.95654296875,
+            "delta_v_total": 46259.28515625,
+            "mean_step_latency_ms": 21.125931467468035,
+            "peak_vram_mb": 10.77783203125
           },
           "43": {
-            "intercept_rate_pct": 56.097564697265625,
-            "leaker_rate_pct": 3.28947377204895,
+            "intercept_rate_pct": 37.11416244506836,
+            "leaker_rate_pct": 38.19217300415039,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 16.875747680664062,
+            "false_target_waste_pct": 16.441102981567383,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1395.801025390625,
-            "delta_v_total": 38295.33203125,
-            "mean_step_latency_ms": 8.919114889277223,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 2658.3720703125,
+            "delta_v_total": 48287.09375,
+            "mean_step_latency_ms": 20.886344632572218,
+            "peak_vram_mb": 10.77783203125
           },
           "44": {
-            "intercept_rate_pct": 54.679718017578125,
-            "leaker_rate_pct": 8.94421100616455,
+            "intercept_rate_pct": 43.87899398803711,
+            "leaker_rate_pct": 50.565452575683594,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.007168769836426,
+            "false_target_waste_pct": 10.21372127532959,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1420.76953125,
-            "delta_v_total": 38244.25390625,
-            "mean_step_latency_ms": 9.86734175358736,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 2092.03759765625,
+            "delta_v_total": 43898.02734375,
+            "mean_step_latency_ms": 19.507266160003383,
+            "peak_vram_mb": 10.77783203125
           },
           "45": {
-            "intercept_rate_pct": 58.47882080078125,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 41.2052001953125,
+            "leaker_rate_pct": 35.74626541137695,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.41980266571045,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1300.4237060546875,
-            "delta_v_total": 37485.8203125,
-            "mean_step_latency_ms": 8.91132408216403,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 7.272347450256348,
+            "friendly_collision_count": 4.25,
+            "mean_delta_v_per_intercept": 2293.836181640625,
+            "delta_v_total": 47407.6640625,
+            "mean_step_latency_ms": 20.13951940500192,
+            "peak_vram_mb": 10.77783203125
           },
           "46": {
-            "intercept_rate_pct": 52.83430099487305,
-            "leaker_rate_pct": 0.54347825050354,
+            "intercept_rate_pct": 45.14628219604492,
+            "leaker_rate_pct": 38.10577392578125,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.012096405029297,
-            "friendly_collision_count": 0.75,
-            "mean_delta_v_per_intercept": 1488.411376953125,
-            "delta_v_total": 38988.375,
-            "mean_step_latency_ms": 9.076200360703167,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 13.53801155090332,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 2157.622314453125,
+            "delta_v_total": 46548.63671875,
+            "mean_step_latency_ms": 19.96344582999882,
+            "peak_vram_mb": 10.77783203125
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 54.37544555664063,
-            "std": 3.2911451458464174,
-            "ci95": 2.8848159138129708
+            "mean": 40.03382034301758,
+            "std": 5.069368659774131,
+            "ci95": 4.4434975470946885
           },
           "leaker_rate_pct": {
-            "mean": 2.8887659549713134,
-            "std": 3.61136577897629,
-            "ci95": 3.165501674375726
+            "mean": 42.549652099609375,
+            "std": 7.191433587220443,
+            "ci95": 6.303569467826429
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -894,45 +894,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.909199714660645,
-            "std": 2.7567708492743304,
-            "ci95": 2.416416190807954
+            "mean": 11.312125968933106,
+            "std": 3.664046351203387,
+            "ci95": 3.21167823188833
           },
           "friendly_collision_count": {
-            "mean": 0.3,
-            "std": 0.41079191812887456,
-            "ci95": 0.36007499218912714
+            "mean": 1.05,
+            "std": 1.840516231930596,
+            "ci95": 1.613283608049124
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1413.2759033203124,
-            "std": 72.48720634116953,
-            "ci95": 63.53783778414027
+            "mean": 2371.16494140625,
+            "std": 270.16258505329574,
+            "ci95": 236.80794682124525
           },
           "delta_v_total": {
-            "mean": 38297.36875,
-            "std": 540.7851081036417,
-            "ci95": 474.01904707221155
+            "mean": 46480.14140625,
+            "std": 1646.675223989195,
+            "ci95": 1443.3744731801767
           },
           "mean_step_latency_ms": {
-            "mean": 9.220716388578174,
-            "std": 0.39923430968950596,
-            "ci95": 0.3499443017230478
+            "mean": 20.324501499008875,
+            "std": 0.6690311785753424,
+            "ci95": 0.5864316841896166
           },
           "peak_vram_mb": {
-            "mean": 10.466796875,
+            "mean": 10.77783203125,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 54.37544555664063,
-          "std": 3.2911451458464174,
-          "ci95": 2.8848159138129708
+          "mean": 40.03382034301758,
+          "std": 5.069368659774131,
+          "ci95": 4.4434975470946885
         },
         "leaker_rate_pct": {
-          "mean": 2.8887659549713134,
-          "std": 3.61136577897629,
-          "ci95": 3.165501674375726
+          "mean": 42.549652099609375,
+          "std": 7.191433587220443,
+          "ci95": 6.303569467826429
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -940,32 +940,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.909199714660645,
-          "std": 2.7567708492743304,
-          "ci95": 2.416416190807954
+          "mean": 11.312125968933106,
+          "std": 3.664046351203387,
+          "ci95": 3.21167823188833
         },
         "friendly_collision_count": {
-          "mean": 0.3,
-          "std": 0.41079191812887456,
-          "ci95": 0.36007499218912714
+          "mean": 1.05,
+          "std": 1.840516231930596,
+          "ci95": 1.613283608049124
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1413.2759033203124,
-          "std": 72.48720634116953,
-          "ci95": 63.53783778414027
+          "mean": 2371.16494140625,
+          "std": 270.16258505329574,
+          "ci95": 236.80794682124525
         },
         "delta_v_total": {
-          "mean": 38297.36875,
-          "std": 540.7851081036417,
-          "ci95": 474.01904707221155
+          "mean": 46480.14140625,
+          "std": 1646.675223989195,
+          "ci95": 1443.3744731801767
         },
         "mean_step_latency_ms": {
-          "mean": 9.220716388578174,
-          "std": 0.39923430968950596,
-          "ci95": 0.3499443017230478
+          "mean": 20.324501499008875,
+          "std": 0.6690311785753424,
+          "ci95": 0.5864316841896166
         },
         "peak_vram_mb": {
-          "mean": 10.466796875,
+          "mean": 10.77783203125,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -981,71 +981,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 54.913673400878906,
-            "leaker_rate_pct": 1.6666667461395264,
+            "intercept_rate_pct": 55.44514846801758,
+            "leaker_rate_pct": 25.7995662689209,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.761350631713867,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1377.15185546875,
-            "delta_v_total": 38183.5078125,
-            "mean_step_latency_ms": 9.364042046433951,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 5.776203155517578,
+            "friendly_collision_count": 1.25,
+            "mean_delta_v_per_intercept": 1924.4349365234375,
+            "delta_v_total": 46963.1640625,
+            "mean_step_latency_ms": 10.391466560013214,
+            "peak_vram_mb": 10.77783203125
           },
           "43": {
-            "intercept_rate_pct": 56.05598449707031,
-            "leaker_rate_pct": 3.28947377204895,
+            "intercept_rate_pct": 59.95521545410156,
+            "leaker_rate_pct": 20.893627166748047,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 17.23417091369629,
+            "false_target_waste_pct": 12.027986526489258,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1399.70751953125,
-            "delta_v_total": 38289.1953125,
-            "mean_step_latency_ms": 10.697419953576823,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1963.4813232421875,
+            "delta_v_total": 49261.3046875,
+            "mean_step_latency_ms": 10.345350077473086,
+            "peak_vram_mb": 10.77783203125
           },
           "44": {
-            "intercept_rate_pct": 52.41169357299805,
-            "leaker_rate_pct": 8.94421100616455,
+            "intercept_rate_pct": 59.454341888427734,
+            "leaker_rate_pct": 33.876792907714844,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.85409164428711,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1479.98876953125,
-            "delta_v_total": 38554.39453125,
-            "mean_step_latency_ms": 11.869501503570389,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 7.039416313171387,
+            "friendly_collision_count": 1.25,
+            "mean_delta_v_per_intercept": 1716.131103515625,
+            "delta_v_total": 45650.2734375,
+            "mean_step_latency_ms": 10.306237812478685,
+            "peak_vram_mb": 10.77783203125
           },
           "45": {
-            "intercept_rate_pct": 59.0860595703125,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 59.04982376098633,
+            "leaker_rate_pct": 23.360578536987305,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.005376815795898,
+            "false_target_waste_pct": 6.175856113433838,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1286.110595703125,
-            "delta_v_total": 37177.296875,
-            "mean_step_latency_ms": 12.307224735710472,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1862.408447265625,
+            "delta_v_total": 48689.27734375,
+            "mean_step_latency_ms": 9.903866157528682,
+            "peak_vram_mb": 10.77783203125
           },
           "46": {
-            "intercept_rate_pct": 54.16582489013672,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 62.752540588378906,
+            "leaker_rate_pct": 20.037555694580078,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.060632705688477,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1499.6654052734375,
-            "delta_v_total": 38918.0078125,
-            "mean_step_latency_ms": 11.941441103588854,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 9.778613090515137,
+            "friendly_collision_count": 0.25,
+            "mean_delta_v_per_intercept": 1769.2647705078125,
+            "delta_v_total": 48525.16015625,
+            "mean_step_latency_ms": 10.224940557468472,
+            "peak_vram_mb": 10.77783203125
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 55.326647186279295,
-            "std": 2.4839547451777957,
-            "ci95": 2.177282331994282
+            "mean": 59.33141403198242,
+            "std": 2.6120250525879345,
+            "ci95": 2.289540905995481
           },
           "leaker_rate_pct": {
-            "mean": 2.7800703048706055,
-            "std": 3.7065270726909456,
-            "ci95": 3.2489142260322614
+            "mean": 24.793624114990234,
+            "std": 5.554269924543094,
+            "ci95": 4.868532245731107
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -1053,45 +1053,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.983124542236329,
-            "std": 3.0157418250677135,
-            "ci95": 2.643414259588749
+            "mean": 8.15961503982544,
+            "std": 2.6672199722963588,
+            "ci95": 2.3379213862479076
           },
           "friendly_collision_count": {
-            "mean": 0.0,
-            "std": 0.0,
-            "ci95": 0.0
+            "mean": 0.55,
+            "std": 0.6471089552772392,
+            "ci95": 0.5672160082367209
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1408.5248291015625,
-            "std": 85.82096534039668,
-            "ci95": 75.2253928591459
+            "mean": 1847.1441162109375,
+            "std": 103.64701928855354,
+            "ci95": 90.85061807141953
           },
           "delta_v_total": {
-            "mean": 38224.48046875,
-            "std": 650.4390274547487,
-            "ci95": 570.1349451982067
+            "mean": 47817.8359375,
+            "std": 1480.8874799006594,
+            "ci95": 1298.0551082578013
           },
           "mean_step_latency_ms": {
-            "mean": 11.235925868576098,
-            "std": 1.2083861922936325,
-            "ci95": 1.0591971982639523
+            "mean": 10.234372232992428,
+            "std": 0.1946038241429356,
+            "ci95": 0.17057777275028732
           },
           "peak_vram_mb": {
-            "mean": 10.466796875,
+            "mean": 10.77783203125,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 55.326647186279295,
-          "std": 2.4839547451777957,
-          "ci95": 2.177282331994282
+          "mean": 59.33141403198242,
+          "std": 2.6120250525879345,
+          "ci95": 2.289540905995481
         },
         "leaker_rate_pct": {
-          "mean": 2.7800703048706055,
-          "std": 3.7065270726909456,
-          "ci95": 3.2489142260322614
+          "mean": 24.793624114990234,
+          "std": 5.554269924543094,
+          "ci95": 4.868532245731107
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -1099,32 +1099,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.983124542236329,
-          "std": 3.0157418250677135,
-          "ci95": 2.643414259588749
+          "mean": 8.15961503982544,
+          "std": 2.6672199722963588,
+          "ci95": 2.3379213862479076
         },
         "friendly_collision_count": {
-          "mean": 0.0,
-          "std": 0.0,
-          "ci95": 0.0
+          "mean": 0.55,
+          "std": 0.6471089552772392,
+          "ci95": 0.5672160082367209
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1408.5248291015625,
-          "std": 85.82096534039668,
-          "ci95": 75.2253928591459
+          "mean": 1847.1441162109375,
+          "std": 103.64701928855354,
+          "ci95": 90.85061807141953
         },
         "delta_v_total": {
-          "mean": 38224.48046875,
-          "std": 650.4390274547487,
-          "ci95": 570.1349451982067
+          "mean": 47817.8359375,
+          "std": 1480.8874799006594,
+          "ci95": 1298.0551082578013
         },
         "mean_step_latency_ms": {
-          "mean": 11.235925868576098,
-          "std": 1.2083861922936325,
-          "ci95": 1.0591971982639523
+          "mean": 10.234372232992428,
+          "std": 0.1946038241429356,
+          "ci95": 0.17057777275028732
         },
         "peak_vram_mb": {
-          "mean": 10.466796875,
+          "mean": 10.77783203125,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -1140,71 +1140,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 50.89734649658203,
-            "leaker_rate_pct": 0.5555555820465088,
+            "intercept_rate_pct": 73.52947998046875,
+            "leaker_rate_pct": 16.821704864501953,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.578405380249023,
+            "false_target_waste_pct": 1.1073195934295654,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1459.5191650390625,
-            "delta_v_total": 38363.9453125,
-            "mean_step_latency_ms": 17.718172846415264,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 996.3626708984375,
+            "delta_v_total": 32548.943359375,
+            "mean_step_latency_ms": 12.906410810060152,
+            "peak_vram_mb": 10.77783203125
           },
           "43": {
-            "intercept_rate_pct": 51.075096130371094,
-            "leaker_rate_pct": 5.173445224761963,
+            "intercept_rate_pct": 78.25884246826172,
+            "leaker_rate_pct": 7.343330383300781,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 19.27643394470215,
+            "false_target_waste_pct": 2.729741096496582,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1475.444091796875,
-            "delta_v_total": 38408.15234375,
-            "mean_step_latency_ms": 16.420973746434292,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1027.854248046875,
+            "delta_v_total": 33876.6484375,
+            "mean_step_latency_ms": 12.8501289249607,
+            "peak_vram_mb": 10.77783203125
           },
           "44": {
-            "intercept_rate_pct": 51.274742126464844,
-            "leaker_rate_pct": 11.487815856933594,
+            "intercept_rate_pct": 72.72702026367188,
+            "leaker_rate_pct": 23.937442779541016,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.996564865112305,
+            "false_target_waste_pct": 1.3647770881652832,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1462.68310546875,
-            "delta_v_total": 38342.6953125,
-            "mean_step_latency_ms": 14.357425046427709,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 1009.43115234375,
+            "delta_v_total": 32273.484375,
+            "mean_step_latency_ms": 13.16859750749245,
+            "peak_vram_mb": 10.77783203125
           },
           "45": {
-            "intercept_rate_pct": 56.15324020385742,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 70.14183807373047,
+            "leaker_rate_pct": 14.996349334716797,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.871564865112305,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1353.570556640625,
-            "delta_v_total": 37857.6015625,
-            "mean_step_latency_ms": 14.190538796432454,
-            "peak_vram_mb": 10.466796875
+            "false_target_waste_pct": 1.3137009143829346,
+            "friendly_collision_count": 0.25,
+            "mean_delta_v_per_intercept": 1104.674072265625,
+            "delta_v_total": 35260.91015625,
+            "mean_step_latency_ms": 13.302406195057301,
+            "peak_vram_mb": 10.77783203125
           },
           "46": {
-            "intercept_rate_pct": 51.58430099487305,
-            "leaker_rate_pct": 1.6304347515106201,
+            "intercept_rate_pct": 77.33692932128906,
+            "leaker_rate_pct": 9.570152282714844,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.299581527709961,
+            "false_target_waste_pct": 0.7664995193481445,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1490.7359619140625,
-            "delta_v_total": 38779.80078125,
-            "mean_step_latency_ms": 14.234001560717909,
-            "peak_vram_mb": 10.466796875
+            "mean_delta_v_per_intercept": 994.6697387695312,
+            "delta_v_total": 33008.65625,
+            "mean_step_latency_ms": 12.978281342520859,
+            "peak_vram_mb": 10.77783203125
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 52.19694519042969,
-            "std": 2.2262953371808867,
-            "ci95": 1.9514339030754928
+            "mean": 74.39882202148438,
+            "std": 3.3617265425611795,
+            "ci95": 2.946683235805398
           },
           "leaker_rate_pct": {
-            "mean": 3.769450283050537,
-            "std": 4.760715044984182,
-            "ci95": 4.172950725139516
+            "mean": 14.533795928955078,
+            "std": 6.523373553062372,
+            "ci95": 5.7179890292505435
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -1212,45 +1212,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.804510116577148,
-            "std": 3.457282631914619,
-            "ci95": 3.0304418410970646
+            "mean": 1.456407642364502,
+            "std": 0.749662447071872,
+            "ci95": 0.6571081071979652
           },
           "friendly_collision_count": {
-            "mean": 0.0,
-            "std": 0.0,
-            "ci95": 0.0
+            "mean": 0.05,
+            "std": 0.1118033988749895,
+            "ci95": 0.098
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1448.390576171875,
-            "std": 54.41503098664542,
-            "ci95": 47.696877647287465
+            "mean": 1026.5983764648438,
+            "std": 45.622748899007306,
+            "ci95": 39.99010260056493
           },
           "delta_v_total": {
-            "mean": 38350.4390625,
-            "std": 328.1819214322944,
-            "ci95": 287.6641374411693
+            "mean": 33393.728515625,
+            "std": 1207.939203210304,
+            "ci95": 1058.8053950575472
           },
           "mean_step_latency_ms": {
-            "mean": 15.384222399285525,
-            "std": 1.6065786138953169,
-            "ci95": 1.408228244811988
+            "mean": 13.041164956018292,
+            "std": 0.18913872819407615,
+            "ci95": 0.16578740494056565
           },
           "peak_vram_mb": {
-            "mean": 10.466796875,
+            "mean": 10.77783203125,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 52.19694519042969,
-          "std": 2.2262953371808867,
-          "ci95": 1.9514339030754928
+          "mean": 74.39882202148438,
+          "std": 3.3617265425611795,
+          "ci95": 2.946683235805398
         },
         "leaker_rate_pct": {
-          "mean": 3.769450283050537,
-          "std": 4.760715044984182,
-          "ci95": 4.172950725139516
+          "mean": 14.533795928955078,
+          "std": 6.523373553062372,
+          "ci95": 5.7179890292505435
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -1258,32 +1258,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.804510116577148,
-          "std": 3.457282631914619,
-          "ci95": 3.0304418410970646
+          "mean": 1.456407642364502,
+          "std": 0.749662447071872,
+          "ci95": 0.6571081071979652
         },
         "friendly_collision_count": {
-          "mean": 0.0,
-          "std": 0.0,
-          "ci95": 0.0
+          "mean": 0.05,
+          "std": 0.1118033988749895,
+          "ci95": 0.098
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1448.390576171875,
-          "std": 54.41503098664542,
-          "ci95": 47.696877647287465
+          "mean": 1026.5983764648438,
+          "std": 45.622748899007306,
+          "ci95": 39.99010260056493
         },
         "delta_v_total": {
-          "mean": 38350.4390625,
-          "std": 328.1819214322944,
-          "ci95": 287.6641374411693
+          "mean": 33393.728515625,
+          "std": 1207.939203210304,
+          "ci95": 1058.8053950575472
         },
         "mean_step_latency_ms": {
-          "mean": 15.384222399285525,
-          "std": 1.6065786138953169,
-          "ci95": 1.408228244811988
+          "mean": 13.041164956018292,
+          "std": 0.18913872819407615,
+          "ci95": 0.16578740494056565
         },
         "peak_vram_mb": {
-          "mean": 10.466796875,
+          "mean": 10.77783203125,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -1299,71 +1299,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 50.32916259765625,
-            "leaker_rate_pct": 0.5555555820465088,
+            "intercept_rate_pct": 73.45196533203125,
+            "leaker_rate_pct": 16.343669891357422,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.786888122558594,
+            "false_target_waste_pct": 0.9445568323135376,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1517.4908447265625,
-            "delta_v_total": 38588.7890625,
-            "mean_step_latency_ms": 18.016605125012575,
-            "peak_vram_mb": 10.77783203125
+            "mean_delta_v_per_intercept": 1006.375732421875,
+            "delta_v_total": 32821.2890625,
+            "mean_step_latency_ms": 16.854781539973374,
+            "peak_vram_mb": 11.1484375
           },
           "43": {
-            "intercept_rate_pct": 51.732994079589844,
-            "leaker_rate_pct": 5.173445224761963,
+            "intercept_rate_pct": 75.71697235107422,
+            "leaker_rate_pct": 8.665684700012207,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 18.77239990234375,
+            "false_target_waste_pct": 3.147451877593994,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1439.9150390625,
-            "delta_v_total": 38298.69140625,
-            "mean_step_latency_ms": 18.058868592856925,
-            "peak_vram_mb": 10.78173828125
+            "mean_delta_v_per_intercept": 1088.393310546875,
+            "delta_v_total": 34282.16796875,
+            "mean_step_latency_ms": 17.203009467466472,
+            "peak_vram_mb": 11.15234375
           },
           "44": {
-            "intercept_rate_pct": 51.80665588378906,
-            "leaker_rate_pct": 9.173985481262207,
+            "intercept_rate_pct": 75.54913330078125,
+            "leaker_rate_pct": 22.228647232055664,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.29898452758789,
+            "false_target_waste_pct": 1.6837928295135498,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1453.43603515625,
-            "delta_v_total": 38488.9453125,
-            "mean_step_latency_ms": 18.217290982145837,
-            "peak_vram_mb": 10.78173828125
+            "mean_delta_v_per_intercept": 971.0714721679688,
+            "delta_v_total": 32587.1953125,
+            "mean_step_latency_ms": 16.795637835080015,
+            "peak_vram_mb": 11.15234375
           },
           "45": {
-            "intercept_rate_pct": 55.63391876220703,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 71.78434753417969,
+            "leaker_rate_pct": 15.553589820861816,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.005376815795898,
-            "friendly_collision_count": 2.0,
-            "mean_delta_v_per_intercept": 1367.81591796875,
-            "delta_v_total": 37732.7734375,
-            "mean_step_latency_ms": 18.137856189278928,
-            "peak_vram_mb": 10.78173828125
+            "false_target_waste_pct": 1.3763575553894043,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1077.67236328125,
+            "delta_v_total": 35000.8984375,
+            "mean_step_latency_ms": 17.479942472482435,
+            "peak_vram_mb": 11.15234375
           },
           "46": {
-            "intercept_rate_pct": 49.78266906738281,
-            "leaker_rate_pct": 1.6304347515106201,
+            "intercept_rate_pct": 75.43670654296875,
+            "leaker_rate_pct": 9.038049697875977,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.710872650146484,
-            "friendly_collision_count": 0.5,
-            "mean_delta_v_per_intercept": 1504.0811767578125,
-            "delta_v_total": 38856.12109375,
-            "mean_step_latency_ms": 18.036678457160956,
-            "peak_vram_mb": 10.78173828125
+            "false_target_waste_pct": 1.5664161443710327,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1038.008544921875,
+            "delta_v_total": 33542.1484375,
+            "mean_step_latency_ms": 16.532578427481894,
+            "peak_vram_mb": 11.15234375
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 51.857080078125,
-            "std": 2.286928248141805,
-            "ci95": 2.0045809928237563
+            "mean": 74.38782501220703,
+            "std": 1.7225961783508843,
+            "ci95": 1.50992212380898
           },
           "leaker_rate_pct": {
-            "mean": 3.30668420791626,
-            "std": 3.8478143904457225,
-            "ci95": 3.3727580204007124
+            "mean": 14.365928268432617,
+            "std": 5.6573716996720345,
+            "ci95": 4.958904936224475
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -1371,45 +1371,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.714904403686523,
-            "std": 3.729344318527914,
-            "ci95": 3.268914423830569
+            "mean": 1.7437150478363037,
+            "std": 0.8335328489824627,
+            "ci95": 0.7306237558271103
           },
           "friendly_collision_count": {
-            "mean": 0.5,
-            "std": 0.8660254037844386,
-            "ci95": 0.7591047358566536
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1456.547802734375,
-            "std": 59.44147397272042,
-            "ci95": 52.10274918242863
+            "mean": 1036.3042846679687,
+            "std": 48.934975003540025,
+            "ci95": 42.89339678938605
           },
           "delta_v_total": {
-            "mean": 38393.0640625,
-            "std": 420.36091981391337,
-            "ci95": 368.4625919809934
+            "mean": 33646.73984375,
+            "std": 1006.53581248972,
+            "ci95": 882.2675394178783
           },
           "mean_step_latency_ms": {
-            "mean": 18.093459869291046,
-            "std": 0.08311515299008423,
-            "ci95": 0.07285364376208031
+            "mean": 16.973189948496838,
+            "std": 0.3705735245886264,
+            "ci95": 0.3248220159236085
           },
           "peak_vram_mb": {
-            "mean": 10.78095703125,
+            "mean": 11.1515625,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 51.857080078125,
-          "std": 2.286928248141805,
-          "ci95": 2.0045809928237563
+          "mean": 74.38782501220703,
+          "std": 1.7225961783508843,
+          "ci95": 1.50992212380898
         },
         "leaker_rate_pct": {
-          "mean": 3.30668420791626,
-          "std": 3.8478143904457225,
-          "ci95": 3.3727580204007124
+          "mean": 14.365928268432617,
+          "std": 5.6573716996720345,
+          "ci95": 4.958904936224475
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -1417,32 +1417,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.714904403686523,
-          "std": 3.729344318527914,
-          "ci95": 3.268914423830569
+          "mean": 1.7437150478363037,
+          "std": 0.8335328489824627,
+          "ci95": 0.7306237558271103
         },
         "friendly_collision_count": {
-          "mean": 0.5,
-          "std": 0.8660254037844386,
-          "ci95": 0.7591047358566536
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1456.547802734375,
-          "std": 59.44147397272042,
-          "ci95": 52.10274918242863
+          "mean": 1036.3042846679687,
+          "std": 48.934975003540025,
+          "ci95": 42.89339678938605
         },
         "delta_v_total": {
-          "mean": 38393.0640625,
-          "std": 420.36091981391337,
-          "ci95": 368.4625919809934
+          "mean": 33646.73984375,
+          "std": 1006.53581248972,
+          "ci95": 882.2675394178783
         },
         "mean_step_latency_ms": {
-          "mean": 18.093459869291046,
-          "std": 0.08311515299008423,
-          "ci95": 0.07285364376208031
+          "mean": 16.973189948496838,
+          "std": 0.3705735245886264,
+          "ci95": 0.3248220159236085
         },
         "peak_vram_mb": {
-          "mean": 10.78095703125,
+          "mean": 11.1515625,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -1458,71 +1458,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 52.602481842041016,
-            "leaker_rate_pct": 0.5555555820465088,
+            "intercept_rate_pct": 68.43933868408203,
+            "leaker_rate_pct": 18.514211654663086,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.059438705444336,
+            "false_target_waste_pct": 0.9385322332382202,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1430.445068359375,
-            "delta_v_total": 38274.515625,
-            "mean_step_latency_ms": 19.21937385713883,
-            "peak_vram_mb": 13.60302734375
+            "mean_delta_v_per_intercept": 1098.705078125,
+            "delta_v_total": 33460.3359375,
+            "mean_step_latency_ms": 19.05709205754647,
+            "peak_vram_mb": 14.38134765625
           },
           "43": {
-            "intercept_rate_pct": 51.684852600097656,
-            "leaker_rate_pct": 5.173445224761963,
+            "intercept_rate_pct": 77.6009521484375,
+            "leaker_rate_pct": 8.56940746307373,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 19.310035705566406,
+            "false_target_waste_pct": 2.690058708190918,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1443.17724609375,
-            "delta_v_total": 38235.9375,
-            "mean_step_latency_ms": 19.111442321400318,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 1044.7557373046875,
+            "delta_v_total": 33717.5390625,
+            "mean_step_latency_ms": 18.309511710026527,
+            "peak_vram_mb": 14.38525390625
           },
           "44": {
-            "intercept_rate_pct": 51.99282455444336,
-            "leaker_rate_pct": 10.862815856933594,
+            "intercept_rate_pct": 73.88394165039062,
+            "leaker_rate_pct": 22.224971771240234,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.074970245361328,
+            "false_target_waste_pct": 1.4260272979736328,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1465.77099609375,
-            "delta_v_total": 38383.05859375,
-            "mean_step_latency_ms": 19.187023910706102,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 995.0206298828125,
+            "delta_v_total": 32819.3671875,
+            "mean_step_latency_ms": 18.223395272448215,
+            "peak_vram_mb": 14.38525390625
           },
           "45": {
-            "intercept_rate_pct": 55.597686767578125,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 75.23480224609375,
+            "leaker_rate_pct": 12.153129577636719,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.77822494506836,
+            "false_target_waste_pct": 1.1257309913635254,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1367.0712890625,
-            "delta_v_total": 37887.359375,
-            "mean_step_latency_ms": 19.146787510724803,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 1027.1103515625,
+            "delta_v_total": 34867.0859375,
+            "mean_step_latency_ms": 17.858450190010444,
+            "peak_vram_mb": 14.38525390625
           },
           "46": {
-            "intercept_rate_pct": 52.20930099487305,
-            "leaker_rate_pct": 1.6304347515106201,
+            "intercept_rate_pct": 77.14607238769531,
+            "leaker_rate_pct": 11.630313873291016,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.9859619140625,
+            "false_target_waste_pct": 1.5267333984375,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1491.3077392578125,
-            "delta_v_total": 38799.46875,
-            "mean_step_latency_ms": 19.682543585702206,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 1009.533935546875,
+            "delta_v_total": 33164.65625,
+            "mean_step_latency_ms": 17.12954569001795,
+            "peak_vram_mb": 14.38525390625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 52.81742935180664,
-            "std": 1.58969784855171,
-            "ci95": 1.3934316015943413
+            "mean": 74.46102142333984,
+            "std": 3.683106178142399,
+            "ci95": 3.2283849068089348
           },
           "leaker_rate_pct": {
-            "mean": 3.644450283050537,
-            "std": 4.50894039633485,
-            "ci95": 3.9522605152182306
+            "mean": 14.618406867980957,
+            "std": 5.5819756857944425,
+            "ci95": 4.892817416217453
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -1530,9 +1530,9 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.641726303100587,
-            "std": 3.5355239658406554,
-            "ci95": 3.0990233940901453
+            "mean": 1.5414165258407593,
+            "std": 0.6835885211610737,
+            "ci95": 0.5991917575662479
           },
           "friendly_collision_count": {
             "mean": 0.0,
@@ -1540,35 +1540,35 @@
             "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1439.5544677734374,
-            "std": 46.678754115201926,
-            "ci95": 40.915731984183104
+            "mean": 1035.025146484375,
+            "std": 40.195227495646705,
+            "ci95": 35.232670332123185
           },
           "delta_v_total": {
-            "mean": 38316.06796875,
-            "std": 327.91104235726664,
-            "ci95": 287.4267014631951
+            "mean": 33605.796875,
+            "std": 780.6362796454139,
+            "ci95": 684.2578684999548
           },
           "mean_step_latency_ms": {
-            "mean": 19.269434237134455,
-            "std": 0.23449973473212718,
-            "ci95": 0.2055480802461483
+            "mean": 18.11559898400992,
+            "std": 0.7025058707009794,
+            "ci95": 0.6157735455401865
           },
           "peak_vram_mb": {
-            "mean": 13.60615234375,
+            "mean": 14.38447265625,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 52.81742935180664,
-          "std": 1.58969784855171,
-          "ci95": 1.3934316015943413
+          "mean": 74.46102142333984,
+          "std": 3.683106178142399,
+          "ci95": 3.2283849068089348
         },
         "leaker_rate_pct": {
-          "mean": 3.644450283050537,
-          "std": 4.50894039633485,
-          "ci95": 3.9522605152182306
+          "mean": 14.618406867980957,
+          "std": 5.5819756857944425,
+          "ci95": 4.892817416217453
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -1576,9 +1576,9 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.641726303100587,
-          "std": 3.5355239658406554,
-          "ci95": 3.0990233940901453
+          "mean": 1.5414165258407593,
+          "std": 0.6835885211610737,
+          "ci95": 0.5991917575662479
         },
         "friendly_collision_count": {
           "mean": 0.0,
@@ -1586,22 +1586,22 @@
           "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1439.5544677734374,
-          "std": 46.678754115201926,
-          "ci95": 40.915731984183104
+          "mean": 1035.025146484375,
+          "std": 40.195227495646705,
+          "ci95": 35.232670332123185
         },
         "delta_v_total": {
-          "mean": 38316.06796875,
-          "std": 327.91104235726664,
-          "ci95": 287.4267014631951
+          "mean": 33605.796875,
+          "std": 780.6362796454139,
+          "ci95": 684.2578684999548
         },
         "mean_step_latency_ms": {
-          "mean": 19.269434237134455,
-          "std": 0.23449973473212718,
-          "ci95": 0.2055480802461483
+          "mean": 18.11559898400992,
+          "std": 0.7025058707009794,
+          "ci95": 0.6157735455401865
         },
         "peak_vram_mb": {
-          "mean": 13.60615234375,
+          "mean": 14.38447265625,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -1619,71 +1619,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 63.17814636230469,
-            "leaker_rate_pct": 1.3157894611358643,
+            "intercept_rate_pct": 45.036109924316406,
+            "leaker_rate_pct": 39.99634552001953,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.677419662475586,
-            "friendly_collision_count": 1.5,
-            "mean_delta_v_per_intercept": 1310.640869140625,
-            "delta_v_total": 121876.1171875,
-            "mean_step_latency_ms": 9.519997896430661,
-            "peak_vram_mb": 17.58642578125
+            "false_target_waste_pct": 13.811403274536133,
+            "friendly_collision_count": 12.75,
+            "mean_delta_v_per_intercept": 2217.70556640625,
+            "delta_v_total": 146253.46875,
+            "mean_step_latency_ms": 46.00925407496106,
+            "peak_vram_mb": 25.4365234375
           },
           "43": {
-            "intercept_rate_pct": 63.79888153076172,
-            "leaker_rate_pct": 3.024193525314331,
+            "intercept_rate_pct": 49.48613357543945,
+            "leaker_rate_pct": 35.243099212646484,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.222670555114746,
-            "friendly_collision_count": 2.25,
-            "mean_delta_v_per_intercept": 1290.6151123046875,
-            "delta_v_total": 120680.421875,
-            "mean_step_latency_ms": 9.623358817873395,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 13.794486045837402,
+            "friendly_collision_count": 12.75,
+            "mean_delta_v_per_intercept": 2157.57763671875,
+            "delta_v_total": 154770.96875,
+            "mean_step_latency_ms": 43.32128536254913,
+            "peak_vram_mb": 25.4404296875
           },
           "44": {
-            "intercept_rate_pct": 59.38269805908203,
-            "leaker_rate_pct": 3.982813835144043,
+            "intercept_rate_pct": 46.608009338378906,
+            "leaker_rate_pct": 49.03448486328125,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.672714233398438,
-            "friendly_collision_count": 2.0,
-            "mean_delta_v_per_intercept": 1397.3087158203125,
-            "delta_v_total": 121800.9296875,
-            "mean_step_latency_ms": 9.756118364297047,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 12.418842315673828,
+            "friendly_collision_count": 32.0,
+            "mean_delta_v_per_intercept": 2184.52099609375,
+            "delta_v_total": 145552.875,
+            "mean_step_latency_ms": 44.299014104999515,
+            "peak_vram_mb": 25.4404296875
           },
           "45": {
-            "intercept_rate_pct": 64.99299621582031,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 49.18693161010742,
+            "leaker_rate_pct": 36.283843994140625,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.52419376373291,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1237.0408935546875,
-            "delta_v_total": 118963.703125,
-            "mean_step_latency_ms": 10.021766535721456,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 9.995613098144531,
+            "friendly_collision_count": 10.25,
+            "mean_delta_v_per_intercept": 2115.84619140625,
+            "delta_v_total": 153076.28125,
+            "mean_step_latency_ms": 43.13144774749617,
+            "peak_vram_mb": 25.4404296875
           },
           "46": {
-            "intercept_rate_pct": 60.27558898925781,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 42.403404235839844,
+            "leaker_rate_pct": 36.92881393432617,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.488574981689453,
-            "friendly_collision_count": 4.25,
-            "mean_delta_v_per_intercept": 1385.436767578125,
-            "delta_v_total": 123546.8203125,
-            "mean_step_latency_ms": 10.207624342880147,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 11.000626564025879,
+            "friendly_collision_count": 8.25,
+            "mean_delta_v_per_intercept": 2365.65576171875,
+            "delta_v_total": 151840.96875,
+            "mean_step_latency_ms": 46.829170559994964,
+            "peak_vram_mb": 25.4404296875
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 62.325662231445314,
-            "std": 2.3914228661820904,
-            "ci95": 2.09617456395837
+            "mean": 46.5441177368164,
+            "std": 2.960726277454958,
+            "ci95": 2.5951910059104017
           },
           "leaker_rate_pct": {
-            "mean": 1.6645593643188477,
-            "std": 1.7948582843288978,
-            "ci95": 1.5732626524253197
+            "mean": 39.497317504882815,
+            "std": 5.617574789359596,
+            "ci95": 4.92402140629727
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -1691,45 +1691,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.917114639282227,
-            "std": 1.812517354443029,
-            "ci95": 1.5887415098536157
+            "mean": 12.204194259643554,
+            "std": 1.6944489159906815,
+            "ci95": 1.4852499605379494
           },
           "friendly_collision_count": {
-            "mean": 2.0,
-            "std": 1.5309310892394863,
-            "ci95": 1.341920265887657
+            "mean": 15.2,
+            "std": 9.579274502800304,
+            "ci95": 8.396604313649656
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1324.2084716796876,
-            "std": 67.08824453840526,
-            "ci95": 58.80543910936924
+            "mean": 2208.26123046875,
+            "std": 95.57091450491875,
+            "ci95": 83.77160010988902
           },
           "delta_v_total": {
-            "mean": 121373.5984375,
-            "std": 1691.6057144999415,
-            "ci95": 1482.7577845495966
+            "mean": 150298.9125,
+            "std": 4152.75477366004,
+            "ci95": 3640.050051373916
           },
           "mean_step_latency_ms": {
-            "mean": 9.82577319144054,
-            "std": 0.28440534342181356,
-            "ci95": 0.2492922749736963
+            "mean": 44.71803437000017,
+            "std": 1.640722952099955,
+            "ci95": 1.438157076830735
           },
           "peak_vram_mb": {
-            "mean": 17.58955078125,
+            "mean": 25.4396484375,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 62.325662231445314,
-          "std": 2.3914228661820904,
-          "ci95": 2.09617456395837
+          "mean": 46.5441177368164,
+          "std": 2.960726277454958,
+          "ci95": 2.5951910059104017
         },
         "leaker_rate_pct": {
-          "mean": 1.6645593643188477,
-          "std": 1.7948582843288978,
-          "ci95": 1.5732626524253197
+          "mean": 39.497317504882815,
+          "std": 5.617574789359596,
+          "ci95": 4.92402140629727
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -1737,32 +1737,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.917114639282227,
-          "std": 1.812517354443029,
-          "ci95": 1.5887415098536157
+          "mean": 12.204194259643554,
+          "std": 1.6944489159906815,
+          "ci95": 1.4852499605379494
         },
         "friendly_collision_count": {
-          "mean": 2.0,
-          "std": 1.5309310892394863,
-          "ci95": 1.341920265887657
+          "mean": 15.2,
+          "std": 9.579274502800304,
+          "ci95": 8.396604313649656
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1324.2084716796876,
-          "std": 67.08824453840526,
-          "ci95": 58.80543910936924
+          "mean": 2208.26123046875,
+          "std": 95.57091450491875,
+          "ci95": 83.77160010988902
         },
         "delta_v_total": {
-          "mean": 121373.5984375,
-          "std": 1691.6057144999415,
-          "ci95": 1482.7577845495966
+          "mean": 150298.9125,
+          "std": 4152.75477366004,
+          "ci95": 3640.050051373916
         },
         "mean_step_latency_ms": {
-          "mean": 9.82577319144054,
-          "std": 0.28440534342181356,
-          "ci95": 0.2492922749736963
+          "mean": 44.71803437000017,
+          "std": 1.640722952099955,
+          "ci95": 1.438157076830735
         },
         "peak_vram_mb": {
-          "mean": 17.58955078125,
+          "mean": 25.4396484375,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -1778,71 +1778,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 64.74668884277344,
-            "leaker_rate_pct": 1.3157894611358643,
+            "intercept_rate_pct": 67.8949203491211,
+            "leaker_rate_pct": 19.551746368408203,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.70206069946289,
-            "friendly_collision_count": 3.25,
-            "mean_delta_v_per_intercept": 1277.2894287109375,
-            "delta_v_total": 121089.578125,
-            "mean_step_latency_ms": 11.406106803573428,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 8.09711742401123,
+            "friendly_collision_count": 1.75,
+            "mean_delta_v_per_intercept": 1488.739501953125,
+            "delta_v_total": 138655.875,
+            "mean_step_latency_ms": 14.730802502435836,
+            "peak_vram_mb": 25.4404296875
           },
           "43": {
-            "intercept_rate_pct": 65.24412536621094,
-            "leaker_rate_pct": 3.024193525314331,
+            "intercept_rate_pct": 63.01600646972656,
+            "leaker_rate_pct": 22.900339126586914,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.616935729980469,
-            "friendly_collision_count": 1.25,
-            "mean_delta_v_per_intercept": 1266.0927734375,
-            "delta_v_total": 119944.234375,
-            "mean_step_latency_ms": 10.466457271424392,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 9.565790176391602,
+            "friendly_collision_count": 2.5,
+            "mean_delta_v_per_intercept": 1850.8438720703125,
+            "delta_v_total": 151856.90625,
+            "mean_step_latency_ms": 14.905892550000317,
+            "peak_vram_mb": 25.4404296875
           },
           "44": {
-            "intercept_rate_pct": 60.12103271484375,
-            "leaker_rate_pct": 4.192898273468018,
+            "intercept_rate_pct": 66.09352111816406,
+            "leaker_rate_pct": 30.084627151489258,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.604391098022461,
-            "friendly_collision_count": 6.25,
-            "mean_delta_v_per_intercept": 1379.8707275390625,
-            "delta_v_total": 121192.328125,
-            "mean_step_latency_ms": 10.824862135715259,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 7.38533878326416,
+            "friendly_collision_count": 5.25,
+            "mean_delta_v_per_intercept": 1580.5167236328125,
+            "delta_v_total": 142369.265625,
+            "mean_step_latency_ms": 14.597872899917093,
+            "peak_vram_mb": 25.4404296875
           },
           "45": {
-            "intercept_rate_pct": 68.01739501953125,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 65.26567840576172,
+            "leaker_rate_pct": 21.32269859313965,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.55555534362793,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1161.010986328125,
-            "delta_v_total": 116497.359375,
-            "mean_step_latency_ms": 12.429460117849496,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 7.1447367668151855,
+            "friendly_collision_count": 2.5,
+            "mean_delta_v_per_intercept": 1668.821044921875,
+            "delta_v_total": 149696.125,
+            "mean_step_latency_ms": 14.560018609990948,
+            "peak_vram_mb": 25.4404296875
           },
           "46": {
-            "intercept_rate_pct": 59.50666809082031,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 63.494625091552734,
+            "leaker_rate_pct": 20.717506408691406,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.45161247253418,
-            "friendly_collision_count": 3.0,
-            "mean_delta_v_per_intercept": 1373.0797119140625,
-            "delta_v_total": 123083.328125,
-            "mean_step_latency_ms": 12.681614864282308,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 7.182957172393799,
+            "friendly_collision_count": 4.25,
+            "mean_delta_v_per_intercept": 1750.9681396484375,
+            "delta_v_total": 150917.3125,
+            "mean_step_latency_ms": 14.074796129993956,
+            "peak_vram_mb": 25.4404296875
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 63.527182006835936,
-            "std": 3.6181310600154015,
-            "ci95": 3.171431704665541
+            "mean": 65.15295028686523,
+            "std": 1.983201469266483,
+            "ci95": 1.7383527329560677
           },
           "leaker_rate_pct": {
-            "mean": 1.7065762519836425,
-            "std": 1.8638288411940973,
-            "ci95": 1.6337180110351872
+            "mean": 22.915383529663085,
+            "std": 4.185679291992322,
+            "ci95": 3.668909664131945
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -1850,45 +1850,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.986111068725586,
-            "std": 1.8873678417395434,
-            "ci95": 1.65435085472926
+            "mean": 7.8751880645751955,
+            "std": 1.0198140965328257,
+            "ci95": 0.8939064685498929
           },
           "friendly_collision_count": {
-            "mean": 2.75,
-            "std": 2.3651109910530628,
-            "ci95": 2.0731111885280056
+            "mean": 3.25,
+            "std": 1.4469796128487782,
+            "ci95": 1.268333552343389
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1291.4687255859376,
-            "std": 89.91590540379701,
-            "ci95": 78.81476608260166
+            "mean": 1667.9778564453125,
+            "std": 141.513175373724,
+            "ci95": 124.04176730021845
           },
           "delta_v_total": {
-            "mean": 120361.365625,
-            "std": 2435.89894868067,
-            "ci95": 2135.1595691435377
+            "mean": 146699.096875,
+            "std": 5848.490723550567,
+            "ci95": 5126.428146865311
           },
           "mean_step_latency_ms": {
-            "mean": 11.561700238568976,
-            "std": 0.971328065187816,
-            "ci95": 0.851406588227615
+            "mean": 14.57387653846763,
+            "std": 0.3101247780120734,
+            "ci95": 0.271836353375675
           },
           "peak_vram_mb": {
-            "mean": 17.59033203125,
+            "mean": 25.4404296875,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 63.527182006835936,
-          "std": 3.6181310600154015,
-          "ci95": 3.171431704665541
+          "mean": 65.15295028686523,
+          "std": 1.983201469266483,
+          "ci95": 1.7383527329560677
         },
         "leaker_rate_pct": {
-          "mean": 1.7065762519836425,
-          "std": 1.8638288411940973,
-          "ci95": 1.6337180110351872
+          "mean": 22.915383529663085,
+          "std": 4.185679291992322,
+          "ci95": 3.668909664131945
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -1896,32 +1896,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.986111068725586,
-          "std": 1.8873678417395434,
-          "ci95": 1.65435085472926
+          "mean": 7.8751880645751955,
+          "std": 1.0198140965328257,
+          "ci95": 0.8939064685498929
         },
         "friendly_collision_count": {
-          "mean": 2.75,
-          "std": 2.3651109910530628,
-          "ci95": 2.0731111885280056
+          "mean": 3.25,
+          "std": 1.4469796128487782,
+          "ci95": 1.268333552343389
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1291.4687255859376,
-          "std": 89.91590540379701,
-          "ci95": 78.81476608260166
+          "mean": 1667.9778564453125,
+          "std": 141.513175373724,
+          "ci95": 124.04176730021845
         },
         "delta_v_total": {
-          "mean": 120361.365625,
-          "std": 2435.89894868067,
-          "ci95": 2135.1595691435377
+          "mean": 146699.096875,
+          "std": 5848.490723550567,
+          "ci95": 5126.428146865311
         },
         "mean_step_latency_ms": {
-          "mean": 11.561700238568976,
-          "std": 0.971328065187816,
-          "ci95": 0.851406588227615
+          "mean": 14.57387653846763,
+          "std": 0.3101247780120734,
+          "ci95": 0.271836353375675
         },
         "peak_vram_mb": {
-          "mean": 17.59033203125,
+          "mean": 25.4404296875,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -1937,71 +1937,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 66.03561401367188,
-            "leaker_rate_pct": 0.37593984603881836,
+            "intercept_rate_pct": 81.73321533203125,
+            "leaker_rate_pct": 8.857083320617676,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.125224113464355,
-            "friendly_collision_count": 3.75,
-            "mean_delta_v_per_intercept": 1216.875732421875,
-            "delta_v_total": 119150.515625,
-            "mean_step_latency_ms": 16.70221848214299,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 1.0332080125808716,
+            "friendly_collision_count": 3.5,
+            "mean_delta_v_per_intercept": 762.7822875976562,
+            "delta_v_total": 82229.5625,
+            "mean_step_latency_ms": 13.19263803252852,
+            "peak_vram_mb": 25.4404296875
           },
           "43": {
-            "intercept_rate_pct": 64.22389221191406,
-            "leaker_rate_pct": 3.4166460037231445,
+            "intercept_rate_pct": 81.49366760253906,
+            "leaker_rate_pct": 7.396441459655762,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.88328742980957,
-            "friendly_collision_count": 2.25,
-            "mean_delta_v_per_intercept": 1259.2271728515625,
-            "delta_v_total": 119745.6171875,
-            "mean_step_latency_ms": 17.206919525019007,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 1.5106515884399414,
+            "friendly_collision_count": 2.75,
+            "mean_delta_v_per_intercept": 806.600341796875,
+            "delta_v_total": 87529.671875,
+            "mean_step_latency_ms": 13.11876879499323,
+            "peak_vram_mb": 25.4404296875
           },
           "44": {
-            "intercept_rate_pct": 62.50462341308594,
-            "leaker_rate_pct": 3.754838705062866,
+            "intercept_rate_pct": 82.68023681640625,
+            "leaker_rate_pct": 15.607850074768066,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.96505355834961,
-            "friendly_collision_count": 2.5,
-            "mean_delta_v_per_intercept": 1295.0985107421875,
-            "delta_v_total": 119251.9375,
-            "mean_step_latency_ms": 19.806595585727596,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 1.112656593322754,
+            "friendly_collision_count": 4.25,
+            "mean_delta_v_per_intercept": 754.3524169921875,
+            "delta_v_total": 85303.234375,
+            "mean_step_latency_ms": 13.055541797539263,
+            "peak_vram_mb": 25.4404296875
           },
           "45": {
-            "intercept_rate_pct": 68.7739486694336,
-            "leaker_rate_pct": 0.3731343150138855,
+            "intercept_rate_pct": 85.01390075683594,
+            "leaker_rate_pct": 7.172842025756836,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.476030349731445,
+            "false_target_waste_pct": 1.226190447807312,
             "friendly_collision_count": 3.5,
-            "mean_delta_v_per_intercept": 1154.9993896484375,
-            "delta_v_total": 116970.6875,
-            "mean_step_latency_ms": 19.57737029287208,
-            "peak_vram_mb": 17.59033203125
+            "mean_delta_v_per_intercept": 744.4610595703125,
+            "delta_v_total": 86988.6875,
+            "mean_step_latency_ms": 13.34734271493744,
+            "peak_vram_mb": 25.4404296875
           },
           "46": {
-            "intercept_rate_pct": 59.86195373535156,
-            "leaker_rate_pct": 0.36985480785369873,
+            "intercept_rate_pct": 82.98831939697266,
+            "leaker_rate_pct": 4.634135723114014,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.564740180969238,
-            "friendly_collision_count": 4.0,
-            "mean_delta_v_per_intercept": 1357.1158447265625,
-            "delta_v_total": 123049.515625,
-            "mean_step_latency_ms": 19.85474590358243,
-            "peak_vram_mb": 17.59033203125
+            "false_target_waste_pct": 0.6315789222717285,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 798.7290649414062,
+            "delta_v_total": 89227.015625,
+            "mean_step_latency_ms": 13.304152747487024,
+            "peak_vram_mb": 25.4404296875
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 64.2800064086914,
-            "std": 3.3893951567396288,
-            "ci95": 2.9709358454467187
+            "mean": 82.78186798095703,
+            "std": 1.395891649308405,
+            "ci95": 1.223552977894533
           },
           "leaker_rate_pct": {
-            "mean": 1.6580827355384826,
-            "std": 1.763763333763539,
-            "ci95": 1.5460067265226336
+            "mean": 8.733670520782471,
+            "std": 4.132194573398532,
+            "ci95": 3.622028241250946
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -2009,45 +2009,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.802867126464843,
-            "std": 1.6743462197320729,
-            "ci95": 1.4676291703547601
+            "mean": 1.1028571128845215,
+            "std": 0.3195925553474034,
+            "ci95": 0.28013522611298586
           },
           "friendly_collision_count": {
-            "mean": 3.2,
-            "std": 0.7786205751198718,
-            "ci95": 0.6824910255820218
+            "mean": 2.9,
+            "std": 1.4426538046253508,
+            "ci95": 1.264541814255266
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1256.663330078125,
-            "std": 76.63738286989461,
-            "ci95": 67.17562790418681
+            "mean": 773.3850341796875,
+            "std": 27.644310511603496,
+            "ci95": 24.2313065380625
           },
           "delta_v_total": {
-            "mean": 119633.6546875,
-            "std": 2188.1023257832676,
-            "ci95": 1917.9562525332963
+            "mean": 86255.634375,
+            "std": 2650.7529812770226,
+            "ci95": 2323.4874322166947
           },
           "mean_step_latency_ms": {
-            "mean": 18.629569957868817,
-            "std": 1.5429994221235286,
-            "ci95": 1.3524986260675522
+            "mean": 13.203688817497095,
+            "std": 0.12248521652804414,
+            "ci95": 0.10736302599503109
           },
           "peak_vram_mb": {
-            "mean": 17.59033203125,
+            "mean": 25.4404296875,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 64.2800064086914,
-          "std": 3.3893951567396288,
-          "ci95": 2.9709358454467187
+          "mean": 82.78186798095703,
+          "std": 1.395891649308405,
+          "ci95": 1.223552977894533
         },
         "leaker_rate_pct": {
-          "mean": 1.6580827355384826,
-          "std": 1.763763333763539,
-          "ci95": 1.5460067265226336
+          "mean": 8.733670520782471,
+          "std": 4.132194573398532,
+          "ci95": 3.622028241250946
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -2055,32 +2055,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.802867126464843,
-          "std": 1.6743462197320729,
-          "ci95": 1.4676291703547601
+          "mean": 1.1028571128845215,
+          "std": 0.3195925553474034,
+          "ci95": 0.28013522611298586
         },
         "friendly_collision_count": {
-          "mean": 3.2,
-          "std": 0.7786205751198718,
-          "ci95": 0.6824910255820218
+          "mean": 2.9,
+          "std": 1.4426538046253508,
+          "ci95": 1.264541814255266
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1256.663330078125,
-          "std": 76.63738286989461,
-          "ci95": 67.17562790418681
+          "mean": 773.3850341796875,
+          "std": 27.644310511603496,
+          "ci95": 24.2313065380625
         },
         "delta_v_total": {
-          "mean": 119633.6546875,
-          "std": 2188.1023257832676,
-          "ci95": 1917.9562525332963
+          "mean": 86255.634375,
+          "std": 2650.7529812770226,
+          "ci95": 2323.4874322166947
         },
         "mean_step_latency_ms": {
-          "mean": 18.629569957868817,
-          "std": 1.5429994221235286,
-          "ci95": 1.3524986260675522
+          "mean": 13.203688817497095,
+          "std": 0.12248521652804414,
+          "ci95": 0.10736302599503109
         },
         "peak_vram_mb": {
-          "mean": 17.59033203125,
+          "mean": 25.4404296875,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -2096,71 +2096,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 64.09845733642578,
-            "leaker_rate_pct": 0.9456781148910522,
+            "intercept_rate_pct": 81.97868347167969,
+            "leaker_rate_pct": 9.429698944091797,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.040098190307617,
+            "false_target_waste_pct": 1.0833332538604736,
             "friendly_collision_count": 1.5,
-            "mean_delta_v_per_intercept": 1248.655517578125,
-            "delta_v_total": 120303.546875,
-            "mean_step_latency_ms": 24.360313653580437,
-            "peak_vram_mb": 24.79248046875
+            "mean_delta_v_per_intercept": 746.2767333984375,
+            "delta_v_total": 80681.078125,
+            "mean_step_latency_ms": 17.091381590030323,
+            "peak_vram_mb": 27.8330078125
           },
           "43": {
-            "intercept_rate_pct": 64.37686157226562,
-            "leaker_rate_pct": 2.81180739402771,
+            "intercept_rate_pct": 79.11123657226562,
+            "leaker_rate_pct": 8.995448112487793,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.49238395690918,
-            "friendly_collision_count": 2.5,
-            "mean_delta_v_per_intercept": 1272.499755859375,
-            "delta_v_total": 120323.890625,
-            "mean_step_latency_ms": 27.447565092860973,
-            "peak_vram_mb": 24.79638671875
+            "false_target_waste_pct": 1.541353464126587,
+            "friendly_collision_count": 3.25,
+            "mean_delta_v_per_intercept": 835.358154296875,
+            "delta_v_total": 86586.0625,
+            "mean_step_latency_ms": 16.873161047487883,
+            "peak_vram_mb": 27.8369140625
           },
           "44": {
-            "intercept_rate_pct": 63.08892822265625,
-            "leaker_rate_pct": 3.1630752086639404,
+            "intercept_rate_pct": 87.08795166015625,
+            "leaker_rate_pct": 11.179449081420898,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.719757080078125,
-            "friendly_collision_count": 1.0,
-            "mean_delta_v_per_intercept": 1287.466552734375,
-            "delta_v_total": 119098.3671875,
-            "mean_step_latency_ms": 28.13240557500681,
-            "peak_vram_mb": 24.79638671875
+            "false_target_waste_pct": 1.0169172286987305,
+            "friendly_collision_count": 2.25,
+            "mean_delta_v_per_intercept": 708.0306396484375,
+            "delta_v_total": 83972.1875,
+            "mean_step_latency_ms": 17.192076617457133,
+            "peak_vram_mb": 27.8369140625
           },
           "45": {
-            "intercept_rate_pct": 66.70397186279297,
-            "leaker_rate_pct": 0.3731343150138855,
+            "intercept_rate_pct": 81.61714935302734,
+            "leaker_rate_pct": 9.606695175170898,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.406585693359375,
-            "friendly_collision_count": 0.5,
-            "mean_delta_v_per_intercept": 1192.147705078125,
-            "delta_v_total": 117770.265625,
-            "mean_step_latency_ms": 28.224127628586107,
-            "peak_vram_mb": 24.79638671875
+            "false_target_waste_pct": 1.2938597202301025,
+            "friendly_collision_count": 3.0,
+            "mean_delta_v_per_intercept": 774.0045776367188,
+            "delta_v_total": 86713.4375,
+            "mean_step_latency_ms": 17.417523445024017,
+            "peak_vram_mb": 27.8369140625
           },
           "46": {
-            "intercept_rate_pct": 60.57000732421875,
-            "leaker_rate_pct": 0.17605634033679962,
+            "intercept_rate_pct": 80.52001190185547,
+            "leaker_rate_pct": 5.312904357910156,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.566980361938477,
-            "friendly_collision_count": 2.0,
-            "mean_delta_v_per_intercept": 1343.35693359375,
-            "delta_v_total": 122687.0625,
-            "mean_step_latency_ms": 27.536317357152843,
-            "peak_vram_mb": 24.79638671875
+            "false_target_waste_pct": 0.46115291118621826,
+            "friendly_collision_count": 1.5,
+            "mean_delta_v_per_intercept": 829.1649780273438,
+            "delta_v_total": 90267.78125,
+            "mean_step_latency_ms": 17.353951507511738,
+            "peak_vram_mb": 27.8369140625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 63.767645263671874,
-            "std": 2.2241931260817602,
-            "ci95": 1.949591233802578
+            "mean": 82.06300659179688,
+            "std": 3.022819497893051,
+            "ci95": 2.6496181133522523
           },
           "leaker_rate_pct": {
-            "mean": 1.4939502745866775,
-            "std": 1.397891325450842,
-            "ci95": 1.225305771315223
+            "mean": 8.904839134216308,
+            "std": 2.1709523001640307,
+            "ci95": 1.9029235922779095
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -2168,45 +2168,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.645161056518555,
-            "std": 1.5805130599530348,
-            "ci95": 1.385380779421425
+            "mean": 1.0793233156204223,
+            "std": 0.40172844535811475,
+            "ci95": 0.3521305080278933
           },
           "friendly_collision_count": {
-            "mean": 1.5,
-            "std": 0.7905694150420949,
-            "ci95": 0.6929646455628166
+            "mean": 2.3,
+            "std": 0.8177713616898062,
+            "ci95": 0.7168082030780618
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1268.82529296875,
-            "std": 55.231865850863265,
-            "ci95": 48.41286497413837
+            "mean": 778.5670166015625,
+            "std": 54.369673839126705,
+            "ci95": 47.65712035456147
           },
           "delta_v_total": {
-            "mean": 120036.6265625,
-            "std": 1816.2667967166797,
-            "ci95": 1592.0280409118407
+            "mean": 85644.109375,
+            "std": 3564.971314080219,
+            "ci95": 3124.8351328790877
           },
           "mean_step_latency_ms": {
-            "mean": 27.140145861437436,
-            "std": 1.592052241007583,
-            "ci95": 1.3954953175725429
+            "mean": 17.18561884150222,
+            "std": 0.21717957262139123,
+            "ci95": 0.19036628878066691
           },
           "peak_vram_mb": {
-            "mean": 24.79560546875,
+            "mean": 27.8361328125,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 63.767645263671874,
-          "std": 2.2241931260817602,
-          "ci95": 1.949591233802578
+          "mean": 82.06300659179688,
+          "std": 3.022819497893051,
+          "ci95": 2.6496181133522523
         },
         "leaker_rate_pct": {
-          "mean": 1.4939502745866775,
-          "std": 1.397891325450842,
-          "ci95": 1.225305771315223
+          "mean": 8.904839134216308,
+          "std": 2.1709523001640307,
+          "ci95": 1.9029235922779095
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -2214,32 +2214,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.645161056518555,
-          "std": 1.5805130599530348,
-          "ci95": 1.385380779421425
+          "mean": 1.0793233156204223,
+          "std": 0.40172844535811475,
+          "ci95": 0.3521305080278933
         },
         "friendly_collision_count": {
-          "mean": 1.5,
-          "std": 0.7905694150420949,
-          "ci95": 0.6929646455628166
+          "mean": 2.3,
+          "std": 0.8177713616898062,
+          "ci95": 0.7168082030780618
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1268.82529296875,
-          "std": 55.231865850863265,
-          "ci95": 48.41286497413837
+          "mean": 778.5670166015625,
+          "std": 54.369673839126705,
+          "ci95": 47.65712035456147
         },
         "delta_v_total": {
-          "mean": 120036.6265625,
-          "std": 1816.2667967166797,
-          "ci95": 1592.0280409118407
+          "mean": 85644.109375,
+          "std": 3564.971314080219,
+          "ci95": 3124.8351328790877
         },
         "mean_step_latency_ms": {
-          "mean": 27.140145861437436,
-          "std": 1.592052241007583,
-          "ci95": 1.3954953175725429
+          "mean": 17.18561884150222,
+          "std": 0.21717957262139123,
+          "ci95": 0.19036628878066691
         },
         "peak_vram_mb": {
-          "mean": 24.79560546875,
+          "mean": 27.8361328125,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -2255,71 +2255,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 66.80064392089844,
-            "leaker_rate_pct": 0.37593984603881836,
+            "intercept_rate_pct": 82.08670043945312,
+            "leaker_rate_pct": 7.472133159637451,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.245071411132812,
-            "friendly_collision_count": 4.0,
-            "mean_delta_v_per_intercept": 1183.7872314453125,
-            "delta_v_total": 118358.59375,
-            "mean_step_latency_ms": 28.23513728569164,
-            "peak_vram_mb": 25.2919921875
+            "false_target_waste_pct": 1.151629090309143,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 762.6055908203125,
+            "delta_v_total": 82299.515625,
+            "mean_step_latency_ms": 18.735437862560502,
+            "peak_vram_mb": 27.8369140625
           },
           "43": {
-            "intercept_rate_pct": 63.614288330078125,
-            "leaker_rate_pct": 3.8198719024658203,
+            "intercept_rate_pct": 79.653076171875,
+            "leaker_rate_pct": 9.02011775970459,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.445340156555176,
-            "friendly_collision_count": 1.0,
-            "mean_delta_v_per_intercept": 1279.138916015625,
-            "delta_v_total": 120190.6328125,
-            "mean_step_latency_ms": 26.371384239281983,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 1.5682957172393799,
+            "friendly_collision_count": 2.0,
+            "mean_delta_v_per_intercept": 834.7230834960938,
+            "delta_v_total": 86868.796875,
+            "mean_step_latency_ms": 18.333517152532295,
+            "peak_vram_mb": 27.8369140625
           },
           "44": {
-            "intercept_rate_pct": 62.88932800292969,
-            "leaker_rate_pct": 3.979694366455078,
+            "intercept_rate_pct": 85.40707397460938,
+            "leaker_rate_pct": 12.69162368774414,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.801523208618164,
-            "friendly_collision_count": 2.0,
-            "mean_delta_v_per_intercept": 1286.00390625,
-            "delta_v_total": 118965.1640625,
-            "mean_step_latency_ms": 28.220891753562682,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 1.0652318000793457,
+            "friendly_collision_count": 3.0,
+            "mean_delta_v_per_intercept": 751.788818359375,
+            "delta_v_total": 85402.8125,
+            "mean_step_latency_ms": 18.821312584973384,
+            "peak_vram_mb": 27.8369140625
           },
           "45": {
-            "intercept_rate_pct": 67.08354187011719,
-            "leaker_rate_pct": 0.3731343150138855,
+            "intercept_rate_pct": 78.91368103027344,
+            "leaker_rate_pct": 11.90539836883545,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.864694595336914,
-            "friendly_collision_count": 2.25,
-            "mean_delta_v_per_intercept": 1192.10009765625,
-            "delta_v_total": 117916.828125,
-            "mean_step_latency_ms": 27.70350051073527,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 1.2343357801437378,
+            "friendly_collision_count": 4.0,
+            "mean_delta_v_per_intercept": 822.8455810546875,
+            "delta_v_total": 90916.15625,
+            "mean_step_latency_ms": 18.347971269963637,
+            "peak_vram_mb": 27.8369140625
           },
           "46": {
-            "intercept_rate_pct": 60.97757339477539,
-            "leaker_rate_pct": 0.17605634033679962,
+            "intercept_rate_pct": 79.30218505859375,
+            "leaker_rate_pct": 6.267182350158691,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.477374076843262,
-            "friendly_collision_count": 3.25,
-            "mean_delta_v_per_intercept": 1328.959716796875,
-            "delta_v_total": 122461.0,
-            "mean_step_latency_ms": 27.3702328928396,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.43609023094177246,
+            "friendly_collision_count": 2.25,
+            "mean_delta_v_per_intercept": 856.6181640625,
+            "delta_v_total": 92177.6875,
+            "mean_step_latency_ms": 17.957163332503114,
+            "peak_vram_mb": 27.8369140625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 64.27307510375977,
-            "std": 2.6218512131852454,
-            "ci95": 2.29815391551242
+            "mean": 81.07254333496094,
+            "std": 2.7215075051809396,
+            "ci95": 2.3855065068812933
           },
           "leaker_rate_pct": {
-            "mean": 1.7449393540620803,
-            "std": 1.9695734103304283,
-            "ci95": 1.7264072126125702
+            "mean": 9.471291065216064,
+            "std": 2.7731716006317577,
+            "ci95": 2.4307920832155276
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -2327,45 +2327,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 12.766800689697266,
-            "std": 1.4997482629793522,
-            "ci95": 1.3145873135423525
+            "mean": 1.0911165237426759,
+            "std": 0.4127962487724183,
+            "ci95": 0.3618318654599202
           },
           "friendly_collision_count": {
-            "mean": 2.5,
-            "std": 1.159202311936963,
-            "ci95": 1.0160856263130582
+            "mean": 2.35,
+            "std": 1.2942179105544784,
+            "ci95": 1.1344320164734418
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1253.9979736328125,
-            "std": 63.3178588822226,
-            "ci95": 55.500550366952325
+            "mean": 805.7162475585938,
+            "std": 46.0774132448284,
+            "ci95": 40.38863347117189
           },
           "delta_v_total": {
-            "mean": 119578.44375,
-            "std": 1824.0763735040625,
-            "ci95": 1598.873436784101
+            "mean": 87532.99375,
+            "std": 4043.114253399233,
+            "ci95": 3543.9458980684058
           },
           "mean_step_latency_ms": {
-            "mean": 27.580229336422235,
-            "std": 0.7681070095316133,
-            "ci95": 0.6732754790242522
+            "mean": 18.439080440506586,
+            "std": 0.34843138549129277,
+            "ci95": 0.3054135752735621
           },
           "peak_vram_mb": {
-            "mean": 25.2951171875,
-            "std": 0.0017469281074217104,
-            "ci95": 0.0015312499999999996
+            "mean": 27.8369140625,
+            "std": 0.0,
+            "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 64.27307510375977,
-          "std": 2.6218512131852454,
-          "ci95": 2.29815391551242
+          "mean": 81.07254333496094,
+          "std": 2.7215075051809396,
+          "ci95": 2.3855065068812933
         },
         "leaker_rate_pct": {
-          "mean": 1.7449393540620803,
-          "std": 1.9695734103304283,
-          "ci95": 1.7264072126125702
+          "mean": 9.471291065216064,
+          "std": 2.7731716006317577,
+          "ci95": 2.4307920832155276
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -2373,34 +2373,34 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 12.766800689697266,
-          "std": 1.4997482629793522,
-          "ci95": 1.3145873135423525
+          "mean": 1.0911165237426759,
+          "std": 0.4127962487724183,
+          "ci95": 0.3618318654599202
         },
         "friendly_collision_count": {
-          "mean": 2.5,
-          "std": 1.159202311936963,
-          "ci95": 1.0160856263130582
+          "mean": 2.35,
+          "std": 1.2942179105544784,
+          "ci95": 1.1344320164734418
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1253.9979736328125,
-          "std": 63.3178588822226,
-          "ci95": 55.500550366952325
+          "mean": 805.7162475585938,
+          "std": 46.0774132448284,
+          "ci95": 40.38863347117189
         },
         "delta_v_total": {
-          "mean": 119578.44375,
-          "std": 1824.0763735040625,
-          "ci95": 1598.873436784101
+          "mean": 87532.99375,
+          "std": 4043.114253399233,
+          "ci95": 3543.9458980684058
         },
         "mean_step_latency_ms": {
-          "mean": 27.580229336422235,
-          "std": 0.7681070095316133,
-          "ci95": 0.6732754790242522
+          "mean": 18.439080440506586,
+          "std": 0.34843138549129277,
+          "ci95": 0.3054135752735621
         },
         "peak_vram_mb": {
-          "mean": 25.2951171875,
-          "std": 0.0017469281074217104,
-          "ci95": 0.0015312499999999996
+          "mean": 27.8369140625,
+          "std": 0.0,
+          "ci95": 0.0
         }
       }
     }
@@ -2426,71 +2426,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 52.602481842041016,
-            "leaker_rate_pct": 0.5555555820465088,
+            "intercept_rate_pct": 68.43933868408203,
+            "leaker_rate_pct": 18.514211654663086,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.059438705444336,
+            "false_target_waste_pct": 0.9385322332382202,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1430.445068359375,
-            "delta_v_total": 38274.515625,
-            "mean_step_latency_ms": 19.21937385713883,
-            "peak_vram_mb": 13.60302734375
+            "mean_delta_v_per_intercept": 1098.705078125,
+            "delta_v_total": 33460.3359375,
+            "mean_step_latency_ms": 19.05709205754647,
+            "peak_vram_mb": 14.38134765625
           },
           "43": {
-            "intercept_rate_pct": 51.684852600097656,
-            "leaker_rate_pct": 5.173445224761963,
+            "intercept_rate_pct": 77.6009521484375,
+            "leaker_rate_pct": 8.56940746307373,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 19.310035705566406,
+            "false_target_waste_pct": 2.690058708190918,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1443.17724609375,
-            "delta_v_total": 38235.9375,
-            "mean_step_latency_ms": 19.111442321400318,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 1044.7557373046875,
+            "delta_v_total": 33717.5390625,
+            "mean_step_latency_ms": 18.309511710026527,
+            "peak_vram_mb": 14.38525390625
           },
           "44": {
-            "intercept_rate_pct": 51.99282455444336,
-            "leaker_rate_pct": 10.862815856933594,
+            "intercept_rate_pct": 73.88394165039062,
+            "leaker_rate_pct": 22.224971771240234,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.074970245361328,
+            "false_target_waste_pct": 1.4260272979736328,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1465.77099609375,
-            "delta_v_total": 38383.05859375,
-            "mean_step_latency_ms": 19.187023910706102,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 995.0206298828125,
+            "delta_v_total": 32819.3671875,
+            "mean_step_latency_ms": 18.223395272448215,
+            "peak_vram_mb": 14.38525390625
           },
           "45": {
-            "intercept_rate_pct": 55.597686767578125,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 75.23480224609375,
+            "leaker_rate_pct": 12.153129577636719,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.77822494506836,
+            "false_target_waste_pct": 1.1257309913635254,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1367.0712890625,
-            "delta_v_total": 37887.359375,
-            "mean_step_latency_ms": 19.146787510724803,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 1027.1103515625,
+            "delta_v_total": 34867.0859375,
+            "mean_step_latency_ms": 17.858450190010444,
+            "peak_vram_mb": 14.38525390625
           },
           "46": {
-            "intercept_rate_pct": 52.20930099487305,
-            "leaker_rate_pct": 1.6304347515106201,
+            "intercept_rate_pct": 77.14607238769531,
+            "leaker_rate_pct": 11.630313873291016,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.9859619140625,
+            "false_target_waste_pct": 1.5267333984375,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1491.3077392578125,
-            "delta_v_total": 38799.46875,
-            "mean_step_latency_ms": 19.682543585702206,
-            "peak_vram_mb": 13.60693359375
+            "mean_delta_v_per_intercept": 1009.533935546875,
+            "delta_v_total": 33164.65625,
+            "mean_step_latency_ms": 17.12954569001795,
+            "peak_vram_mb": 14.38525390625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 52.81742935180664,
-            "std": 1.58969784855171,
-            "ci95": 1.3934316015943413
+            "mean": 74.46102142333984,
+            "std": 3.683106178142399,
+            "ci95": 3.2283849068089348
           },
           "leaker_rate_pct": {
-            "mean": 3.644450283050537,
-            "std": 4.50894039633485,
-            "ci95": 3.9522605152182306
+            "mean": 14.618406867980957,
+            "std": 5.5819756857944425,
+            "ci95": 4.892817416217453
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -2498,9 +2498,9 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.641726303100587,
-            "std": 3.5355239658406554,
-            "ci95": 3.0990233940901453
+            "mean": 1.5414165258407593,
+            "std": 0.6835885211610737,
+            "ci95": 0.5991917575662479
           },
           "friendly_collision_count": {
             "mean": 0.0,
@@ -2508,35 +2508,35 @@
             "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1439.5544677734374,
-            "std": 46.678754115201926,
-            "ci95": 40.915731984183104
+            "mean": 1035.025146484375,
+            "std": 40.195227495646705,
+            "ci95": 35.232670332123185
           },
           "delta_v_total": {
-            "mean": 38316.06796875,
-            "std": 327.91104235726664,
-            "ci95": 287.4267014631951
+            "mean": 33605.796875,
+            "std": 780.6362796454139,
+            "ci95": 684.2578684999548
           },
           "mean_step_latency_ms": {
-            "mean": 19.269434237134455,
-            "std": 0.23449973473212718,
-            "ci95": 0.2055480802461483
+            "mean": 18.11559898400992,
+            "std": 0.7025058707009794,
+            "ci95": 0.6157735455401865
           },
           "peak_vram_mb": {
-            "mean": 13.60615234375,
+            "mean": 14.38447265625,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 52.81742935180664,
-          "std": 1.58969784855171,
-          "ci95": 1.3934316015943413
+          "mean": 74.46102142333984,
+          "std": 3.683106178142399,
+          "ci95": 3.2283849068089348
         },
         "leaker_rate_pct": {
-          "mean": 3.644450283050537,
-          "std": 4.50894039633485,
-          "ci95": 3.9522605152182306
+          "mean": 14.618406867980957,
+          "std": 5.5819756857944425,
+          "ci95": 4.892817416217453
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -2544,9 +2544,9 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.641726303100587,
-          "std": 3.5355239658406554,
-          "ci95": 3.0990233940901453
+          "mean": 1.5414165258407593,
+          "std": 0.6835885211610737,
+          "ci95": 0.5991917575662479
         },
         "friendly_collision_count": {
           "mean": 0.0,
@@ -2554,22 +2554,22 @@
           "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1439.5544677734374,
-          "std": 46.678754115201926,
-          "ci95": 40.915731984183104
+          "mean": 1035.025146484375,
+          "std": 40.195227495646705,
+          "ci95": 35.232670332123185
         },
         "delta_v_total": {
-          "mean": 38316.06796875,
-          "std": 327.91104235726664,
-          "ci95": 287.4267014631951
+          "mean": 33605.796875,
+          "std": 780.6362796454139,
+          "ci95": 684.2578684999548
         },
         "mean_step_latency_ms": {
-          "mean": 19.269434237134455,
-          "std": 0.23449973473212718,
-          "ci95": 0.2055480802461483
+          "mean": 18.11559898400992,
+          "std": 0.7025058707009794,
+          "ci95": 0.6157735455401865
         },
         "peak_vram_mb": {
-          "mean": 13.60615234375,
+          "mean": 14.38447265625,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -2595,71 +2595,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 50.32916259765625,
-            "leaker_rate_pct": 0.5555555820465088,
+            "intercept_rate_pct": 73.45196533203125,
+            "leaker_rate_pct": 16.343669891357422,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.786888122558594,
+            "false_target_waste_pct": 0.9445568323135376,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1517.4908447265625,
-            "delta_v_total": 38588.7890625,
-            "mean_step_latency_ms": 18.016605125012575,
-            "peak_vram_mb": 10.77783203125
+            "mean_delta_v_per_intercept": 1006.375732421875,
+            "delta_v_total": 32821.2890625,
+            "mean_step_latency_ms": 16.854781539973374,
+            "peak_vram_mb": 11.1484375
           },
           "43": {
-            "intercept_rate_pct": 51.732994079589844,
-            "leaker_rate_pct": 5.173445224761963,
+            "intercept_rate_pct": 75.71697235107422,
+            "leaker_rate_pct": 8.665684700012207,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 18.77239990234375,
+            "false_target_waste_pct": 3.147451877593994,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1439.9150390625,
-            "delta_v_total": 38298.69140625,
-            "mean_step_latency_ms": 18.058868592856925,
-            "peak_vram_mb": 10.78173828125
+            "mean_delta_v_per_intercept": 1088.393310546875,
+            "delta_v_total": 34282.16796875,
+            "mean_step_latency_ms": 17.203009467466472,
+            "peak_vram_mb": 11.15234375
           },
           "44": {
-            "intercept_rate_pct": 51.80665588378906,
-            "leaker_rate_pct": 9.173985481262207,
+            "intercept_rate_pct": 75.54913330078125,
+            "leaker_rate_pct": 22.228647232055664,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.29898452758789,
+            "false_target_waste_pct": 1.6837928295135498,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1453.43603515625,
-            "delta_v_total": 38488.9453125,
-            "mean_step_latency_ms": 18.217290982145837,
-            "peak_vram_mb": 10.78173828125
+            "mean_delta_v_per_intercept": 971.0714721679688,
+            "delta_v_total": 32587.1953125,
+            "mean_step_latency_ms": 16.795637835080015,
+            "peak_vram_mb": 11.15234375
           },
           "45": {
-            "intercept_rate_pct": 55.63391876220703,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 71.78434753417969,
+            "leaker_rate_pct": 15.553589820861816,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.005376815795898,
-            "friendly_collision_count": 2.0,
-            "mean_delta_v_per_intercept": 1367.81591796875,
-            "delta_v_total": 37732.7734375,
-            "mean_step_latency_ms": 18.137856189278928,
-            "peak_vram_mb": 10.78173828125
+            "false_target_waste_pct": 1.3763575553894043,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1077.67236328125,
+            "delta_v_total": 35000.8984375,
+            "mean_step_latency_ms": 17.479942472482435,
+            "peak_vram_mb": 11.15234375
           },
           "46": {
-            "intercept_rate_pct": 49.78266906738281,
-            "leaker_rate_pct": 1.6304347515106201,
+            "intercept_rate_pct": 75.43670654296875,
+            "leaker_rate_pct": 9.038049697875977,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.710872650146484,
-            "friendly_collision_count": 0.5,
-            "mean_delta_v_per_intercept": 1504.0811767578125,
-            "delta_v_total": 38856.12109375,
-            "mean_step_latency_ms": 18.036678457160956,
-            "peak_vram_mb": 10.78173828125
+            "false_target_waste_pct": 1.5664161443710327,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1038.008544921875,
+            "delta_v_total": 33542.1484375,
+            "mean_step_latency_ms": 16.532578427481894,
+            "peak_vram_mb": 11.15234375
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 51.857080078125,
-            "std": 2.286928248141805,
-            "ci95": 2.0045809928237563
+            "mean": 74.38782501220703,
+            "std": 1.7225961783508843,
+            "ci95": 1.50992212380898
           },
           "leaker_rate_pct": {
-            "mean": 3.30668420791626,
-            "std": 3.8478143904457225,
-            "ci95": 3.3727580204007124
+            "mean": 14.365928268432617,
+            "std": 5.6573716996720345,
+            "ci95": 4.958904936224475
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -2667,45 +2667,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.714904403686523,
-            "std": 3.729344318527914,
-            "ci95": 3.268914423830569
+            "mean": 1.7437150478363037,
+            "std": 0.8335328489824627,
+            "ci95": 0.7306237558271103
           },
           "friendly_collision_count": {
-            "mean": 0.5,
-            "std": 0.8660254037844386,
-            "ci95": 0.7591047358566536
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1456.547802734375,
-            "std": 59.44147397272042,
-            "ci95": 52.10274918242863
+            "mean": 1036.3042846679687,
+            "std": 48.934975003540025,
+            "ci95": 42.89339678938605
           },
           "delta_v_total": {
-            "mean": 38393.0640625,
-            "std": 420.36091981391337,
-            "ci95": 368.4625919809934
+            "mean": 33646.73984375,
+            "std": 1006.53581248972,
+            "ci95": 882.2675394178783
           },
           "mean_step_latency_ms": {
-            "mean": 18.093459869291046,
-            "std": 0.08311515299008423,
-            "ci95": 0.07285364376208031
+            "mean": 16.973189948496838,
+            "std": 0.3705735245886264,
+            "ci95": 0.3248220159236085
           },
           "peak_vram_mb": {
-            "mean": 10.78095703125,
+            "mean": 11.1515625,
             "std": 0.0017469281074217104,
             "ci95": 0.0015312499999999996
           }
         },
         "intercept_rate_pct": {
-          "mean": 51.857080078125,
-          "std": 2.286928248141805,
-          "ci95": 2.0045809928237563
+          "mean": 74.38782501220703,
+          "std": 1.7225961783508843,
+          "ci95": 1.50992212380898
         },
         "leaker_rate_pct": {
-          "mean": 3.30668420791626,
-          "std": 3.8478143904457225,
-          "ci95": 3.3727580204007124
+          "mean": 14.365928268432617,
+          "std": 5.6573716996720345,
+          "ci95": 4.958904936224475
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -2713,32 +2713,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.714904403686523,
-          "std": 3.729344318527914,
-          "ci95": 3.268914423830569
+          "mean": 1.7437150478363037,
+          "std": 0.8335328489824627,
+          "ci95": 0.7306237558271103
         },
         "friendly_collision_count": {
-          "mean": 0.5,
-          "std": 0.8660254037844386,
-          "ci95": 0.7591047358566536
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1456.547802734375,
-          "std": 59.44147397272042,
-          "ci95": 52.10274918242863
+          "mean": 1036.3042846679687,
+          "std": 48.934975003540025,
+          "ci95": 42.89339678938605
         },
         "delta_v_total": {
-          "mean": 38393.0640625,
-          "std": 420.36091981391337,
-          "ci95": 368.4625919809934
+          "mean": 33646.73984375,
+          "std": 1006.53581248972,
+          "ci95": 882.2675394178783
         },
         "mean_step_latency_ms": {
-          "mean": 18.093459869291046,
-          "std": 0.08311515299008423,
-          "ci95": 0.07285364376208031
+          "mean": 16.973189948496838,
+          "std": 0.3705735245886264,
+          "ci95": 0.3248220159236085
         },
         "peak_vram_mb": {
-          "mean": 10.78095703125,
+          "mean": 11.1515625,
           "std": 0.0017469281074217104,
           "ci95": 0.0015312499999999996
         }
@@ -2764,71 +2764,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 53.77789306640625,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 70.52031707763672,
+            "leaker_rate_pct": 17.609819412231445,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 11.495668411254883,
-            "friendly_collision_count": 25.25,
-            "mean_delta_v_per_intercept": 1410.025634765625,
-            "delta_v_total": 38061.66015625,
-            "mean_step_latency_ms": 25.007740017882238,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.7688202261924744,
+            "friendly_collision_count": 261.5,
+            "mean_delta_v_per_intercept": 896.5880126953125,
+            "delta_v_total": 28394.26171875,
+            "mean_step_latency_ms": 17.375896362509593,
+            "peak_vram_mb": 27.8369140625
           },
           "43": {
-            "intercept_rate_pct": 52.39088821411133,
-            "leaker_rate_pct": 3.9473681449890137,
+            "intercept_rate_pct": 70.08475494384766,
+            "leaker_rate_pct": 14.387617111206055,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 18.309438705444336,
-            "friendly_collision_count": 9.75,
-            "mean_delta_v_per_intercept": 1418.61279296875,
-            "delta_v_total": 38079.9296875,
-            "mean_step_latency_ms": 21.527846907148223,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 2.9573934078216553,
+            "friendly_collision_count": 28.0,
+            "mean_delta_v_per_intercept": 1043.586181640625,
+            "delta_v_total": 30604.9453125,
+            "mean_step_latency_ms": 17.811627195019355,
+            "peak_vram_mb": 27.8369140625
           },
           "44": {
-            "intercept_rate_pct": 50.165828704833984,
-            "leaker_rate_pct": 8.455900192260742,
+            "intercept_rate_pct": 70.96508026123047,
+            "leaker_rate_pct": 26.254947662353516,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.447729110717773,
-            "friendly_collision_count": 9.5,
-            "mean_delta_v_per_intercept": 1516.554931640625,
-            "delta_v_total": 38496.91015625,
-            "mean_step_latency_ms": 21.060666342853956,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 1.5257842540740967,
+            "friendly_collision_count": 11.5,
+            "mean_delta_v_per_intercept": 940.7081909179688,
+            "delta_v_total": 29347.828125,
+            "mean_step_latency_ms": 17.83208621254289,
+            "peak_vram_mb": 27.8369140625
           },
           "45": {
-            "intercept_rate_pct": 57.94742202758789,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 67.40029907226562,
+            "leaker_rate_pct": 20.56903839111328,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.763291358947754,
-            "friendly_collision_count": 13.75,
-            "mean_delta_v_per_intercept": 1293.7796630859375,
-            "delta_v_total": 37091.3046875,
-            "mean_step_latency_ms": 27.118501064273914,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.8688387870788574,
+            "friendly_collision_count": 72.75,
+            "mean_delta_v_per_intercept": 981.3323974609375,
+            "delta_v_total": 30134.40234375,
+            "mean_step_latency_ms": 17.68998845497208,
+            "peak_vram_mb": 27.8369140625
           },
           "46": {
-            "intercept_rate_pct": 53.97509765625,
-            "leaker_rate_pct": 0.54347825050354,
+            "intercept_rate_pct": 66.90744018554688,
+            "leaker_rate_pct": 14.564976692199707,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.258512496948242,
-            "friendly_collision_count": 2.5,
-            "mean_delta_v_per_intercept": 1442.443115234375,
-            "delta_v_total": 38424.24609375,
-            "mean_step_latency_ms": 25.99844656429338,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.7309941053390503,
+            "friendly_collision_count": 71.25,
+            "mean_delta_v_per_intercept": 1070.154296875,
+            "delta_v_total": 30743.01953125,
+            "mean_step_latency_ms": 17.620659999965937,
+            "peak_vram_mb": 27.8369140625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 53.65142593383789,
-            "std": 2.8423002631107477,
-            "ci95": 2.4913860275062185
+            "mean": 69.17557830810547,
+            "std": 1.879714650000487,
+            "ci95": 1.647642536395699
           },
           "leaker_rate_pct": {
-            "mean": 2.589349317550659,
-            "std": 3.669321548352615,
-            "ci95": 3.216302146061121
+            "mean": 18.6772798538208,
+            "std": 4.9358767030970805,
+            "ci95": 4.326486687979586
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -2836,45 +2836,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.254928016662598,
-            "std": 3.259346218743682,
-            "ci95": 2.8569429252685667
+            "mean": 1.3703661561012268,
+            "std": 0.9440595995281386,
+            "ci95": 0.8275047242276092
           },
           "friendly_collision_count": {
-            "mean": 12.15,
-            "std": 8.367720717136775,
-            "ci95": 7.334630597378438
+            "mean": 89.0,
+            "std": 100.07825063419125,
+            "ci95": 87.72245442302672
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1416.2832275390624,
-            "std": 80.29704542166074,
-            "ci95": 70.38346356644689
+            "mean": 986.4738159179688,
+            "std": 71.52731899073864,
+            "ci95": 62.696459424548465
           },
           "delta_v_total": {
-            "mean": 38030.81015625,
-            "std": 560.8199407068817,
-            "ci95": 491.5803521387316
+            "mean": 29844.89140625,
+            "std": 977.1810282743664,
+            "ci95": 856.5369365734939
           },
           "mean_step_latency_ms": {
-            "mean": 24.14264017929034,
-            "std": 2.7103445196433555,
-            "ci95": 2.3757217186396904
+            "mean": 17.66605164500197,
+            "std": 0.1841081059121366,
+            "ci95": 0.1613778700910812
           },
           "peak_vram_mb": {
-            "mean": 25.2958984375,
+            "mean": 27.8369140625,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 53.65142593383789,
-          "std": 2.8423002631107477,
-          "ci95": 2.4913860275062185
+          "mean": 69.17557830810547,
+          "std": 1.879714650000487,
+          "ci95": 1.647642536395699
         },
         "leaker_rate_pct": {
-          "mean": 2.589349317550659,
-          "std": 3.669321548352615,
-          "ci95": 3.216302146061121
+          "mean": 18.6772798538208,
+          "std": 4.9358767030970805,
+          "ci95": 4.326486687979586
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -2882,32 +2882,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.254928016662598,
-          "std": 3.259346218743682,
-          "ci95": 2.8569429252685667
+          "mean": 1.3703661561012268,
+          "std": 0.9440595995281386,
+          "ci95": 0.8275047242276092
         },
         "friendly_collision_count": {
-          "mean": 12.15,
-          "std": 8.367720717136775,
-          "ci95": 7.334630597378438
+          "mean": 89.0,
+          "std": 100.07825063419125,
+          "ci95": 87.72245442302672
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1416.2832275390624,
-          "std": 80.29704542166074,
-          "ci95": 70.38346356644689
+          "mean": 986.4738159179688,
+          "std": 71.52731899073864,
+          "ci95": 62.696459424548465
         },
         "delta_v_total": {
-          "mean": 38030.81015625,
-          "std": 560.8199407068817,
-          "ci95": 491.5803521387316
+          "mean": 29844.89140625,
+          "std": 977.1810282743664,
+          "ci95": 856.5369365734939
         },
         "mean_step_latency_ms": {
-          "mean": 24.14264017929034,
-          "std": 2.7103445196433555,
-          "ci95": 2.3757217186396904
+          "mean": 17.66605164500197,
+          "std": 0.1841081059121366,
+          "ci95": 0.1613778700910812
         },
         "peak_vram_mb": {
-          "mean": 25.2958984375,
+          "mean": 27.8369140625,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -2933,71 +2933,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 10.606648445129395,
-            "leaker_rate_pct": 5.762273788452148,
+            "intercept_rate_pct": 8.448731422424316,
+            "leaker_rate_pct": 68.79287719726562,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.376792907714844,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 16494.3671875,
-            "delta_v_total": 38582.44921875,
-            "mean_step_latency_ms": 22.376648764286852,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.22079236805438995,
+            "friendly_collision_count": 0.75,
+            "mean_delta_v_per_intercept": 13727.634765625,
+            "delta_v_total": 41196.2890625,
+            "mean_step_latency_ms": 17.97394815244843,
+            "peak_vram_mb": 27.8369140625
           },
           "43": {
-            "intercept_rate_pct": 8.473129272460938,
-            "leaker_rate_pct": 8.803536415100098,
+            "intercept_rate_pct": 2.9240574836730957,
+            "leaker_rate_pct": 69.29192352294922,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 19.183094024658203,
-            "friendly_collision_count": 0.5,
-            "mean_delta_v_per_intercept": 10235.66796875,
-            "delta_v_total": 38586.0625,
-            "mean_step_latency_ms": 19.1361777785882,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.818713366985321,
+            "friendly_collision_count": 1.0,
+            "mean_delta_v_per_intercept": 28465.06640625,
+            "delta_v_total": 43170.66796875,
+            "mean_step_latency_ms": 17.96052682501795,
+            "peak_vram_mb": 27.8369140625
           },
           "44": {
-            "intercept_rate_pct": 10.512672424316406,
-            "leaker_rate_pct": 23.767559051513672,
+            "intercept_rate_pct": 11.344528198242188,
+            "leaker_rate_pct": 80.31993865966797,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 13.201910972595215,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 8125.7451171875,
-            "delta_v_total": 38985.609375,
-            "mean_step_latency_ms": 18.537585624998037,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.6617237329483032,
+            "friendly_collision_count": 1.5,
+            "mean_delta_v_per_intercept": 8886.306640625,
+            "delta_v_total": 40531.234375,
+            "mean_step_latency_ms": 18.087831992493193,
+            "peak_vram_mb": 27.8369140625
           },
           "45": {
-            "intercept_rate_pct": 9.387428283691406,
-            "leaker_rate_pct": 6.783788681030273,
+            "intercept_rate_pct": 4.991292953491211,
+            "leaker_rate_pct": 60.9027099609375,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 10.297191619873047,
-            "friendly_collision_count": 0.75,
-            "mean_delta_v_per_intercept": 10222.783203125,
-            "delta_v_total": 38146.03125,
-            "mean_step_latency_ms": 18.767707025017444,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.19423559308052063,
+            "friendly_collision_count": 1.75,
+            "mean_delta_v_per_intercept": 16222.4345703125,
+            "delta_v_total": 43278.00390625,
+            "mean_step_latency_ms": 18.08696870253698,
+            "peak_vram_mb": 27.8369140625
           },
           "46": {
-            "intercept_rate_pct": 11.369318008422852,
-            "leaker_rate_pct": 2.769151210784912,
+            "intercept_rate_pct": 4.795819282531738,
+            "leaker_rate_pct": 70.62716674804688,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 15.333781242370605,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 9670.0361328125,
-            "delta_v_total": 38954.953125,
-            "mean_step_latency_ms": 24.528004264287315,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 0.02923976629972458,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 27139.12109375,
+            "delta_v_total": 43167.0,
+            "mean_step_latency_ms": 17.908452544984357,
+            "peak_vram_mb": 27.8369140625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 10.0698392868042,
-            "std": 1.1388676234701098,
-            "ci95": 0.9982614859934978
+            "mean": 6.50088586807251,
+            "std": 3.3628409658556073,
+            "ci95": 2.947660070892281
           },
           "leaker_rate_pct": {
-            "mean": 9.577261829376221,
-            "std": 8.226043739963913,
-            "ci95": 7.210445251470798
+            "mean": 69.98692321777344,
+            "std": 6.921214143325178,
+            "ci95": 6.066711682032763
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -3005,45 +3005,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 14.078554153442383,
-            "std": 3.3762079155421967,
-            "ci95": 2.959376718887486
+            "mean": 0.38494096547365186,
+            "std": 0.33712158076583115,
+            "ci95": 0.2955000943396369
           },
           "friendly_collision_count": {
-            "mean": 0.25,
-            "std": 0.3535533905932738,
-            "ci95": 0.3099032106965012
+            "mean": 1.1,
+            "std": 0.518411033833193,
+            "ci95": 0.45440730627928944
           },
           "mean_delta_v_per_intercept": {
-            "mean": 10949.719921875,
-            "std": 3216.9024224605646,
-            "ci95": 2819.7392974933828
+            "mean": 18888.1126953125,
+            "std": 8566.937589608735,
+            "ci95": 7509.251885270424
           },
           "delta_v_total": {
-            "mean": 38651.02109375,
-            "std": 342.1477973052079,
-            "ci95": 299.90576738549555
+            "mean": 42268.6390625,
+            "std": 1304.6106200876457,
+            "ci95": 1143.5416280281781
           },
           "mean_step_latency_ms": {
-            "mean": 20.669224691435566,
-            "std": 2.660609147294268,
-            "ci95": 2.3321267426438315
+            "mean": 18.00354564349618,
+            "std": 0.08036311811262471,
+            "ci95": 0.0704413788336
           },
           "peak_vram_mb": {
-            "mean": 25.2958984375,
+            "mean": 27.8369140625,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 10.0698392868042,
-          "std": 1.1388676234701098,
-          "ci95": 0.9982614859934978
+          "mean": 6.50088586807251,
+          "std": 3.3628409658556073,
+          "ci95": 2.947660070892281
         },
         "leaker_rate_pct": {
-          "mean": 9.577261829376221,
-          "std": 8.226043739963913,
-          "ci95": 7.210445251470798
+          "mean": 69.98692321777344,
+          "std": 6.921214143325178,
+          "ci95": 6.066711682032763
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -3051,32 +3051,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 14.078554153442383,
-          "std": 3.3762079155421967,
-          "ci95": 2.959376718887486
+          "mean": 0.38494096547365186,
+          "std": 0.33712158076583115,
+          "ci95": 0.2955000943396369
         },
         "friendly_collision_count": {
-          "mean": 0.25,
-          "std": 0.3535533905932738,
-          "ci95": 0.3099032106965012
+          "mean": 1.1,
+          "std": 0.518411033833193,
+          "ci95": 0.45440730627928944
         },
         "mean_delta_v_per_intercept": {
-          "mean": 10949.719921875,
-          "std": 3216.9024224605646,
-          "ci95": 2819.7392974933828
+          "mean": 18888.1126953125,
+          "std": 8566.937589608735,
+          "ci95": 7509.251885270424
         },
         "delta_v_total": {
-          "mean": 38651.02109375,
-          "std": 342.1477973052079,
-          "ci95": 299.90576738549555
+          "mean": 42268.6390625,
+          "std": 1304.6106200876457,
+          "ci95": 1143.5416280281781
         },
         "mean_step_latency_ms": {
-          "mean": 20.669224691435566,
-          "std": 2.660609147294268,
-          "ci95": 2.3321267426438315
+          "mean": 18.00354564349618,
+          "std": 0.08036311811262471,
+          "ci95": 0.0704413788336
         },
         "peak_vram_mb": {
-          "mean": 25.2958984375,
+          "mean": 27.8369140625,
           "std": 0.0,
           "ci95": 0.0
         }
@@ -3102,71 +3102,71 @@
         ],
         "per_seed": {
           "42": {
-            "intercept_rate_pct": 50.89734649658203,
-            "leaker_rate_pct": 0.5555555820465088,
+            "intercept_rate_pct": 73.52947998046875,
+            "leaker_rate_pct": 16.821704864501953,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.578405380249023,
+            "false_target_waste_pct": 1.1073195934295654,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1459.5191650390625,
-            "delta_v_total": 38363.9453125,
-            "mean_step_latency_ms": 24.949907992866624,
-            "peak_vram_mb": 25.2958984375
+            "mean_delta_v_per_intercept": 996.3626708984375,
+            "delta_v_total": 32548.943359375,
+            "mean_step_latency_ms": 17.887269532516257,
+            "peak_vram_mb": 27.8369140625
           },
           "43": {
-            "intercept_rate_pct": 51.075096130371094,
-            "leaker_rate_pct": 5.173445224761963,
+            "intercept_rate_pct": 78.25884246826172,
+            "leaker_rate_pct": 7.343330383300781,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 19.27643394470215,
+            "false_target_waste_pct": 2.729741096496582,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1475.444091796875,
-            "delta_v_total": 38408.15234375,
-            "mean_step_latency_ms": 24.860819521416033,
-            "peak_vram_mb": 25.2958984375
+            "mean_delta_v_per_intercept": 1027.854248046875,
+            "delta_v_total": 33876.6484375,
+            "mean_step_latency_ms": 17.821634962488133,
+            "peak_vram_mb": 27.8369140625
           },
           "44": {
-            "intercept_rate_pct": 51.274742126464844,
-            "leaker_rate_pct": 11.487815856933594,
+            "intercept_rate_pct": 72.72702026367188,
+            "leaker_rate_pct": 23.937442779541016,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 12.996564865112305,
+            "false_target_waste_pct": 1.3647770881652832,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1462.68310546875,
-            "delta_v_total": 38342.6953125,
-            "mean_step_latency_ms": 25.059908982149995,
-            "peak_vram_mb": 25.2958984375
+            "mean_delta_v_per_intercept": 1009.43115234375,
+            "delta_v_total": 32273.484375,
+            "mean_step_latency_ms": 17.93683633746241,
+            "peak_vram_mb": 27.8369140625
           },
           "45": {
-            "intercept_rate_pct": 56.15324020385742,
-            "leaker_rate_pct": 0.0,
+            "intercept_rate_pct": 70.14183807373047,
+            "leaker_rate_pct": 14.996349334716797,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 9.871564865112305,
-            "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1353.570556640625,
-            "delta_v_total": 37857.6015625,
-            "mean_step_latency_ms": 24.950117942853467,
-            "peak_vram_mb": 25.2958984375
+            "false_target_waste_pct": 1.3137009143829346,
+            "friendly_collision_count": 0.25,
+            "mean_delta_v_per_intercept": 1104.674072265625,
+            "delta_v_total": 35260.91015625,
+            "mean_step_latency_ms": 17.89588456749243,
+            "peak_vram_mb": 27.8369140625
           },
           "46": {
-            "intercept_rate_pct": 51.58430099487305,
-            "leaker_rate_pct": 1.6304347515106201,
+            "intercept_rate_pct": 77.33692932128906,
+            "leaker_rate_pct": 9.570152282714844,
             "duplicate_ownership_rate_pct": 0.0,
-            "false_target_waste_pct": 14.299581527709961,
+            "false_target_waste_pct": 0.7664995193481445,
             "friendly_collision_count": 0.0,
-            "mean_delta_v_per_intercept": 1490.7359619140625,
-            "delta_v_total": 38779.80078125,
-            "mean_step_latency_ms": 24.985728178564518,
-            "peak_vram_mb": 25.2958984375
+            "mean_delta_v_per_intercept": 994.6697387695312,
+            "delta_v_total": 33008.65625,
+            "mean_step_latency_ms": 17.566217185039932,
+            "peak_vram_mb": 27.8369140625
           }
         },
         "summary": {
           "intercept_rate_pct": {
-            "mean": 52.19694519042969,
-            "std": 2.2262953371808867,
-            "ci95": 1.9514339030754928
+            "mean": 74.39882202148438,
+            "std": 3.3617265425611795,
+            "ci95": 2.946683235805398
           },
           "leaker_rate_pct": {
-            "mean": 3.769450283050537,
-            "std": 4.760715044984182,
-            "ci95": 4.172950725139516
+            "mean": 14.533795928955078,
+            "std": 6.523373553062372,
+            "ci95": 5.7179890292505435
           },
           "duplicate_ownership_rate_pct": {
             "mean": 0.0,
@@ -3174,45 +3174,45 @@
             "ci95": 0.0
           },
           "false_target_waste_pct": {
-            "mean": 13.804510116577148,
-            "std": 3.457282631914619,
-            "ci95": 3.0304418410970646
+            "mean": 1.456407642364502,
+            "std": 0.749662447071872,
+            "ci95": 0.6571081071979652
           },
           "friendly_collision_count": {
-            "mean": 0.0,
-            "std": 0.0,
-            "ci95": 0.0
+            "mean": 0.05,
+            "std": 0.1118033988749895,
+            "ci95": 0.098
           },
           "mean_delta_v_per_intercept": {
-            "mean": 1448.390576171875,
-            "std": 54.41503098664542,
-            "ci95": 47.696877647287465
+            "mean": 1026.5983764648438,
+            "std": 45.622748899007306,
+            "ci95": 39.99010260056493
           },
           "delta_v_total": {
-            "mean": 38350.4390625,
-            "std": 328.1819214322944,
-            "ci95": 287.6641374411693
+            "mean": 33393.728515625,
+            "std": 1207.939203210304,
+            "ci95": 1058.8053950575472
           },
           "mean_step_latency_ms": {
-            "mean": 24.961296523570127,
-            "std": 0.07188812491160908,
-            "ci95": 0.06301271975832275
+            "mean": 17.821568516999832,
+            "std": 0.1486022176681753,
+            "ci95": 0.130255586842798
           },
           "peak_vram_mb": {
-            "mean": 25.2958984375,
+            "mean": 27.8369140625,
             "std": 0.0,
             "ci95": 0.0
           }
         },
         "intercept_rate_pct": {
-          "mean": 52.19694519042969,
-          "std": 2.2262953371808867,
-          "ci95": 1.9514339030754928
+          "mean": 74.39882202148438,
+          "std": 3.3617265425611795,
+          "ci95": 2.946683235805398
         },
         "leaker_rate_pct": {
-          "mean": 3.769450283050537,
-          "std": 4.760715044984182,
-          "ci95": 4.172950725139516
+          "mean": 14.533795928955078,
+          "std": 6.523373553062372,
+          "ci95": 5.7179890292505435
         },
         "duplicate_ownership_rate_pct": {
           "mean": 0.0,
@@ -3220,32 +3220,32 @@
           "ci95": 0.0
         },
         "false_target_waste_pct": {
-          "mean": 13.804510116577148,
-          "std": 3.457282631914619,
-          "ci95": 3.0304418410970646
+          "mean": 1.456407642364502,
+          "std": 0.749662447071872,
+          "ci95": 0.6571081071979652
         },
         "friendly_collision_count": {
-          "mean": 0.0,
-          "std": 0.0,
-          "ci95": 0.0
+          "mean": 0.05,
+          "std": 0.1118033988749895,
+          "ci95": 0.098
         },
         "mean_delta_v_per_intercept": {
-          "mean": 1448.390576171875,
-          "std": 54.41503098664542,
-          "ci95": 47.696877647287465
+          "mean": 1026.5983764648438,
+          "std": 45.622748899007306,
+          "ci95": 39.99010260056493
         },
         "delta_v_total": {
-          "mean": 38350.4390625,
-          "std": 328.1819214322944,
-          "ci95": 287.6641374411693
+          "mean": 33393.728515625,
+          "std": 1207.939203210304,
+          "ci95": 1058.8053950575472
         },
         "mean_step_latency_ms": {
-          "mean": 24.961296523570127,
-          "std": 0.07188812491160908,
-          "ci95": 0.06301271975832275
+          "mean": 17.821568516999832,
+          "std": 0.1486022176681753,
+          "ci95": 0.130255586842798
         },
         "peak_vram_mb": {
-          "mean": 25.2958984375,
+          "mean": 27.8369140625,
           "std": 0.0,
           "ci95": 0.0
         }
