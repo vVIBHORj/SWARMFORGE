@@ -239,3 +239,57 @@ def test_decoy_fraction(base_cfg, device):
     )
     mean_decoys = scen["missile_is_decoy"].float().mean().item()
     assert abs(mean_decoys - 0.15) <= 0.05
+
+
+@pytest.mark.parametrize("device", DEVICES)
+def test_omnidirectional_spawning_and_patrols(base_cfg, device):
+    """Verify 360-degree omnidirectional spawning across all 4 quadrants and scout altitude pickets."""
+    scen = generate_scenario(
+        base_cfg,
+        num_envs=8,
+        num_interceptors=16,
+        num_scouts=4,
+        num_missiles=30,
+        device=device,
+        seed=808,
+        mode="3d",
+    )
+    W, L, H = [float(v) for v in base_cfg["environment"]["world_bounds_meters"]]
+
+    drone_pos = scen["drone_pos"]
+    missile_pos = scen["missile_pos"]
+    drone_vel = scen["drone_vel"]
+    drone_role = scen["drone_role"]
+
+    # 1. Verify bounds
+    assert (drone_pos[..., 0] >= -W / 2.0).all() and (drone_pos[..., 0] <= W / 2.0).all()
+    assert (drone_pos[..., 1] >= -L / 2.0).all() and (drone_pos[..., 1] <= L / 2.0).all()
+    assert (drone_pos[..., 2] >= 0.0).all() and (drone_pos[..., 2] <= H).all()
+
+    assert (missile_pos[..., 0] >= -W / 2.0 - 1e-3).all() and (missile_pos[..., 0] <= W / 2.0 + 1e-3).all()
+    assert (missile_pos[..., 1] >= -L / 2.0 - 1e-3).all() and (missile_pos[..., 1] <= L / 2.0 + 1e-3).all()
+    assert (missile_pos[..., 2] >= 0.0).all() and (missile_pos[..., 2] <= H).all()
+
+    # 2. Verify all 4 quadrants for drones
+    assert (drone_pos[..., 0] > 0).any(), "No drones in positive X quadrant"
+    assert (drone_pos[..., 0] < 0).any(), "No drones in negative X quadrant"
+    assert (drone_pos[..., 1] > 0).any(), "No drones in positive Y quadrant"
+    assert (drone_pos[..., 1] < 0).any(), "No drones in negative Y quadrant"
+
+    # 3. Verify all 4 quadrants for missiles
+    assert (missile_pos[..., 0] > 0).any(), "No missiles in positive X quadrant"
+    assert (missile_pos[..., 0] < 0).any(), "No missiles in negative X quadrant"
+    assert (missile_pos[..., 1] > 0).any(), "No missiles in positive Y quadrant"
+    assert (missile_pos[..., 1] < 0).any(), "No missiles in negative Y quadrant"
+
+    # 4. Verify randomized initial patrol velocities (50-180 m/s) in 3D
+    speeds = torch.linalg.norm(drone_vel, dim=-1)
+    assert (speeds >= 49.0).all(), f"Minimum drone speed {speeds.min().item():.1f} fell below 50 m/s"
+    assert (speeds <= 185.0).all(), f"Maximum drone speed {speeds.max().item():.1f} exceeded 180 m/s"
+
+    # 5. Verify scout altitude pickets (Scouts at [1000m, 2400m])
+    scout_mask = drone_role == 1
+    scout_alts = drone_pos[scout_mask][:, 2]
+    assert (scout_alts >= 1000.0).all(), f"Scout alt below 1000m: {scout_alts.min().item()}"
+    assert (scout_alts <= 2400.0).all(), f"Scout alt above 2400m: {scout_alts.max().item()}"
+

@@ -1,11 +1,13 @@
 /**
  * SandboxHUD.js
- * Interactive DOM telemetry overlay and Red-Team Sandbox command controller.
+ * Interactive DOM telemetry overlay, speed controls, and Red-Team Sandbox command controller.
  *
- * Spec Section 9.2:
+ * Spec Section 9.2 & Step 15:
  * - Real-time telemetry: FPS, sim clock, entity counts, intercept/leaker rates, Delta-V.
  * - Algorithm hot-swapping mid-episode.
  * - Interactive Red-Team salvo threat spawner with live sliders.
+ * - Time-Dilation / Slow-Motion controls (0.1x, 0.25x, 0.5x, 1.0x, 2.0x, slider).
+ * - Step 1 Frame (S) when paused, Spacebar to toggle Pause/Resume.
  * - Sensor noise & playback control (pause/resume, reset, scale presets).
  */
 
@@ -17,6 +19,7 @@ export class SandboxHUD {
     this.sendCommand = sendCommandCallback || (() => {});
 
     this.isPaused = false;
+    this.speedMultiplier = 1.0;
     this.lastDomUpdate = 0;
     this.domUpdateIntervalMs = 50; // Update DOM at ~20 Hz to avoid reflow overhead
 
@@ -74,10 +77,16 @@ export class SandboxHUD {
     this.inputNoise = document.getElementById('input-noise');
     this.valNoise = document.getElementById('val-noise');
 
+    // Playback & Speed Controls
     this.btnPausePlay = document.getElementById('btn-pause-play');
     this.pauseIcon = document.getElementById('pause-icon');
     this.pauseText = document.getElementById('pause-text');
+    this.btnStep = document.getElementById('btn-step');
     this.btnReset = document.getElementById('btn-reset');
+
+    this.inputSpeed = document.getElementById('input-speed');
+    this.valSpeed = document.getElementById('val-speed');
+    this.speedPresetButtons = document.querySelectorAll('.btn-speed-preset');
 
     this.chkTrails = document.getElementById('chk-trails');
     this.chkLocks = document.getElementById('chk-locks');
@@ -133,7 +142,6 @@ export class SandboxHUD {
           decoy_fraction: decoy,
         });
 
-        // Visual flash feedback on button
         this.btnSpawnSalvo.style.transform = 'scale(0.97)';
         setTimeout(() => {
           this.btnSpawnSalvo.style.transform = '';
@@ -153,20 +161,41 @@ export class SandboxHUD {
     // 5. Pause / Resume Button
     if (this.btnPausePlay) {
       this.btnPausePlay.addEventListener('click', () => {
-        this.isPaused = !this.isPaused;
-        this.updatePauseButton();
-        this.sendCommand({ type: 'set_params', paused: this.isPaused });
+        this.togglePause();
       });
     }
 
-    // 6. Reset Button
+    // 6. Step Forward 1 Frame Button
+    if (this.btnStep) {
+      this.btnStep.addEventListener('click', () => {
+        this.stepOnce();
+      });
+    }
+
+    // 7. Speed Slider
+    if (this.inputSpeed && this.valSpeed) {
+      this.inputSpeed.addEventListener('input', (e) => {
+        const spd = parseFloat(e.target.value);
+        this.setSpeedMultiplier(spd);
+      });
+    }
+
+    // 8. Speed Preset Buttons
+    this.speedPresetButtons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const spd = parseFloat(btn.getAttribute('data-speed'));
+        this.setSpeedMultiplier(spd);
+      });
+    });
+
+    // 9. Reset Button
     if (this.btnReset) {
       this.btnReset.addEventListener('click', () => {
         this.sendCommand({ type: 'reset' });
       });
     }
 
-    // 7. Scale Presets
+    // 10. Scale Presets
     this.presetButtons.forEach((btn) => {
       btn.addEventListener('click', () => {
         const preset = btn.getAttribute('data-preset');
@@ -185,16 +214,43 @@ export class SandboxHUD {
     });
   }
 
+  togglePause() {
+    this.isPaused = !this.isPaused;
+    this.updatePauseButton();
+    this.sendCommand({ type: 'set_params', paused: this.isPaused });
+  }
+
+  stepOnce() {
+    this.sendCommand({ type: 'step_once' });
+  }
+
+  setSpeedMultiplier(spd) {
+    this.speedMultiplier = spd;
+    if (this.valSpeed) {
+      this.valSpeed.textContent = `${spd.toFixed(2)}x`;
+    }
+    if (this.inputSpeed) {
+      this.inputSpeed.value = spd;
+    }
+    this.speedPresetButtons.forEach((b) => {
+      const bSpd = parseFloat(b.getAttribute('data-speed'));
+      b.classList.toggle('active', Math.abs(bSpd - spd) < 0.02);
+    });
+    this.sendCommand({ type: 'set_params', speed_multiplier: spd });
+  }
+
   updatePauseButton() {
     if (this.pauseIcon && this.pauseText) {
       if (this.isPaused) {
         this.pauseIcon.textContent = '▶';
         this.pauseText.textContent = 'Resume';
         this.btnPausePlay?.classList.add('active');
+        if (this.btnStep) this.btnStep.disabled = false;
       } else {
         this.pauseIcon.textContent = '⏸';
         this.pauseText.textContent = 'Pause';
         this.btnPausePlay?.classList.remove('active');
+        if (this.btnStep) this.btnStep.disabled = true;
       }
     }
   }

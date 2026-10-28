@@ -80,11 +80,16 @@ def test_js_binary_layout_contract_consistency(default_cfg):
     """Verify JavaScript Three.js renderers and binary layout contracts match ws_binary_server.py."""
     repo_root = Path(__file__).resolve().parent.parent
 
-    # 1. Verify InstancedSwarmRenderer uses THREE.InstancedMesh
+    # 1. Verify InstancedSwarmRenderer uses THREE.InstancedMesh and composite geometries
     swarm_code = (repo_root / "viewer3d" / "src" / "InstancedSwarmRenderer.js").read_text(encoding="utf-8")
     assert "THREE.InstancedMesh" in swarm_code
     assert "setMatrixAt" in swarm_code
     assert "setColorAt" in swarm_code
+    assert "BufferGeometryUtils.mergeGeometries" in swarm_code
+    assert "createInterceptorGeometry" in swarm_code
+    assert "createScoutGeometry" in swarm_code
+    assert "createMissileGeometry" in swarm_code
+    assert "createDecoyGeometry" in swarm_code
 
     # 2. Verify TrailAndLockRenderer uses THREE.BufferGeometry and THREE.LineSegments
     trail_code = (repo_root / "viewer3d" / "src" / "TrailAndLockRenderer.js").read_text(encoding="utf-8")
@@ -181,3 +186,46 @@ def test_websocket_full_sandbox_workflow(default_cfg):
         arr6 = np.frombuffer(raw6, dtype=np.float32)
         assert int(arr6[3]) == 15  # N = 12 + 3
         assert int(arr6[4]) == 25  # M = 25
+
+
+def test_slow_motion_and_step_once_commands(default_cfg):
+    """Verify speed_multiplier (0.1, 0.25, 0.5, 2.0) and step_once commands via /api/command and /ws."""
+    app = create_app(default_cfg)
+    client = TestClient(app)
+
+    # 1. Test speed_multiplier settings over /api/command
+    for spd in [0.1, 0.25, 0.5, 2.0]:
+        res = client.post("/api/command", json={"type": "set_params", "speed_multiplier": spd})
+        assert res.status_code == 200
+        data = res.json()
+        assert data["status"] == "ok"
+        assert np.isclose(data["speed_multiplier"], spd)
+
+    # 2. Test pause and step_once over /api/command
+    client.post("/api/command", json={"type": "set_params", "paused": True})
+    status1 = client.get("/api/status").json()
+    step1 = status1["step"]
+    assert status1["paused"] is True
+
+    # Send step_once command
+    res_step = client.post("/api/command", json={"type": "step_once"})
+    assert res_step.status_code == 200
+    assert res_step.json()["status"] == "ok"
+    assert res_step.json()["step"] == step1 + 1
+
+    # 3. Test speed_multiplier and step_once over WebSocket /ws
+    with client.websocket_connect("/ws") as ws:
+        # Check initial frame
+        raw = ws.receive_bytes()
+        assert len(raw) > 64
+
+        # Set speed_multiplier to 0.1 over WebSocket
+        ws.send_text(json.dumps({"type": "set_params", "speed_multiplier": 0.1, "paused": True}))
+        raw_ack = ws.receive_bytes()
+        assert len(raw_ack) > 64
+
+        # Send step_once over WebSocket
+        ws.send_text(json.dumps({"type": "step_once"}))
+        raw_step = ws.receive_bytes()
+        arr_step = np.frombuffer(raw_step, dtype=np.float32)
+        assert arr_step[2] >= step1 + 1

@@ -238,6 +238,8 @@ class SandboxSession:
         self.paused = False
         self.auto_reset = True
         self.speed_multiplier = 1.0
+        self.step_once = False
+        self._step_accum = 0.0
 
     @torch.no_grad()
     def _act_attention_mappo(self) -> torch.Tensor:
@@ -331,24 +333,35 @@ class SandboxSession:
         accel_cmd = torch.where(is_interceptor, accel_cmd, torch.zeros_like(accel_cmd))
         return accel_cmd
 
+    def step_simulation(self) -> None:
+        """Advance one physical simulation step."""
+        is_done = bool(self.env.done[0])
+        if is_done and self.auto_reset:
+            self.env.reset()
+            is_done = False
+        if not is_done:
+            if self.algorithm in {"greedy", "hungarian", "auction"}:
+                ctrl = self.baseline_controllers[self.algorithm]
+                ctrl.use_estimated_state = self.env.sigma_obs > 0
+                accel_cmd, _ = ctrl.act(self.env)
+            elif self.algorithm == "attention_mappo":
+                accel_cmd = self._act_attention_mappo()
+            else:
+                ctrl = self.baseline_controllers["auction"]
+                accel_cmd, _ = ctrl.act(self.env)
+            self.env.step(accel_cmd)
+
     def step_and_pack(self) -> bytes:
-        """Step simulation once (if not paused) and pack env 0 frame into binary bytes."""
-        if not self.paused:
-            is_done = bool(self.env.done[0])
-            if is_done and self.auto_reset:
-                self.env.reset()
-                is_done = False
-            if not is_done:
-                if self.algorithm in {"greedy", "hungarian", "auction"}:
-                    ctrl = self.baseline_controllers[self.algorithm]
-                    ctrl.use_estimated_state = self.env.sigma_obs > 0
-                    accel_cmd, _ = ctrl.act(self.env)
-                elif self.algorithm == "attention_mappo":
-                    accel_cmd = self._act_attention_mappo()
-                else:
-                    ctrl = self.baseline_controllers["auction"]
-                    accel_cmd, _ = ctrl.act(self.env)
-                self.env.step(accel_cmd)
+        """Step simulation according to speed_multiplier / paused state, and pack env 0 frame."""
+        if self.step_once:
+            self.step_once = False
+            self.step_simulation()
+        elif not self.paused:
+            self._step_accum += self.speed_multiplier
+            steps_to_run = int(self._step_accum)
+            self._step_accum -= steps_to_run
+            for _ in range(steps_to_run):
+                self.step_simulation()
         return pack_binary_frame(self.env, algo_id=self.algo_id, fps=self.target_fps)
 
     def pack_current_frame(self) -> bytes:
@@ -391,13 +404,21 @@ class SandboxSession:
             if "paused" in cmd:
                 self.paused = bool(cmd["paused"])
             if "speed_multiplier" in cmd:
-                self.speed_multiplier = float(cmd["speed_multiplier"])
+                self.speed_multiplier = max(0.05, min(4.0, float(cmd["speed_multiplier"])))
+            if cmd.get("step_once", False):
+                self.step_once = True
             return {
                 "status": "ok",
                 "sigma_obs": float(self.env.sigma_obs),
                 "paused": bool(self.paused),
                 "speed_multiplier": float(self.speed_multiplier),
+                "step_once": bool(self.step_once),
             }
+
+        elif cmd_type == "step_once":
+            self.step_once = True
+            self.step_simulation()
+            return {"status": "ok", "step": int(self.env.t[0].item())}
 
         elif cmd_type == "reset":
             reset_kwargs = {}
@@ -474,7 +495,7 @@ def create_app(
                     frame = session.step_and_pack()
                     await websocket.send_bytes(frame)
                     elapsed = time.perf_counter() - t0
-                    dt = 1.0 / max(1.0, session.target_fps * max(0.1, session.speed_multiplier))
+                    dt = 1.0 / max(1.0, session.target_fps)
                     sleep_time = max(0.001, dt - elapsed)
                     await asyncio.sleep(sleep_time)
             except (WebSocketDisconnect, asyncio.CancelledError):

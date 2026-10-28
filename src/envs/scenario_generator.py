@@ -46,29 +46,55 @@ def generate_scenario(
     hva_xy = (hva_rand * 2.0 - 1.0) * torch.tensor([(W / 2.0) * hva_frac, (L / 2.0) * hva_frac], device=device)
     hva_pos = torch.cat([hva_xy, torch.zeros((E, P, 1), device=device, dtype=torch.float32)], dim=-1)
 
-    # 2. Drones: spawn on ring around HVA centroid
+    # 2. Drones: 360-degree omnidirectional deployment with CAP sectors and picket patrols
     hva_centroid = hva_pos.mean(dim=1, keepdim=True)
-    ring_min, ring_max = get(cfg, "scenario.drone_ring_radius", [300.0, 1500.0])
-    r_drone = ring_min + torch.rand((E, N, 1), generator=gen, device=device) * (ring_max - ring_min)
-    az_drone = torch.rand((E, N, 1), generator=gen, device=device) * (2.0 * math.pi)
-
-    dx = hva_centroid[..., 0:1] + r_drone * torch.cos(az_drone)
-    dy = hva_centroid[..., 1:2] + r_drone * torch.sin(az_drone)
     if mode == "2d":
+        ring_min, ring_max = get(cfg, "scenario.drone_ring_radius", [300.0, 1500.0])
+        r_drone = ring_min + torch.rand((E, N, 1), generator=gen, device=device) * (ring_max - ring_min)
+        az_drone = torch.rand((E, N, 1), generator=gen, device=device) * (2.0 * math.pi)
+        dx = hva_centroid[..., 0:1] + r_drone * torch.cos(az_drone)
+        dy = hva_centroid[..., 1:2] + r_drone * torch.sin(az_drone)
         dz = torch.zeros((E, N, 1), device=device, dtype=torch.float32)
+        drone_vel = torch.zeros((E, N, 3), device=device, dtype=torch.float32)
     else:
-        alt_d_min, alt_d_max = get(cfg, "scenario.drone_altitude_range", [100.0, 800.0])
-        dz = alt_d_min + torch.rand((E, N, 1), generator=gen, device=device) * (alt_d_max - alt_d_min)
+        ring_min, ring_max = get(cfg, "scenario.drone_ring_radius", [500.0, 3800.0])
+        r_drone = ring_min + torch.rand((E, N, 1), generator=gen, device=device) * (ring_max - ring_min)
+        az_drone = torch.rand((E, N, 1), generator=gen, device=device) * (2.0 * math.pi)
+        dx = hva_centroid[..., 0:1] + r_drone * torch.cos(az_drone)
+        dy = hva_centroid[..., 1:2] + r_drone * torch.sin(az_drone)
+        dx = torch.clamp(dx, -W / 2.0 + 200.0, W / 2.0 - 200.0)
+        dy = torch.clamp(dy, -L / 2.0 + 200.0, L / 2.0 - 200.0)
+
+        # Interceptors patrol at [150m, 1800m], Scouts at high overview altitudes [1000m, 2400m]
+        dz_int = 150.0 + torch.rand((E, num_interceptors, 1), generator=gen, device=device) * (1800.0 - 150.0)
+        if num_scouts > 0:
+            dz_scout = 1000.0 + torch.rand((E, num_scouts, 1), generator=gen, device=device) * (2400.0 - 1000.0)
+            dz = torch.cat([dz_int, dz_scout], dim=1)
+        else:
+            dz = dz_int
+
+        # Initial randomized patrol velocity (50-180 m/s) heading inward into engagement zone
+        to_hva = hva_centroid[..., :2] - torch.cat([dx, dy], dim=-1)
+        dist_hva = torch.linalg.norm(to_hva, dim=-1, keepdim=True) + 1e-8
+        u_hva = to_hva / dist_hva
+        heading_spread = (torch.rand((E, N, 1), generator=gen, device=device) * 2.0 - 1.0) * math.radians(25.0)
+        cos_s = torch.cos(heading_spread)
+        sin_s = torch.sin(heading_spread)
+        vx = u_hva[..., 0:1] * cos_s - u_hva[..., 1:2] * sin_s
+        vy = u_hva[..., 0:1] * sin_s + u_hva[..., 1:2] * cos_s
+        spd = 50.0 + torch.rand((E, N, 1), generator=gen, device=device) * (180.0 - 50.0)
+        vz = (torch.rand((E, N, 1), generator=gen, device=device) * 2.0 - 1.0) * 15.0
+        drone_vel = torch.cat([vx * spd, vy * spd, vz], dim=-1)
 
     drone_pos = torch.cat([dx, dy, dz], dim=-1)
-    drone_vel = torch.zeros((E, N, 3), device=device, dtype=torch.float32)
+
     roles_1d = torch.cat([torch.zeros(num_interceptors, dtype=torch.int64, device=device),
                           torch.ones(num_scouts, dtype=torch.int64, device=device)])
     drone_role = roles_1d.unsqueeze(0).expand(E, N).clone()
     drone_active = torch.ones((E, N), device=device, dtype=torch.bool)
 
-    # 3. Missiles: pattern-based perimeter spawn
-    patterns = list(get(cfg, "scenario.patterns", ["saturation", "pincer", "wave"]))
+    # 3. Missiles: 360-degree multi-vector perimeter spawn with varied dive angles
+    patterns = list(get(cfg, "scenario.patterns", ["saturation", "pincer", "wave", "omnidirectional"]))
     phi_base = torch.rand((E, 1), generator=gen, device=device) * (2.0 * math.pi)
     num_waves = int(get(cfg, "scenario.num_waves", 3))
     wave_interval_s = float(get(cfg, "scenario.wave_interval_s", 2.0))
@@ -96,6 +122,9 @@ def generate_scenario(
             st = wave_k.unsqueeze(0).expand(E, M) * wave_interval_s
             azimuth = torch.where(mask, az, azimuth) if isinstance(mask, torch.Tensor) else az
             spawn_time = torch.where(mask, st, spawn_time) if isinstance(mask, torch.Tensor) else st
+        elif p_name == "omnidirectional":
+            az = torch.rand((E, M), generator=gen, device=device) * (2.0 * math.pi)
+            azimuth = torch.where(mask, az, azimuth) if isinstance(mask, torch.Tensor) else az
 
     tx = (W / 2.0) / (torch.abs(torch.cos(azimuth)) + 1e-8)
     ty = (L / 2.0) / (torch.abs(torch.sin(azimuth)) + 1e-8)
@@ -106,8 +135,11 @@ def generate_scenario(
     if mode == "2d":
         mz = torch.zeros((E, M, 1), device=device, dtype=torch.float32)
     else:
-        alt_m_min, alt_m_max = get(cfg, "scenario.missile_altitude_range", [1500.0, 3000.0])
-        mz = alt_m_min + torch.rand((E, M, 1), generator=gen, device=device) * (alt_m_max - alt_m_min)
+        # Varied dive angles: sea-skimming [150m, 500m] up to high-altitude ballistic dives [1800m, 2950m]
+        is_low = torch.rand((E, M, 1), generator=gen, device=device) < 0.35
+        z_low = 150.0 + torch.rand((E, M, 1), generator=gen, device=device) * (500.0 - 150.0)
+        z_high = 1800.0 + torch.rand((E, M, 1), generator=gen, device=device) * (2950.0 - 1800.0)
+        mz = torch.where(is_low, z_low, z_high)
     missile_pos = torch.cat([mx.unsqueeze(-1), my.unsqueeze(-1), mz], dim=-1)
 
     missile_target_hva = torch.randint(0, P, (E, M), generator=gen, device=device, dtype=torch.int64)

@@ -270,13 +270,16 @@
 
     /* Bottom: Playback & Preset Bar */
     #hud-playback {
-      bottom: 16px;
+      bottom: 14px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
+      gap: 8px;
+      padding: 8px 14px;
+      max-width: 96vw;
+      overflow-x: auto;
+      white-space: nowrap;
     }
 
     .btn-ctrl {
@@ -284,13 +287,13 @@
       border: 1px solid var(--panel-border);
       border-radius: 4px;
       color: var(--text-main);
-      padding: 6px 12px;
+      padding: 5px 10px;
       font-size: 11px;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.12s;
     }
 
@@ -307,10 +310,24 @@
       box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
     }
 
-    .btn-preset {
-      padding: 5px 8px;
+    .btn-preset, .btn-speed-preset, .btn-cam {
+      padding: 4px 7px;
       font-size: 10px;
       color: var(--text-dim);
+    }
+
+    .speed-slider-wrap {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    .speed-slider-wrap input[type="range"] {
+      width: 75px;
+      accent-color: var(--accent-cyan);
+      cursor: pointer;
     }
 
     .divider {
@@ -471,24 +488,55 @@
     </div>
   </div>
 
-  <!-- Bottom: Playback & Scale Preset Bar -->
+  <!-- Bottom: Playback, Speed, Camera & Preset Bar -->
   <div id="hud-playback" class="glass-panel">
-    <button id="btn-pause-play" class="btn-ctrl">
+    <!-- Playback -->
+    <button id="btn-pause-play" class="btn-ctrl" title="Toggle Play / Pause (Space)">
       <span id="pause-icon">⏸</span>
       <span id="pause-text">Pause</span>
+    </button>
+    <button id="btn-step" class="btn-ctrl" disabled title="Step 1 Frame Forward (S)">
+      <span>⏭</span>
+      <span>Step</span>
     </button>
     <button id="btn-reset" class="btn-ctrl">🔄 Reset</button>
 
     <div class="divider"></div>
 
-    <span class="hud-label" style="margin-right: 2px;">Presets:</span>
-    <button class="btn-ctrl btn-preset" data-preset="stage1">6v8 (2D)</button>
+    <!-- Time Dilation / Speed Controls -->
+    <span class="hud-label" style="margin-right: 2px;">Speed:</span>
+    <button class="btn-ctrl btn-speed-preset" data-speed="0.10">0.1x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="0.25">0.25x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="0.50">0.5x</button>
+    <button class="btn-ctrl btn-speed-preset active" data-speed="1.00">1.0x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="2.00">2.0x</button>
+
+    <div class="speed-slider-wrap">
+      <input type="range" id="input-speed" min="0.05" max="4.0" step="0.05" value="1.0">
+      <span id="val-speed" class="hud-val cyan" style="font-size: 10px;">1.00x</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Camera View Presets -->
+    <span class="hud-label" style="margin-right: 2px;">Camera:</span>
+    <button class="btn-ctrl btn-cam active" data-cam="overview" title="Tactical Overview (1)">Overview</button>
+    <button class="btn-ctrl btn-cam" data-cam="action" title="Low-Altitude Action Cam (2)">Action Cam</button>
+    <button class="btn-ctrl btn-cam" data-cam="follow" title="Follow Active Interceptor (3)">Follow Drone</button>
+    <button class="btn-ctrl btn-cam" data-cam="topdown" title="Top-Down 2D Radar View (4)">Top-Down</button>
+
+    <div class="divider"></div>
+
+    <!-- Scale Presets -->
+    <span class="hud-label" style="margin-right: 2px;">Scale:</span>
+    <button class="btn-ctrl btn-preset" data-preset="stage1">6v8</button>
     <button class="btn-ctrl btn-preset" data-preset="standard">20v30</button>
     <button class="btn-ctrl btn-preset" data-preset="swarm">60v100</button>
     <button class="btn-ctrl btn-preset" data-preset="stress">300v500</button>
 
     <div class="divider"></div>
 
+    <!-- Layer Toggles -->
     <label class="checkbox-label">
       <input type="checkbox" id="chk-trails" checked>
       <span>Trails</span>

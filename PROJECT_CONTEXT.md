@@ -135,26 +135,31 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 - `scripts/demo_server.py`:
   - Full CLI entrypoint supporting `--config`, `--checkpoint`, `--host`, `--port`, `--algorithm`, and `--smoke-test` (10-step frame size & latency validator).
 
-## Three.js 3D Tactical Viewer Architecture (`viewer3d/`) (Milestone M5 Part 2)
+## Three.js 3D Tactical Viewer Architecture (`viewer3d/`) (Milestone M5 Part 2 & Step 15 Visual Realism)
 - Zero-build-step ES Module architecture with CDN `importmap` for Three.js (also supports `npm`/`vite`).
 - Coordinate convention: maps simulation `(x, y, z)` (z=altitude) to Three.js `(x, z, -y)` (Y-up, 1 sim meter = 1 Three.js unit).
 - Key Modules:
-  - `viewer3d/index.html`: Tactical obsidian HUD layout, full-viewport canvas, telemetry overlay, and red-team control panel.
+  - `viewer3d/index.html`: Tactical obsidian HUD layout, full-viewport canvas, telemetry overlay, red-team control panel, camera presets (`Overview`, `Action Cam`, `Follow Drone`, `Top-Down`), and slow-motion dilation bar (`0.1x`, `0.25x`, `0.5x`, `1.0x`, `2.0x`, slider).
   - `viewer3d/src/InstancedSwarmRenderer.js`:
-    - Renders up to 1,000 drones and 1,000 missiles in **2 GPU draw calls** via `THREE.InstancedMesh`.
-    - Role-based dynamic instance coloring (Interceptors: Cyan `#00f0ff`, Scouts: Emerald `#10b981`, Threats: Crimson `#ff3344`, Decoys: Gold `#ffcc00`).
-    - Ground HVA pads with translucent cyan hemispheric defense domes.
-    - Zero per-frame heap allocations using pre-allocated `THREE.Object3D` dummy.
+    - Renders composite aerospace geometries procedural merged with `BufferGeometryUtils.mergeGeometries`:
+      - **Interceptor**: Sleek delta-wing UAV with pointed fuselage, swept wings, twin canted V-tails, and glowing nozzle.
+      - **Scout / AWACS**: High-aspect surveillance glider airframe with twin boom tails and dorsal rotodome radar dish.
+      - **Hypersonic Threat**: Sharp ogive nose, cylindrical booster, cruciform strakes, rear control fins, and exhaust plume.
+      - **EW Decoy**: Compact winged munition with wingtip flare pods and radar corner reflectors in high-vis amber/gold.
+    - 3D velocity orientation with roll banking into lateral turns and speed-scaled emissive thruster glow.
+    - Expanding planar shockwave rings + spherical energy burst flashes on intercepts and HVA impacts.
   - `viewer3d/src/TrailAndLockRenderer.js`:
     - Pre-allocated ring-buffer trajectory trails (`THREE.LineSegments`, `Float32Array` positions and fading vertex colors).
     - Dynamic assignment lock-on lines connecting defending interceptors to assigned targets with zero per-frame garbage collection.
   - `viewer3d/src/SandboxHUD.js`:
     - Real-time telemetry display (client/server FPS, clock, active entity counts, intercept/leaker rates, Delta-V).
+    - Time-dilation slow-motion control bar (`0.1x` to `2.0x`, continuous slider), Step 1 Frame (`S`), Spacebar Pause/Resume.
     - Red-team salvo threat spawner with live sliders (salvo size, speed, weave frequency, decoy fraction).
     - Mid-episode algorithm hot-swapper, sensor noise slider, pause/resume, and scale presets (`6v8`, `20v30`, `60v100`, `300v500`).
   - `viewer3d/src/main.js`:
+    - 60 FPS sub-frame kinematic interpolation (`p_render = p_curr + v_curr * sub_dt * speed_multiplier`) during slow-motion.
+    - Follow Camera mode dynamically tracking active interceptors in real time.
     - Pure `parseBinaryFrame(arrayBuffer)` zero-copy decoder parsing `Float32Array` packets with `magic === 2026.0`.
-    - OrbitControls, tactical ground grid, 10km x 10km x 3km airspace boundary wireframe, render loop, and auto-reconnecting WebSocket client.
 - **Launching the Live Viewer**:
   ```bash
   .venv/bin/python scripts/demo_server.py --port 8765

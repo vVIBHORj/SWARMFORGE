@@ -216,8 +216,10 @@ class VectorizedSwarmEnv:
         if self.mode == "2d":
             mz = torch.zeros((E, count, 1), device=device, dtype=torch.float32)
         else:
-            alt_m_min, alt_m_max = get(self.cfg, "scenario.missile_altitude_range", [1500.0, 3000.0])
-            mz_cpu = alt_m_min + torch.rand((E, count, 1), generator=self._rng, device="cpu") * (alt_m_max - alt_m_min)
+            is_low = torch.rand((E, count, 1), generator=self._rng, device="cpu") < 0.35
+            z_low = 150.0 + torch.rand((E, count, 1), generator=self._rng, device="cpu") * (500.0 - 150.0)
+            z_high = 1800.0 + torch.rand((E, count, 1), generator=self._rng, device="cpu") * (2950.0 - 1800.0)
+            mz_cpu = torch.where(is_low, z_low, z_high)
             mz = mz_cpu.to(device=device, dtype=torch.float32)
 
         new_pos = torch.cat([mx.unsqueeze(-1), my.unsqueeze(-1), mz], dim=-1)
