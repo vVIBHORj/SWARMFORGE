@@ -182,14 +182,21 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 
 ### 5-Seed Statistical Benchmark Results (Final Release)
 - **Swarm Scale Generalization**:
-  - Small (`10v15`): Greedy `55.8 ± 4.6%`, Hungarian `56.2 ± 4.7%`, Auction `53.6 ± 1.2%`, MAPPO `53.6 ± 1.2%`.
-  - Medium (`30v50`): Greedy `54.4 ± 3.3%`, Hungarian `55.3 ± 2.5%`, Auction `52.2 ± 2.2%`, MAPPO `52.8 ± 1.6%`.
-  - Large Zero-Shot (`100v150`): Greedy `62.3 ± 2.4%`, Hungarian `63.5 ± 3.6%`, Auction `64.3 ± 3.4%`, MAPPO `64.3 ± 2.6%`.
+  - Small (`10v15`): Greedy `46.4 ± 6.3%`, Hungarian `60.2 ± 7.1%`, Auction `77.5 ± 7.5%`, Flat-MLP `79.5 ± 3.6%`, MAPPO `78.5 ± 6.8%`.
+  - Medium (`30v50`): Greedy `40.0 ± 5.1%`, Hungarian `59.3 ± 2.6%`, Auction `74.4 ± 3.4%`, Flat-MLP `74.4 ± 1.7%`, MAPPO `74.5 ± 3.7%`.
+  - Large Zero-Shot (`100v150`): Greedy `46.5 ± 3.0%`, Hungarian `65.2 ± 2.0%`, Auction **`82.8 ± 1.4%`**, Flat-MLP `82.1 ± 3.0%`, MAPPO **`81.1 ± 2.7%`**.
 - **Component Ablations (Medium 30v50)**:
-  - **Full (Cross-Attn + TPN + CBF)**: Intercept `52.8 ± 1.6%`, Friendly Collisions `0.0 ± 0.0`, Mean $\Delta V$ `1439.6 ± 46.7 m/s`.
-  - **w/o CBF Safety Shield**: Intercept `53.7 ± 2.8%`, Friendly Collisions **`12.2 ± 8.4`** (severe collision spike during tight launches).
-  - **w/o Kalman Filter (Raw Noisy Obs)**: Intercept drops to **`10.1 ± 1.1%`**, Mean $\Delta V$ surges to **`10,949.7 ± 3216.9 m/s`** (~7.6x $\Delta V$ waste on noisy steering jitter).
-- **Trained Checkpoint**: `runs/mappo/best.pt` achieved **87.5%** peak win rate during Stage 1/2 training and is automatically loaded for benchmarks and live sandbox sessions.
+  - **Full (Cross-Attn + TPN + CBF)**: Intercept **`74.5 ± 3.7%`**, Friendly Collisions **`0.0 ± 0.0`**, Mean $\Delta V$ **`1035.0 ± 40.2 m/s`**.
+  - **w/o Cross-Attention (Flat-MLP)**: Intercept `74.4 ± 1.7%`, Friendly Collisions `0.0 ± 0.0`, Mean $\Delta V$ `1036.3 ± 48.9 m/s`.
+  - **w/o CBF Safety Shield**: Intercept `69.2 ± 1.9%`, Friendly Collisions **`89.0 ± 100.1`** (severe collision spike during tight formation launches).
+  - **w/o Kalman Filter (Raw Noisy Obs)**: Intercept drops to **`6.5 ± 3.4%`**, Mean $\Delta V$ surges to **`18,888.1 ± 8566.9 m/s`** (~18x $\Delta V$ waste on noisy steering jitter).
+  - **w/o RL Residual & Coord Logits**: Intercept `74.4 ± 3.4%`, Friendly Collisions `0.1 ± 0.1`, Mean $\Delta V$ `1026.6 ± 45.6 m/s`.
+- **Trained Checkpoint**: `runs/mappo/best.pt` achieved **88.9%** peak win rate during Stage 1/2 training and is automatically loaded for benchmarks and live sandbox sessions.
+- **Guidance & Interception Optimizations**:
+  - Decoupled pure lateral APN with 100% authority priority up to $a_{\max} = 117.68\text{ m/s}^2$ (12G) and forward acceleration along $\mathbf{u}_r$ using only orthogonal remaining authority $\sqrt{\max(a_{\max}^2 - \|\mathbf{a}_{\text{lat}}\|^2, 0)}$.
+  - Clamped effective distance $d_{\text{eff}} \ge 25.0\text{ m}$ in relative kinematics to eliminate the terminal LOS-rate singularity ($\omega \to \infty$) at CPA.
+  - Added receding threat penalty ($+500 + 2 \cdot d$) when $V_c < -20\text{ m/s}$ and $d > 100\text{ m}$, preventing interceptors from chasing faster 450 m/s threats from behind, alongside $+5000$ decoy cost penalty.
+  - Dynamic terminal commitment lock when $d < 800\text{ m}$ and $V_c > 0\text{ m/s}$, strictly enforcing 1 target per drone ($\sum_m z_{i,m} \le 1$).
 
 
 
