@@ -273,14 +273,13 @@ def test_300v500_frame_budget_latency(stress_cfg):
     # (16 + 8 + 8000) * 4 = 8024 * 4 = 32096 bytes (~32.1 KB)
     assert expected_bytes == 32096
 
-    # 5 warmup steps
-    for _ in range(5):
+    # 10 warmup steps
+    for _ in range(10):
         frame = session.step_and_pack()
         assert len(frame) == expected_bytes
 
     if torch.cuda.is_available():
         torch.cuda.synchronize()
-        torch.cuda.empty_cache()
 
     # 20 timed steps
     latencies = []

@@ -122,6 +122,8 @@ class CrossAttentionActorCritic(nn.Module):
 
         # 6. Residual Acceleration Actor Head: h_i -> mu (3), log_std (3)
         self.mu_head = nn.Linear(self.d_model, 3)
+        nn.init.orthogonal_(self.mu_head.weight, gain=0.01)
+        nn.init.constant_(self.mu_head.bias, 0.0)
         self.log_std = nn.Parameter(torch.full((3,), -0.5, dtype=torch.float32))
 
         # 7. Coordination Logit Head: Cross-Pointer against E_threat
@@ -302,6 +304,8 @@ class FlatMLPAblationActorCritic(nn.Module):
         )
 
         self.mu_head = nn.Linear(hidden_dim, 3)
+        nn.init.orthogonal_(self.mu_head.weight, gain=0.01)
+        nn.init.constant_(self.mu_head.bias, 0.0)
         self.log_std = nn.Parameter(torch.full((3,), -0.5, dtype=torch.float32))
         self.logit_head = nn.Linear(hidden_dim, K_threat)
 

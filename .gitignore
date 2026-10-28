@@ -20,16 +20,22 @@ dist/
 .coverage
 htmlcov/
 
-# PyTorch checkpoints and model weights
-*.pt
+# PyTorch checkpoints and model weights (ignore transient checkpoints, allow production model)
 *.pth
 *.bin
 *.onnx
 checkpoints/
+runs/mappo/latest.pt
+runs/mappo/events.*
 
-# Run artifacts & telemetry (preserve .gitkeep)
+# Run artifacts & telemetry (track benchmark figures and production checkpoint)
 runs/*
 !runs/.gitkeep
+!runs/benchmarks/
+!runs/benchmarks/**
+!runs/mappo/
+runs/mappo/*
+!runs/mappo/best.pt
 
 # Node / Three.js
 node_modules/

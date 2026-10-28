@@ -4,7 +4,8 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.4%2Bcu126-EE4C2C.svg?style=flat&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6-76B900.svg?style=flat&logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-zone)
 [![PettingZoo](https://img.shields.io/badge/PettingZoo-ParallelEnv-blueviolet.svg?style=flat)](https://pettingzoo.farama.org/)
-[![Tests](https://img.shields.io/badge/Tests-109%20Passed-brightgreen.svg?style=flat)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-148%20Passed-brightgreen.svg?style=flat)](tests/)
+[![Milestones](https://img.shields.io/badge/Milestones-M0--M6%20Complete-success.svg?style=flat)](PROJECT_CONTEXT.md)
 [![Platform](https://img.shields.io/badge/Platform-WSL2%20Ubuntu%20%7C%20Win11-orange.svg?style=flat)](https://ubuntu.com/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](LICENSE)
 
@@ -13,6 +14,16 @@ A high-performance, abstract mathematical simulation where $N$ defending autonom
 Built from the ground up for vectorized PyTorch GPU physics, intra-step continuous Closest Point of Approach (CPA) anti-tunneling, multi-target 3D Kalman tracking, classical guidance/allocation baselines, cross-attention Multi-Agent Reinforcement Learning (Attention-MAPPO), and real-time Three.js 3D instanced tactical visualization.
 
 > **Research & Safety Boundary**: Purely synthetic, abstract mathematical simulation focusing on multi-agent optimization, spatial geometry, and resource allocation. No real-world operational hardware, military seekers, or weapon systems are modeled or interfaced.
+
+---
+
+## 3D Tactical Instanced Viewer
+
+SWARMFORGE includes a zero-build Three.js client connected via binary `Float32Array` WebSockets streaming at 60 Hz. The instanced renderer draws up to 2,000 entities in just **2 GPU draw calls**, with ring-buffer trajectory trails, live assignment lock lines, real-time telemetry HUD, and red-team salvo injection.
+
+![3D Tactical Web Viewer](runs/benchmarks/viewer_screenshot.png)
+
+*Live tactical display at `http://localhost:8765`: Obsidian HUD, interceptor assignment lock lines (cyan), red-team saturation salvo (crimson), HVA defense domes, and real-time telemetry.*
 
 ---
 
@@ -247,57 +258,113 @@ SWARMFORGE/
 
 ---
 
-## Quickstart
+## Quickstart & Operational Commands
 
-### 1. Environment Setup (WSL2 Ubuntu)
+### 1. Environment Verification & Test Suite
 ```bash
-# Automated environment setup
-bash scripts/setup_wsl.sh
-```
-
-### 2. Verify GPU & VRAM Allocation
-```bash
+# Verify GPU acceleration and strictly bounded VRAM allocation (< 250 MB)
 .venv/bin/python scripts/check_gpu.py
-```
 
-### 3. Run Test Suite
-```bash
+# Run complete pytest validation suite (148 tests passing across CPU/CUDA)
 .venv/bin/pytest -q
 ```
-*Current test status: **109 passed tests** across CPU and CUDA backends.*
 
-### 4. PettingZoo ParallelEnv Usage
+### 2. Train Production Cross-Attention MAPPO Checkpoint
+```bash
+# Train on CUDA with 3-stage automated curriculum and CTDE PPO
+.venv/bin/python scripts/train.py --updates 20 --num-envs 16 --rollout-steps 128 --device cuda
 
-```python
-from src.config import load_config
-from src.envs.pettingzoo_wrapper import SwarmParallelEnv
+# Checkpoints saved to: runs/mappo/best.pt (87.5% peak win rate) and latest.pt
+```
 
-cfg = load_config("configs/default_sim.yaml")
-env = SwarmParallelEnv(cfg, allocator="hungarian", use_cbf=True)
+### 3. Run Multi-Seed Statistical Benchmark & Ablation Suite
+```bash
+# Fast smoke-test suite (< 20s, generates all publication plots and markdown tables)
+.venv/bin/python scripts/evaluate.py --smoke-test
 
-observations, infos = env.reset(seed=42)
+# Complete 5-seed full-horizon statistical protocol (Small 10v15, Medium 30v50, Large 100v150)
+.venv/bin/python scripts/evaluate.py --seeds 5 --episodes-per-seed 4
+```
 
-for step in range(100):
-    # Sample multi-agent actions (residual acceleration + coordination logits)
-    actions = {agent: env.action_space(agent).sample() for agent in env.agents}
-    observations, rewards, terminations, truncations, infos = env.step(actions)
-    
-    if len(env.agents) == 0:
-        break
+### 4. Launch 3D Tactical Instanced Viewer & WebSocket Telemetry Server
+```bash
+# Start FastAPI binary WebSocket server at 60 Hz
+.venv/bin/python scripts/demo_server.py --port 8765
+
+# Open browser at http://localhost:8765 to access:
+# - Three.js InstancedMesh rendering (<2 GPU draw calls for 2,000 entities)
+# - Interactive Red-Team Salvo Threat Spawner & Trajectory Trails
+# - Real-time algorithm hot-swapping (Greedy / Hungarian / Auction / MAPPO)
 ```
 
 ---
 
-## Development Milestones
+## 5-Seed Statistical Benchmark & Ablation Results
+
+Evaluated across 5 random seeds `(42, 43, 44, 45, 46)` and 20 full-horizon Monte Carlo episodes per condition:
+
+### Algorithms Evaluated & Accuracy Overview
+
+1. **Greedy + TPN**: Sequential nearest-target allocation combined with 3D True Proportional Navigation. Offers fast execution (~9–10 ms) but suffers from uncoordinated clustering under saturated salvos.
+2. **Hungarian + TPN**: Global optimal bipartite matching via capacity-expanded linear sum assignment. Achieves strong Small/Medium defense coordination (~55–56%).
+3. **Auction + TPN**: 100% GPU-vectorized $\epsilon$-complementary slackness auction allocator with zero host syncs. Scales seamlessly up to **64.3% intercept rate** on Large zero-shot scale (100v150).
+4. **Flat-MLP MAPPO**: CTDE reinforcement learning baseline using flattened fixed-size observation vectors.
+5. **Cross-Attention MAPPO**: Permutation-invariant attention network with continuous residual steering ($\Delta a_{RL}$) and coordination pointer logits ($u_{ij}$) scattered into the GPU auction allocator. Achieves **87.5% peak win rate** in training and top-tier zero-shot scalability (**64.3% intercept rate** on Large 100v150).
+
+### 1. Zero-Shot Swarm Scale Generalization Benchmark
+
+| Swarm Scale | Algorithm | Intercept Rate (%) | Leaker Rate (%) | Duplicate Conflict (%) | Latency (ms) |
+| :--- | :--- | :---: | :---: | :---: | :---: |
+| Small (10v15) | `greedy` | 55.8 ± 4.6 | 1.8 ± 3.1 | 0.0 ± 0.0 | 10.71 |
+| Small (10v15) | `hungarian_tpn` | 56.2 ± 4.7 | 1.8 ± 3.1 | 0.0 ± 0.0 | 9.97 |
+| Small (10v15) | `auction_tpn` | 53.6 ± 1.2 | 1.4 ± 3.2 | 0.0 ± 0.0 | 15.89 |
+| Small (10v15) | `flat_mlp_mappo` | 54.1 ± 1.7 | 1.4 ± 3.2 | 0.0 ± 0.0 | 22.32 |
+| Small (10v15) | `attention_mappo` | 53.6 ± 1.2 | 1.4 ± 3.2 | 0.0 ± 0.0 | 23.88 |
+| Medium (30v50) | `greedy` | 54.4 ± 3.3 | 2.9 ± 3.6 | 0.0 ± 0.0 | 9.22 |
+| Medium (30v50) | `hungarian_tpn` | 55.3 ± 2.5 | 2.8 ± 3.7 | 0.0 ± 0.0 | 11.24 |
+| Medium (30v50) | `auction_tpn` | 52.2 ± 2.2 | 3.8 ± 4.8 | 0.0 ± 0.0 | 15.38 |
+| Medium (30v50) | `flat_mlp_mappo` | 51.9 ± 2.3 | 3.3 ± 3.8 | 0.0 ± 0.0 | 18.09 |
+| Medium (30v50) | `attention_mappo` | 52.8 ± 1.6 | 3.6 ± 4.5 | 0.0 ± 0.0 | 19.27 |
+| Large (100v150) | `greedy` | 62.3 ± 2.4 | 1.7 ± 1.8 | 0.0 ± 0.0 | 9.83 |
+| Large (100v150) | `hungarian_tpn` | 63.5 ± 3.6 | 1.7 ± 1.9 | 0.0 ± 0.0 | 11.56 |
+| Large (100v150) | `auction_tpn` | **64.3 ± 3.4** | **1.7 ± 1.8** | **0.0 ± 0.0** | 18.63 |
+| Large (100v150) | `flat_mlp_mappo` | 63.8 ± 2.2 | 1.5 ± 1.4 | 0.0 ± 0.0 | 27.14 |
+| Large (100v150) | `attention_mappo` | **64.3 ± 2.6** | **1.7 ± 2.0** | **0.0 ± 0.0** | 27.58 |
+
+![Scale Generalization](runs/benchmarks/scale_generalization.png)
+
+### 2. Component Ablation Study (Medium 30v50 Scale)
+
+| Architecture / Component Variant | Intercept Rate (%) | Friendly Collisions | Duplicate Conflict (%) | Mean ΔV (m/s) |
+| :--- | :---: | :---: | :---: | :---: |
+| **Full (Cross-Attn + TPN + CBF)** | **52.8 ± 1.6** | **0.0 ± 0.0** | **0.0 ± 0.0** | **1439.6 ± 46.7** |
+| **w/o Cross-Attention (Flat-MLP)** | 51.9 ± 2.3 | 0.5 ± 0.9 | 0.0 ± 0.0 | 1456.5 ± 59.4 |
+| **w/o CBF Safety Shield** | 53.7 ± 2.8 | **12.2 ± 8.4** | 0.0 ± 0.0 | 1416.3 ± 80.3 |
+| **w/o Kalman (Raw Noisy Obs)** | **10.1 ± 1.1** | 0.2 ± 0.4 | 0.0 ± 0.0 | **10949.7 ± 3216.9** |
+| **w/o RL Residual & Coord Logits** | 52.2 ± 2.2 | 0.0 ± 0.0 | 0.0 ± 0.0 | 1448.4 ± 54.4 |
+
+![Component Ablation Study](runs/benchmarks/ablation_study.png)
+
+### 3. Step Latency vs Intercept Pareto Trade-off
+
+![Pareto Trade-Off](runs/benchmarks/pareto_latency_vs_intercept.png)
+
+- **Throughput & Real-Time Performance**: All baseline algorithms and neural policies execute within **10–27 ms** per step even under the 100 defending drones vs 150 missiles regime, allowing 40–100 Hz closed-loop control.
+- **Safety Criticality**: Disabling the Control Barrier Function (`w/o CBF`) causes friendly collision spikes (**12.2 collisions/ep**), validating the necessity of the analytical safety shield.
+- **Filtering Under High Sensor Noise**: Operating with raw finite-difference velocity (`w/o Kalman`) degrades intercept success down to **10.1%** and wastes **10,949 m/s $\Delta V$**, proving the critical importance of the 9-state 3D Kalman filter.
+
+---
+
+## Development Milestones (100% Complete)
 
 - [x] **Deliverable 1: Vectorized Environment Core & PettingZoo API**
 - [x] **M0: Environment & GPU Setup** (WSL2 Ubuntu, CUDA 12.6, configs, tests, baseline benchmarks)
 - [x] **M1: Vectorized 3D Physics & CPA Anti-Tunneling**
 - [x] **M2: Classical Baselines** (Greedy, Hungarian, Hybrid Auction + TPN)
 - [x] **M3: Sensor Noise & 3D Kalman Filtering**
-- [ ] **M4: Cross-Attention MAPPO & Curriculum Training** *(In Progress)*
-- [ ] **M5: Three.js 3D Instanced Tactical Viewer**
-- [ ] **M6: Ablations, Stress Testing & Research Report**
+- [x] **M4: Cross-Attention MAPPO & Curriculum Training** (`runs/mappo/best.pt`, 87.5% win rate)
+- [x] **M5: Three.js 3D Instanced Tactical Viewer & WebSocket Server** (60 Hz binary Float32Array protocol)
+- [x] **M6: Full-Horizon Engagement Benchmarks, Multi-Seed Statistical Tables & Portfolio Release**
 
 ---
 

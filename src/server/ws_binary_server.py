@@ -65,7 +65,6 @@ def pack_binary_frame(env: VectorizedSwarmEnv, algo_id: int = 1, fps: float = 60
     - Entities Block: (N + M) * 10 floats ([id, type, x, y, z, vx, vy, vz, status, assigned_id])
     """
     device = env.device
-    metrics = env.metrics()
 
     t_val = env.t[0].float()
     dt = float(env.dt)
@@ -77,17 +76,22 @@ def pack_binary_frame(env: VectorizedSwarmEnv, algo_id: int = 1, fps: float = 60
     total_len = 16 + 4 * P + 10 * (N + M)
     total_frame = torch.empty(total_len, dtype=torch.float32, device=device)
 
+    real_m = env.missile_exists[0] & (~env.missile_is_decoy[0])
+    n_real = torch.clamp(real_m.sum().float(), min=1.0)
+    int_rate = (real_m & (env.missile_status[0] == 1)).sum().float() / n_real
+    leak_rate = (real_m & (env.missile_status[0] == 2)).sum().float() / n_real
+
     total_frame[0] = 2026.0
     total_frame[1] = timestamp
     total_frame[2] = t_val
     total_frame[3] = float(N)
     total_frame[4] = float(M)
     total_frame[5] = float(P)
-    total_frame[6] = metrics["intercept_rate"][0]
-    total_frame[7] = metrics["leaker_rate"][0]
+    total_frame[6] = int_rate
+    total_frame[7] = leak_rate
     total_frame[8] = (env.z[0].sum(dim=0) > env.missile_K[0]).sum().float()
-    total_frame[9] = metrics["delta_v_total"][0]
-    total_frame[10] = metrics["friendly_collisions"][0]
+    total_frame[9] = env.delta_v[0]
+    total_frame[10] = env.friendly_collisions[0]
     total_frame[11] = float(algo_id)
     total_frame[12] = float(env.sigma_obs)
     total_frame[13] = float(fps)
@@ -220,6 +224,8 @@ class SandboxSession:
 
         # Attention MAPPO policy
         self.policy = CrossAttentionActorCritic(cfg=cfg).to(self.device)
+        if checkpoint_path is None and Path("runs/mappo/best.pt").exists():
+            checkpoint_path = "runs/mappo/best.pt"
         if checkpoint_path is not None and Path(checkpoint_path).exists():
             ckpt = torch.load(checkpoint_path, map_location=self.device)
             state_dict = ckpt.get("model_state_dict", ckpt)
@@ -333,7 +339,6 @@ class SandboxSession:
                 self.env.reset()
                 is_done = False
             if not is_done:
-                self.env.update_tracker()
                 if self.algorithm in {"greedy", "hungarian", "auction"}:
                     ctrl = self.baseline_controllers[self.algorithm]
                     ctrl.use_estimated_state = self.env.sigma_obs > 0

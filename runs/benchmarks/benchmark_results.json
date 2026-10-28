@@ -1,0 +1,3255 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-28 14:18:08",
+    "quick_mode": false,
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "episodes_per_seed": 4,
+    "checkpoint_path": "runs/mappo/best.pt"
+  },
+  "scale_generalization": {
+    "Small (10v15)": {
+      "greedy": {
+        "policy": "greedy",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 53.8544807434082,
+            "leaker_rate_pct": 1.7857143878936768,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.724014282226562,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1472.9052734375,
+            "delta_v_total": 12362.4931640625,
+            "mean_step_latency_ms": 10.108980110697173,
+            "peak_vram_mb": 8.259765625
+          },
+          "43": {
+            "intercept_rate_pct": 56.87063217163086,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.905016899108887,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1515.597412109375,
+            "delta_v_total": 12465.375,
+            "mean_step_latency_ms": 10.175630610706321,
+            "peak_vram_mb": 8.263671875
+          },
+          "44": {
+            "intercept_rate_pct": 51.92307662963867,
+            "leaker_rate_pct": 7.142857551574707,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.27105712890625,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1505.44677734375,
+            "delta_v_total": 12375.6796875,
+            "mean_step_latency_ms": 10.527480414280685,
+            "peak_vram_mb": 8.263671875
+          },
+          "45": {
+            "intercept_rate_pct": 52.907508850097656,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.690411567687988,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1448.603271484375,
+            "delta_v_total": 12248.134765625,
+            "mean_step_latency_ms": 11.41060474285658,
+            "peak_vram_mb": 8.263671875
+          },
+          "46": {
+            "intercept_rate_pct": 63.25091552734375,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 6.373208045959473,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1306.3583984375,
+            "delta_v_total": 12311.095703125,
+            "mean_step_latency_ms": 11.337293364298214,
+            "peak_vram_mb": 8.263671875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 55.761322784423825,
+            "std": 4.578127369820719,
+            "ci95": 4.012905571360007
+          },
+          "leaker_rate_pct": {
+            "mean": 1.7857143878936768,
+            "std": 3.092948047638606,
+            "ci95": 2.711088497474911
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 11.592741584777832,
+            "std": 3.5380346188846916,
+            "ci95": 3.1012240785129026
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1449.7822265625,
+            "std": 84.46395765078908,
+            "ci95": 74.0359231746845
+          },
+          "delta_v_total": {
+            "mean": 12352.5556640625,
+            "std": 80.59827746143252,
+            "ci95": 70.64750509107569
+          },
+          "mean_step_latency_ms": {
+            "mean": 10.711997848567794,
+            "std": 0.6253824758365956,
+            "ci95": 0.548171909339837
+          },
+          "peak_vram_mb": {
+            "mean": 8.262890625,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 55.761322784423825,
+          "std": 4.578127369820719,
+          "ci95": 4.012905571360007
+        },
+        "leaker_rate_pct": {
+          "mean": 1.7857143878936768,
+          "std": 3.092948047638606,
+          "ci95": 2.711088497474911
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 11.592741584777832,
+          "std": 3.5380346188846916,
+          "ci95": 3.1012240785129026
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1449.7822265625,
+          "std": 84.46395765078908,
+          "ci95": 74.0359231746845
+        },
+        "delta_v_total": {
+          "mean": 12352.5556640625,
+          "std": 80.59827746143252,
+          "ci95": 70.64750509107569
+        },
+        "mean_step_latency_ms": {
+          "mean": 10.711997848567794,
+          "std": 0.6253824758365956,
+          "ci95": 0.548171909339837
+        },
+        "peak_vram_mb": {
+          "mean": 8.262890625,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      },
+      "hungarian_tpn": {
+        "policy": "hungarian_tpn",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 50.521148681640625,
+            "leaker_rate_pct": 1.7857143878936768,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.309587478637695,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1567.2001953125,
+            "delta_v_total": 12537.6015625,
+            "mean_step_latency_ms": 11.616244696421875,
+            "peak_vram_mb": 8.263671875
+          },
+          "43": {
+            "intercept_rate_pct": 60.7167854309082,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.714606285095215,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1504.313232421875,
+            "delta_v_total": 12369.875,
+            "mean_step_latency_ms": 9.89017183214693,
+            "peak_vram_mb": 8.263671875
+          },
+          "44": {
+            "intercept_rate_pct": 53.70879364013672,
+            "leaker_rate_pct": 7.142857551574707,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.890233993530273,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1449.521728515625,
+            "delta_v_total": 12256.62109375,
+            "mean_step_latency_ms": 9.244796103585681,
+            "peak_vram_mb": 8.263671875
+          },
+          "45": {
+            "intercept_rate_pct": 54.830589294433594,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.082437515258789,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1398.06640625,
+            "delta_v_total": 12198.3076171875,
+            "mean_step_latency_ms": 9.146291221434565,
+            "peak_vram_mb": 8.263671875
+          },
+          "46": {
+            "intercept_rate_pct": 61.46520233154297,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 6.765233039855957,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1408.7764892578125,
+            "delta_v_total": 12421.4658203125,
+            "mean_step_latency_ms": 9.942208757113999,
+            "peak_vram_mb": 8.263671875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 56.248503875732425,
+            "std": 4.702198693034991,
+            "ci95": 4.121658881164068
+          },
+          "leaker_rate_pct": {
+            "mean": 1.7857143878936768,
+            "std": 3.092948047638606,
+            "ci95": 2.711088497474911
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 11.552419662475586,
+            "std": 3.3881437458812282,
+            "ci95": 2.96983893546583
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1465.5756103515625,
+            "std": 70.47964165203365,
+            "ci95": 61.778129747398935
+          },
+          "delta_v_total": {
+            "mean": 12356.77421875,
+            "std": 134.34793847301492,
+            "ci95": 117.7611602405473
+          },
+          "mean_step_latency_ms": {
+            "mean": 9.967942522140609,
+            "std": 0.9901593517264834,
+            "ci95": 0.8679129386548758
+          },
+          "peak_vram_mb": {
+            "mean": 8.263671875,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 56.248503875732425,
+          "std": 4.702198693034991,
+          "ci95": 4.121658881164068
+        },
+        "leaker_rate_pct": {
+          "mean": 1.7857143878936768,
+          "std": 3.092948047638606,
+          "ci95": 2.711088497474911
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 11.552419662475586,
+          "std": 3.3881437458812282,
+          "ci95": 2.96983893546583
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1465.5756103515625,
+          "std": 70.47964165203365,
+          "ci95": 61.778129747398935
+        },
+        "delta_v_total": {
+          "mean": 12356.77421875,
+          "std": 134.34793847301492,
+          "ci95": 117.7611602405473
+        },
+        "mean_step_latency_ms": {
+          "mean": 9.967942522140609,
+          "std": 0.9901593517264834,
+          "ci95": 0.8679129386548758
+        },
+        "peak_vram_mb": {
+          "mean": 8.263671875,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "auction_tpn": {
+        "policy": "auction_tpn",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 54.460540771484375,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.5,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1516.7691650390625,
+            "delta_v_total": 12466.904296875,
+            "mean_step_latency_ms": 16.98181328213033,
+            "peak_vram_mb": 8.263671875
+          },
+          "43": {
+            "intercept_rate_pct": 54.02098083496094,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.893817901611328,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1622.443359375,
+            "delta_v_total": 12534.49609375,
+            "mean_step_latency_ms": 15.61792817500743,
+            "peak_vram_mb": 8.263671875
+          },
+          "44": {
+            "intercept_rate_pct": 51.92307662963867,
+            "leaker_rate_pct": 7.142857551574707,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.483871459960938,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1497.382080078125,
+            "delta_v_total": 12311.0,
+            "mean_step_latency_ms": 15.511310039273342,
+            "peak_vram_mb": 8.263671875
+          },
+          "45": {
+            "intercept_rate_pct": 53.04487228393555,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.629480361938477,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1491.0728759765625,
+            "delta_v_total": 12253.994140625,
+            "mean_step_latency_ms": 15.578782821413435,
+            "peak_vram_mb": 8.263671875
+          },
+          "46": {
+            "intercept_rate_pct": 54.79853820800781,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 6.642024993896484,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1593.16748046875,
+            "delta_v_total": 12640.4169921875,
+            "mean_step_latency_ms": 15.73724221430309,
+            "peak_vram_mb": 8.263671875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 53.649601745605466,
+            "std": 1.168566025543411,
+            "ci95": 1.0242932831702343
+          },
+          "leaker_rate_pct": {
+            "mean": 1.4285715103149415,
+            "std": 3.194383007783751,
+            "ci95": 2.800000160217285
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 11.229838943481445,
+            "std": 3.3664129121471125,
+            "ci95": 2.9507910198624363
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1544.1669921875,
+            "std": 59.76347467649322,
+            "ci95": 52.38499524370462
+          },
+          "delta_v_total": {
+            "mean": 12441.3623046875,
+            "std": 158.94198944375563,
+            "ci95": 139.3187964071143
+          },
+          "mean_step_latency_ms": {
+            "mean": 15.885415306425525,
+            "std": 0.6183792088210704,
+            "ci95": 0.5420332751442088
+          },
+          "peak_vram_mb": {
+            "mean": 8.263671875,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 53.649601745605466,
+          "std": 1.168566025543411,
+          "ci95": 1.0242932831702343
+        },
+        "leaker_rate_pct": {
+          "mean": 1.4285715103149415,
+          "std": 3.194383007783751,
+          "ci95": 2.800000160217285
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 11.229838943481445,
+          "std": 3.3664129121471125,
+          "ci95": 2.9507910198624363
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1544.1669921875,
+          "std": 59.76347467649322,
+          "ci95": 52.38499524370462
+        },
+        "delta_v_total": {
+          "mean": 12441.3623046875,
+          "std": 158.94198944375563,
+          "ci95": 139.3187964071143
+        },
+        "mean_step_latency_ms": {
+          "mean": 15.885415306425525,
+          "std": 0.6183792088210704,
+          "ci95": 0.5420332751442088
+        },
+        "peak_vram_mb": {
+          "mean": 8.263671875,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "flat_mlp_mappo": {
+        "policy": "flat_mlp_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 54.460540771484375,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.44399642944336,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1516.84326171875,
+            "delta_v_total": 12467.5283203125,
+            "mean_step_latency_ms": 21.512154671425574,
+            "peak_vram_mb": 9.24658203125
+          },
+          "43": {
+            "intercept_rate_pct": 56.29370880126953,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.927419662475586,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1518.0469970703125,
+            "delta_v_total": 12484.8349609375,
+            "mean_step_latency_ms": 21.928579039276233,
+            "peak_vram_mb": 9.25048828125
+          },
+          "44": {
+            "intercept_rate_pct": 51.92307662963867,
+            "leaker_rate_pct": 7.142857551574707,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.360662460327148,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1497.2393798828125,
+            "delta_v_total": 12309.8681640625,
+            "mean_step_latency_ms": 22.634905192861815,
+            "peak_vram_mb": 9.25048828125
+          },
+          "45": {
+            "intercept_rate_pct": 53.04487228393555,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.629480361938477,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1494.7486572265625,
+            "delta_v_total": 12283.40625,
+            "mean_step_latency_ms": 22.204893514273344,
+            "peak_vram_mb": 9.25048828125
+          },
+          "46": {
+            "intercept_rate_pct": 54.79853820800781,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 6.630824089050293,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1593.169921875,
+            "delta_v_total": 12640.44140625,
+            "mean_step_latency_ms": 23.33270932498895,
+            "peak_vram_mb": 9.25048828125
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 54.104147338867186,
+            "std": 1.679472196573304,
+            "ci95": 1.4721222871606483
+          },
+          "leaker_rate_pct": {
+            "mean": 1.4285715103149415,
+            "std": 3.194383007783751,
+            "ci95": 2.800000160217285
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 11.198476600646973,
+            "std": 3.383909013479148,
+            "ci95": 2.9661270288549417
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1524.0096435546875,
+            "std": 40.13385919960726,
+            "ci95": 35.178878648933036
+          },
+          "delta_v_total": {
+            "mean": 12437.2158203125,
+            "std": 145.2255818217281,
+            "ci95": 127.29583502593397
+          },
+          "mean_step_latency_ms": {
+            "mean": 22.32264834856519,
+            "std": 0.6970983314981611,
+            "ci95": 0.6110336284427758
+          },
+          "peak_vram_mb": {
+            "mean": 9.24970703125,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 54.104147338867186,
+          "std": 1.679472196573304,
+          "ci95": 1.4721222871606483
+        },
+        "leaker_rate_pct": {
+          "mean": 1.4285715103149415,
+          "std": 3.194383007783751,
+          "ci95": 2.800000160217285
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 11.198476600646973,
+          "std": 3.383909013479148,
+          "ci95": 2.9661270288549417
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1524.0096435546875,
+          "std": 40.13385919960726,
+          "ci95": 35.178878648933036
+        },
+        "delta_v_total": {
+          "mean": 12437.2158203125,
+          "std": 145.2255818217281,
+          "ci95": 127.29583502593397
+        },
+        "mean_step_latency_ms": {
+          "mean": 22.32264834856519,
+          "std": 0.6970983314981611,
+          "ci95": 0.6110336284427758
+        },
+        "peak_vram_mb": {
+          "mean": 9.24970703125,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      },
+      "attention_mappo": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 54.460540771484375,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.824820518493652,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1512.7900390625,
+            "delta_v_total": 12435.0732421875,
+            "mean_step_latency_ms": 24.994347828572113,
+            "peak_vram_mb": 10.462890625
+          },
+          "43": {
+            "intercept_rate_pct": 54.02098083496094,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.893817901611328,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1622.2061767578125,
+            "delta_v_total": 12532.5634765625,
+            "mean_step_latency_ms": 24.592020032126324,
+            "peak_vram_mb": 10.466796875
+          },
+          "44": {
+            "intercept_rate_pct": 51.92307662963867,
+            "leaker_rate_pct": 7.142857551574707,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.483871459960938,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1496.54931640625,
+            "delta_v_total": 12303.8466796875,
+            "mean_step_latency_ms": 23.979668642843016,
+            "peak_vram_mb": 10.466796875
+          },
+          "45": {
+            "intercept_rate_pct": 53.04487228393555,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.629480361938477,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1490.8865966796875,
+            "delta_v_total": 12252.5634765625,
+            "mean_step_latency_ms": 23.663005774977005,
+            "peak_vram_mb": 10.466796875
+          },
+          "46": {
+            "intercept_rate_pct": 54.79853820800781,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 6.642024993896484,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1592.857421875,
+            "delta_v_total": 12637.779296875,
+            "mean_step_latency_ms": 22.175141903588674,
+            "peak_vram_mb": 10.466796875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 53.649601745605466,
+            "std": 1.168566025543411,
+            "ci95": 1.0242932831702343
+          },
+          "leaker_rate_pct": {
+            "mean": 1.4285715103149415,
+            "std": 3.194383007783751,
+            "ci95": 2.800000160217285
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 11.294803047180176,
+            "std": 3.400018346331693,
+            "ci95": 2.980247481680482
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1543.05791015625,
+            "std": 60.302319060874616,
+            "ci95": 52.85731317143079
+          },
+          "delta_v_total": {
+            "mean": 12432.365234375,
+            "std": 158.97141970175034,
+            "ci95": 139.34459316564312
+          },
+          "mean_step_latency_ms": {
+            "mean": 23.88083683642143,
+            "std": 1.0853918150459911,
+            "ci95": 0.9513878732205684
+          },
+          "peak_vram_mb": {
+            "mean": 10.466015625,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 53.649601745605466,
+          "std": 1.168566025543411,
+          "ci95": 1.0242932831702343
+        },
+        "leaker_rate_pct": {
+          "mean": 1.4285715103149415,
+          "std": 3.194383007783751,
+          "ci95": 2.800000160217285
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 11.294803047180176,
+          "std": 3.400018346331693,
+          "ci95": 2.980247481680482
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1543.05791015625,
+          "std": 60.302319060874616,
+          "ci95": 52.85731317143079
+        },
+        "delta_v_total": {
+          "mean": 12432.365234375,
+          "std": 158.97141970175034,
+          "ci95": 139.34459316564312
+        },
+        "mean_step_latency_ms": {
+          "mean": 23.88083683642143,
+          "std": 1.0853918150459911,
+          "ci95": 0.9513878732205684
+        },
+        "peak_vram_mb": {
+          "mean": 10.466015625,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      }
+    },
+    "Medium (30v50)": {
+      "greedy": {
+        "policy": "greedy",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 49.78682327270508,
+            "leaker_rate_pct": 1.6666667461395264,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.231183052062988,
+            "friendly_collision_count": 0.75,
+            "mean_delta_v_per_intercept": 1460.973876953125,
+            "delta_v_total": 38473.0625,
+            "mean_step_latency_ms": 9.329600857159091,
+            "peak_vram_mb": 10.466796875
+          },
+          "43": {
+            "intercept_rate_pct": 56.097564697265625,
+            "leaker_rate_pct": 3.28947377204895,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 16.875747680664062,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1395.801025390625,
+            "delta_v_total": 38295.33203125,
+            "mean_step_latency_ms": 8.919114889277223,
+            "peak_vram_mb": 10.466796875
+          },
+          "44": {
+            "intercept_rate_pct": 54.679718017578125,
+            "leaker_rate_pct": 8.94421100616455,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.007168769836426,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1420.76953125,
+            "delta_v_total": 38244.25390625,
+            "mean_step_latency_ms": 9.86734175358736,
+            "peak_vram_mb": 10.466796875
+          },
+          "45": {
+            "intercept_rate_pct": 58.47882080078125,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.41980266571045,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1300.4237060546875,
+            "delta_v_total": 37485.8203125,
+            "mean_step_latency_ms": 8.91132408216403,
+            "peak_vram_mb": 10.466796875
+          },
+          "46": {
+            "intercept_rate_pct": 52.83430099487305,
+            "leaker_rate_pct": 0.54347825050354,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.012096405029297,
+            "friendly_collision_count": 0.75,
+            "mean_delta_v_per_intercept": 1488.411376953125,
+            "delta_v_total": 38988.375,
+            "mean_step_latency_ms": 9.076200360703167,
+            "peak_vram_mb": 10.466796875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 54.37544555664063,
+            "std": 3.2911451458464174,
+            "ci95": 2.8848159138129708
+          },
+          "leaker_rate_pct": {
+            "mean": 2.8887659549713134,
+            "std": 3.61136577897629,
+            "ci95": 3.165501674375726
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.909199714660645,
+            "std": 2.7567708492743304,
+            "ci95": 2.416416190807954
+          },
+          "friendly_collision_count": {
+            "mean": 0.3,
+            "std": 0.41079191812887456,
+            "ci95": 0.36007499218912714
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1413.2759033203124,
+            "std": 72.48720634116953,
+            "ci95": 63.53783778414027
+          },
+          "delta_v_total": {
+            "mean": 38297.36875,
+            "std": 540.7851081036417,
+            "ci95": 474.01904707221155
+          },
+          "mean_step_latency_ms": {
+            "mean": 9.220716388578174,
+            "std": 0.39923430968950596,
+            "ci95": 0.3499443017230478
+          },
+          "peak_vram_mb": {
+            "mean": 10.466796875,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 54.37544555664063,
+          "std": 3.2911451458464174,
+          "ci95": 2.8848159138129708
+        },
+        "leaker_rate_pct": {
+          "mean": 2.8887659549713134,
+          "std": 3.61136577897629,
+          "ci95": 3.165501674375726
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.909199714660645,
+          "std": 2.7567708492743304,
+          "ci95": 2.416416190807954
+        },
+        "friendly_collision_count": {
+          "mean": 0.3,
+          "std": 0.41079191812887456,
+          "ci95": 0.36007499218912714
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1413.2759033203124,
+          "std": 72.48720634116953,
+          "ci95": 63.53783778414027
+        },
+        "delta_v_total": {
+          "mean": 38297.36875,
+          "std": 540.7851081036417,
+          "ci95": 474.01904707221155
+        },
+        "mean_step_latency_ms": {
+          "mean": 9.220716388578174,
+          "std": 0.39923430968950596,
+          "ci95": 0.3499443017230478
+        },
+        "peak_vram_mb": {
+          "mean": 10.466796875,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "hungarian_tpn": {
+        "policy": "hungarian_tpn",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 54.913673400878906,
+            "leaker_rate_pct": 1.6666667461395264,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.761350631713867,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1377.15185546875,
+            "delta_v_total": 38183.5078125,
+            "mean_step_latency_ms": 9.364042046433951,
+            "peak_vram_mb": 10.466796875
+          },
+          "43": {
+            "intercept_rate_pct": 56.05598449707031,
+            "leaker_rate_pct": 3.28947377204895,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 17.23417091369629,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1399.70751953125,
+            "delta_v_total": 38289.1953125,
+            "mean_step_latency_ms": 10.697419953576823,
+            "peak_vram_mb": 10.466796875
+          },
+          "44": {
+            "intercept_rate_pct": 52.41169357299805,
+            "leaker_rate_pct": 8.94421100616455,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.85409164428711,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1479.98876953125,
+            "delta_v_total": 38554.39453125,
+            "mean_step_latency_ms": 11.869501503570389,
+            "peak_vram_mb": 10.466796875
+          },
+          "45": {
+            "intercept_rate_pct": 59.0860595703125,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.005376815795898,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1286.110595703125,
+            "delta_v_total": 37177.296875,
+            "mean_step_latency_ms": 12.307224735710472,
+            "peak_vram_mb": 10.466796875
+          },
+          "46": {
+            "intercept_rate_pct": 54.16582489013672,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.060632705688477,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1499.6654052734375,
+            "delta_v_total": 38918.0078125,
+            "mean_step_latency_ms": 11.941441103588854,
+            "peak_vram_mb": 10.466796875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 55.326647186279295,
+            "std": 2.4839547451777957,
+            "ci95": 2.177282331994282
+          },
+          "leaker_rate_pct": {
+            "mean": 2.7800703048706055,
+            "std": 3.7065270726909456,
+            "ci95": 3.2489142260322614
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.983124542236329,
+            "std": 3.0157418250677135,
+            "ci95": 2.643414259588749
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1408.5248291015625,
+            "std": 85.82096534039668,
+            "ci95": 75.2253928591459
+          },
+          "delta_v_total": {
+            "mean": 38224.48046875,
+            "std": 650.4390274547487,
+            "ci95": 570.1349451982067
+          },
+          "mean_step_latency_ms": {
+            "mean": 11.235925868576098,
+            "std": 1.2083861922936325,
+            "ci95": 1.0591971982639523
+          },
+          "peak_vram_mb": {
+            "mean": 10.466796875,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 55.326647186279295,
+          "std": 2.4839547451777957,
+          "ci95": 2.177282331994282
+        },
+        "leaker_rate_pct": {
+          "mean": 2.7800703048706055,
+          "std": 3.7065270726909456,
+          "ci95": 3.2489142260322614
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.983124542236329,
+          "std": 3.0157418250677135,
+          "ci95": 2.643414259588749
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1408.5248291015625,
+          "std": 85.82096534039668,
+          "ci95": 75.2253928591459
+        },
+        "delta_v_total": {
+          "mean": 38224.48046875,
+          "std": 650.4390274547487,
+          "ci95": 570.1349451982067
+        },
+        "mean_step_latency_ms": {
+          "mean": 11.235925868576098,
+          "std": 1.2083861922936325,
+          "ci95": 1.0591971982639523
+        },
+        "peak_vram_mb": {
+          "mean": 10.466796875,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "auction_tpn": {
+        "policy": "auction_tpn",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 50.89734649658203,
+            "leaker_rate_pct": 0.5555555820465088,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.578405380249023,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1459.5191650390625,
+            "delta_v_total": 38363.9453125,
+            "mean_step_latency_ms": 17.718172846415264,
+            "peak_vram_mb": 10.466796875
+          },
+          "43": {
+            "intercept_rate_pct": 51.075096130371094,
+            "leaker_rate_pct": 5.173445224761963,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 19.27643394470215,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1475.444091796875,
+            "delta_v_total": 38408.15234375,
+            "mean_step_latency_ms": 16.420973746434292,
+            "peak_vram_mb": 10.466796875
+          },
+          "44": {
+            "intercept_rate_pct": 51.274742126464844,
+            "leaker_rate_pct": 11.487815856933594,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.996564865112305,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1462.68310546875,
+            "delta_v_total": 38342.6953125,
+            "mean_step_latency_ms": 14.357425046427709,
+            "peak_vram_mb": 10.466796875
+          },
+          "45": {
+            "intercept_rate_pct": 56.15324020385742,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.871564865112305,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1353.570556640625,
+            "delta_v_total": 37857.6015625,
+            "mean_step_latency_ms": 14.190538796432454,
+            "peak_vram_mb": 10.466796875
+          },
+          "46": {
+            "intercept_rate_pct": 51.58430099487305,
+            "leaker_rate_pct": 1.6304347515106201,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.299581527709961,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1490.7359619140625,
+            "delta_v_total": 38779.80078125,
+            "mean_step_latency_ms": 14.234001560717909,
+            "peak_vram_mb": 10.466796875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 52.19694519042969,
+            "std": 2.2262953371808867,
+            "ci95": 1.9514339030754928
+          },
+          "leaker_rate_pct": {
+            "mean": 3.769450283050537,
+            "std": 4.760715044984182,
+            "ci95": 4.172950725139516
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.804510116577148,
+            "std": 3.457282631914619,
+            "ci95": 3.0304418410970646
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1448.390576171875,
+            "std": 54.41503098664542,
+            "ci95": 47.696877647287465
+          },
+          "delta_v_total": {
+            "mean": 38350.4390625,
+            "std": 328.1819214322944,
+            "ci95": 287.6641374411693
+          },
+          "mean_step_latency_ms": {
+            "mean": 15.384222399285525,
+            "std": 1.6065786138953169,
+            "ci95": 1.408228244811988
+          },
+          "peak_vram_mb": {
+            "mean": 10.466796875,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 52.19694519042969,
+          "std": 2.2262953371808867,
+          "ci95": 1.9514339030754928
+        },
+        "leaker_rate_pct": {
+          "mean": 3.769450283050537,
+          "std": 4.760715044984182,
+          "ci95": 4.172950725139516
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.804510116577148,
+          "std": 3.457282631914619,
+          "ci95": 3.0304418410970646
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1448.390576171875,
+          "std": 54.41503098664542,
+          "ci95": 47.696877647287465
+        },
+        "delta_v_total": {
+          "mean": 38350.4390625,
+          "std": 328.1819214322944,
+          "ci95": 287.6641374411693
+        },
+        "mean_step_latency_ms": {
+          "mean": 15.384222399285525,
+          "std": 1.6065786138953169,
+          "ci95": 1.408228244811988
+        },
+        "peak_vram_mb": {
+          "mean": 10.466796875,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "flat_mlp_mappo": {
+        "policy": "flat_mlp_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 50.32916259765625,
+            "leaker_rate_pct": 0.5555555820465088,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.786888122558594,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1517.4908447265625,
+            "delta_v_total": 38588.7890625,
+            "mean_step_latency_ms": 18.016605125012575,
+            "peak_vram_mb": 10.77783203125
+          },
+          "43": {
+            "intercept_rate_pct": 51.732994079589844,
+            "leaker_rate_pct": 5.173445224761963,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 18.77239990234375,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1439.9150390625,
+            "delta_v_total": 38298.69140625,
+            "mean_step_latency_ms": 18.058868592856925,
+            "peak_vram_mb": 10.78173828125
+          },
+          "44": {
+            "intercept_rate_pct": 51.80665588378906,
+            "leaker_rate_pct": 9.173985481262207,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.29898452758789,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1453.43603515625,
+            "delta_v_total": 38488.9453125,
+            "mean_step_latency_ms": 18.217290982145837,
+            "peak_vram_mb": 10.78173828125
+          },
+          "45": {
+            "intercept_rate_pct": 55.63391876220703,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.005376815795898,
+            "friendly_collision_count": 2.0,
+            "mean_delta_v_per_intercept": 1367.81591796875,
+            "delta_v_total": 37732.7734375,
+            "mean_step_latency_ms": 18.137856189278928,
+            "peak_vram_mb": 10.78173828125
+          },
+          "46": {
+            "intercept_rate_pct": 49.78266906738281,
+            "leaker_rate_pct": 1.6304347515106201,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.710872650146484,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 1504.0811767578125,
+            "delta_v_total": 38856.12109375,
+            "mean_step_latency_ms": 18.036678457160956,
+            "peak_vram_mb": 10.78173828125
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 51.857080078125,
+            "std": 2.286928248141805,
+            "ci95": 2.0045809928237563
+          },
+          "leaker_rate_pct": {
+            "mean": 3.30668420791626,
+            "std": 3.8478143904457225,
+            "ci95": 3.3727580204007124
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.714904403686523,
+            "std": 3.729344318527914,
+            "ci95": 3.268914423830569
+          },
+          "friendly_collision_count": {
+            "mean": 0.5,
+            "std": 0.8660254037844386,
+            "ci95": 0.7591047358566536
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1456.547802734375,
+            "std": 59.44147397272042,
+            "ci95": 52.10274918242863
+          },
+          "delta_v_total": {
+            "mean": 38393.0640625,
+            "std": 420.36091981391337,
+            "ci95": 368.4625919809934
+          },
+          "mean_step_latency_ms": {
+            "mean": 18.093459869291046,
+            "std": 0.08311515299008423,
+            "ci95": 0.07285364376208031
+          },
+          "peak_vram_mb": {
+            "mean": 10.78095703125,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 51.857080078125,
+          "std": 2.286928248141805,
+          "ci95": 2.0045809928237563
+        },
+        "leaker_rate_pct": {
+          "mean": 3.30668420791626,
+          "std": 3.8478143904457225,
+          "ci95": 3.3727580204007124
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.714904403686523,
+          "std": 3.729344318527914,
+          "ci95": 3.268914423830569
+        },
+        "friendly_collision_count": {
+          "mean": 0.5,
+          "std": 0.8660254037844386,
+          "ci95": 0.7591047358566536
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1456.547802734375,
+          "std": 59.44147397272042,
+          "ci95": 52.10274918242863
+        },
+        "delta_v_total": {
+          "mean": 38393.0640625,
+          "std": 420.36091981391337,
+          "ci95": 368.4625919809934
+        },
+        "mean_step_latency_ms": {
+          "mean": 18.093459869291046,
+          "std": 0.08311515299008423,
+          "ci95": 0.07285364376208031
+        },
+        "peak_vram_mb": {
+          "mean": 10.78095703125,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      },
+      "attention_mappo": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 52.602481842041016,
+            "leaker_rate_pct": 0.5555555820465088,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.059438705444336,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1430.445068359375,
+            "delta_v_total": 38274.515625,
+            "mean_step_latency_ms": 19.21937385713883,
+            "peak_vram_mb": 13.60302734375
+          },
+          "43": {
+            "intercept_rate_pct": 51.684852600097656,
+            "leaker_rate_pct": 5.173445224761963,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 19.310035705566406,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1443.17724609375,
+            "delta_v_total": 38235.9375,
+            "mean_step_latency_ms": 19.111442321400318,
+            "peak_vram_mb": 13.60693359375
+          },
+          "44": {
+            "intercept_rate_pct": 51.99282455444336,
+            "leaker_rate_pct": 10.862815856933594,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.074970245361328,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1465.77099609375,
+            "delta_v_total": 38383.05859375,
+            "mean_step_latency_ms": 19.187023910706102,
+            "peak_vram_mb": 13.60693359375
+          },
+          "45": {
+            "intercept_rate_pct": 55.597686767578125,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.77822494506836,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1367.0712890625,
+            "delta_v_total": 37887.359375,
+            "mean_step_latency_ms": 19.146787510724803,
+            "peak_vram_mb": 13.60693359375
+          },
+          "46": {
+            "intercept_rate_pct": 52.20930099487305,
+            "leaker_rate_pct": 1.6304347515106201,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.9859619140625,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1491.3077392578125,
+            "delta_v_total": 38799.46875,
+            "mean_step_latency_ms": 19.682543585702206,
+            "peak_vram_mb": 13.60693359375
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 52.81742935180664,
+            "std": 1.58969784855171,
+            "ci95": 1.3934316015943413
+          },
+          "leaker_rate_pct": {
+            "mean": 3.644450283050537,
+            "std": 4.50894039633485,
+            "ci95": 3.9522605152182306
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.641726303100587,
+            "std": 3.5355239658406554,
+            "ci95": 3.0990233940901453
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1439.5544677734374,
+            "std": 46.678754115201926,
+            "ci95": 40.915731984183104
+          },
+          "delta_v_total": {
+            "mean": 38316.06796875,
+            "std": 327.91104235726664,
+            "ci95": 287.4267014631951
+          },
+          "mean_step_latency_ms": {
+            "mean": 19.269434237134455,
+            "std": 0.23449973473212718,
+            "ci95": 0.2055480802461483
+          },
+          "peak_vram_mb": {
+            "mean": 13.60615234375,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 52.81742935180664,
+          "std": 1.58969784855171,
+          "ci95": 1.3934316015943413
+        },
+        "leaker_rate_pct": {
+          "mean": 3.644450283050537,
+          "std": 4.50894039633485,
+          "ci95": 3.9522605152182306
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.641726303100587,
+          "std": 3.5355239658406554,
+          "ci95": 3.0990233940901453
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1439.5544677734374,
+          "std": 46.678754115201926,
+          "ci95": 40.915731984183104
+        },
+        "delta_v_total": {
+          "mean": 38316.06796875,
+          "std": 327.91104235726664,
+          "ci95": 287.4267014631951
+        },
+        "mean_step_latency_ms": {
+          "mean": 19.269434237134455,
+          "std": 0.23449973473212718,
+          "ci95": 0.2055480802461483
+        },
+        "peak_vram_mb": {
+          "mean": 13.60615234375,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      }
+    },
+    "Large (100v150)": {
+      "greedy": {
+        "policy": "greedy",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 63.17814636230469,
+            "leaker_rate_pct": 1.3157894611358643,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.677419662475586,
+            "friendly_collision_count": 1.5,
+            "mean_delta_v_per_intercept": 1310.640869140625,
+            "delta_v_total": 121876.1171875,
+            "mean_step_latency_ms": 9.519997896430661,
+            "peak_vram_mb": 17.58642578125
+          },
+          "43": {
+            "intercept_rate_pct": 63.79888153076172,
+            "leaker_rate_pct": 3.024193525314331,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.222670555114746,
+            "friendly_collision_count": 2.25,
+            "mean_delta_v_per_intercept": 1290.6151123046875,
+            "delta_v_total": 120680.421875,
+            "mean_step_latency_ms": 9.623358817873395,
+            "peak_vram_mb": 17.59033203125
+          },
+          "44": {
+            "intercept_rate_pct": 59.38269805908203,
+            "leaker_rate_pct": 3.982813835144043,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.672714233398438,
+            "friendly_collision_count": 2.0,
+            "mean_delta_v_per_intercept": 1397.3087158203125,
+            "delta_v_total": 121800.9296875,
+            "mean_step_latency_ms": 9.756118364297047,
+            "peak_vram_mb": 17.59033203125
+          },
+          "45": {
+            "intercept_rate_pct": 64.99299621582031,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.52419376373291,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1237.0408935546875,
+            "delta_v_total": 118963.703125,
+            "mean_step_latency_ms": 10.021766535721456,
+            "peak_vram_mb": 17.59033203125
+          },
+          "46": {
+            "intercept_rate_pct": 60.27558898925781,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.488574981689453,
+            "friendly_collision_count": 4.25,
+            "mean_delta_v_per_intercept": 1385.436767578125,
+            "delta_v_total": 123546.8203125,
+            "mean_step_latency_ms": 10.207624342880147,
+            "peak_vram_mb": 17.59033203125
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 62.325662231445314,
+            "std": 2.3914228661820904,
+            "ci95": 2.09617456395837
+          },
+          "leaker_rate_pct": {
+            "mean": 1.6645593643188477,
+            "std": 1.7948582843288978,
+            "ci95": 1.5732626524253197
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.917114639282227,
+            "std": 1.812517354443029,
+            "ci95": 1.5887415098536157
+          },
+          "friendly_collision_count": {
+            "mean": 2.0,
+            "std": 1.5309310892394863,
+            "ci95": 1.341920265887657
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1324.2084716796876,
+            "std": 67.08824453840526,
+            "ci95": 58.80543910936924
+          },
+          "delta_v_total": {
+            "mean": 121373.5984375,
+            "std": 1691.6057144999415,
+            "ci95": 1482.7577845495966
+          },
+          "mean_step_latency_ms": {
+            "mean": 9.82577319144054,
+            "std": 0.28440534342181356,
+            "ci95": 0.2492922749736963
+          },
+          "peak_vram_mb": {
+            "mean": 17.58955078125,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 62.325662231445314,
+          "std": 2.3914228661820904,
+          "ci95": 2.09617456395837
+        },
+        "leaker_rate_pct": {
+          "mean": 1.6645593643188477,
+          "std": 1.7948582843288978,
+          "ci95": 1.5732626524253197
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.917114639282227,
+          "std": 1.812517354443029,
+          "ci95": 1.5887415098536157
+        },
+        "friendly_collision_count": {
+          "mean": 2.0,
+          "std": 1.5309310892394863,
+          "ci95": 1.341920265887657
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1324.2084716796876,
+          "std": 67.08824453840526,
+          "ci95": 58.80543910936924
+        },
+        "delta_v_total": {
+          "mean": 121373.5984375,
+          "std": 1691.6057144999415,
+          "ci95": 1482.7577845495966
+        },
+        "mean_step_latency_ms": {
+          "mean": 9.82577319144054,
+          "std": 0.28440534342181356,
+          "ci95": 0.2492922749736963
+        },
+        "peak_vram_mb": {
+          "mean": 17.58955078125,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      },
+      "hungarian_tpn": {
+        "policy": "hungarian_tpn",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 64.74668884277344,
+            "leaker_rate_pct": 1.3157894611358643,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.70206069946289,
+            "friendly_collision_count": 3.25,
+            "mean_delta_v_per_intercept": 1277.2894287109375,
+            "delta_v_total": 121089.578125,
+            "mean_step_latency_ms": 11.406106803573428,
+            "peak_vram_mb": 17.59033203125
+          },
+          "43": {
+            "intercept_rate_pct": 65.24412536621094,
+            "leaker_rate_pct": 3.024193525314331,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.616935729980469,
+            "friendly_collision_count": 1.25,
+            "mean_delta_v_per_intercept": 1266.0927734375,
+            "delta_v_total": 119944.234375,
+            "mean_step_latency_ms": 10.466457271424392,
+            "peak_vram_mb": 17.59033203125
+          },
+          "44": {
+            "intercept_rate_pct": 60.12103271484375,
+            "leaker_rate_pct": 4.192898273468018,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.604391098022461,
+            "friendly_collision_count": 6.25,
+            "mean_delta_v_per_intercept": 1379.8707275390625,
+            "delta_v_total": 121192.328125,
+            "mean_step_latency_ms": 10.824862135715259,
+            "peak_vram_mb": 17.59033203125
+          },
+          "45": {
+            "intercept_rate_pct": 68.01739501953125,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.55555534362793,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1161.010986328125,
+            "delta_v_total": 116497.359375,
+            "mean_step_latency_ms": 12.429460117849496,
+            "peak_vram_mb": 17.59033203125
+          },
+          "46": {
+            "intercept_rate_pct": 59.50666809082031,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.45161247253418,
+            "friendly_collision_count": 3.0,
+            "mean_delta_v_per_intercept": 1373.0797119140625,
+            "delta_v_total": 123083.328125,
+            "mean_step_latency_ms": 12.681614864282308,
+            "peak_vram_mb": 17.59033203125
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 63.527182006835936,
+            "std": 3.6181310600154015,
+            "ci95": 3.171431704665541
+          },
+          "leaker_rate_pct": {
+            "mean": 1.7065762519836425,
+            "std": 1.8638288411940973,
+            "ci95": 1.6337180110351872
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.986111068725586,
+            "std": 1.8873678417395434,
+            "ci95": 1.65435085472926
+          },
+          "friendly_collision_count": {
+            "mean": 2.75,
+            "std": 2.3651109910530628,
+            "ci95": 2.0731111885280056
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1291.4687255859376,
+            "std": 89.91590540379701,
+            "ci95": 78.81476608260166
+          },
+          "delta_v_total": {
+            "mean": 120361.365625,
+            "std": 2435.89894868067,
+            "ci95": 2135.1595691435377
+          },
+          "mean_step_latency_ms": {
+            "mean": 11.561700238568976,
+            "std": 0.971328065187816,
+            "ci95": 0.851406588227615
+          },
+          "peak_vram_mb": {
+            "mean": 17.59033203125,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 63.527182006835936,
+          "std": 3.6181310600154015,
+          "ci95": 3.171431704665541
+        },
+        "leaker_rate_pct": {
+          "mean": 1.7065762519836425,
+          "std": 1.8638288411940973,
+          "ci95": 1.6337180110351872
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.986111068725586,
+          "std": 1.8873678417395434,
+          "ci95": 1.65435085472926
+        },
+        "friendly_collision_count": {
+          "mean": 2.75,
+          "std": 2.3651109910530628,
+          "ci95": 2.0731111885280056
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1291.4687255859376,
+          "std": 89.91590540379701,
+          "ci95": 78.81476608260166
+        },
+        "delta_v_total": {
+          "mean": 120361.365625,
+          "std": 2435.89894868067,
+          "ci95": 2135.1595691435377
+        },
+        "mean_step_latency_ms": {
+          "mean": 11.561700238568976,
+          "std": 0.971328065187816,
+          "ci95": 0.851406588227615
+        },
+        "peak_vram_mb": {
+          "mean": 17.59033203125,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "auction_tpn": {
+        "policy": "auction_tpn",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 66.03561401367188,
+            "leaker_rate_pct": 0.37593984603881836,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.125224113464355,
+            "friendly_collision_count": 3.75,
+            "mean_delta_v_per_intercept": 1216.875732421875,
+            "delta_v_total": 119150.515625,
+            "mean_step_latency_ms": 16.70221848214299,
+            "peak_vram_mb": 17.59033203125
+          },
+          "43": {
+            "intercept_rate_pct": 64.22389221191406,
+            "leaker_rate_pct": 3.4166460037231445,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.88328742980957,
+            "friendly_collision_count": 2.25,
+            "mean_delta_v_per_intercept": 1259.2271728515625,
+            "delta_v_total": 119745.6171875,
+            "mean_step_latency_ms": 17.206919525019007,
+            "peak_vram_mb": 17.59033203125
+          },
+          "44": {
+            "intercept_rate_pct": 62.50462341308594,
+            "leaker_rate_pct": 3.754838705062866,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.96505355834961,
+            "friendly_collision_count": 2.5,
+            "mean_delta_v_per_intercept": 1295.0985107421875,
+            "delta_v_total": 119251.9375,
+            "mean_step_latency_ms": 19.806595585727596,
+            "peak_vram_mb": 17.59033203125
+          },
+          "45": {
+            "intercept_rate_pct": 68.7739486694336,
+            "leaker_rate_pct": 0.3731343150138855,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.476030349731445,
+            "friendly_collision_count": 3.5,
+            "mean_delta_v_per_intercept": 1154.9993896484375,
+            "delta_v_total": 116970.6875,
+            "mean_step_latency_ms": 19.57737029287208,
+            "peak_vram_mb": 17.59033203125
+          },
+          "46": {
+            "intercept_rate_pct": 59.86195373535156,
+            "leaker_rate_pct": 0.36985480785369873,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.564740180969238,
+            "friendly_collision_count": 4.0,
+            "mean_delta_v_per_intercept": 1357.1158447265625,
+            "delta_v_total": 123049.515625,
+            "mean_step_latency_ms": 19.85474590358243,
+            "peak_vram_mb": 17.59033203125
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 64.2800064086914,
+            "std": 3.3893951567396288,
+            "ci95": 2.9709358454467187
+          },
+          "leaker_rate_pct": {
+            "mean": 1.6580827355384826,
+            "std": 1.763763333763539,
+            "ci95": 1.5460067265226336
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.802867126464843,
+            "std": 1.6743462197320729,
+            "ci95": 1.4676291703547601
+          },
+          "friendly_collision_count": {
+            "mean": 3.2,
+            "std": 0.7786205751198718,
+            "ci95": 0.6824910255820218
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1256.663330078125,
+            "std": 76.63738286989461,
+            "ci95": 67.17562790418681
+          },
+          "delta_v_total": {
+            "mean": 119633.6546875,
+            "std": 2188.1023257832676,
+            "ci95": 1917.9562525332963
+          },
+          "mean_step_latency_ms": {
+            "mean": 18.629569957868817,
+            "std": 1.5429994221235286,
+            "ci95": 1.3524986260675522
+          },
+          "peak_vram_mb": {
+            "mean": 17.59033203125,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 64.2800064086914,
+          "std": 3.3893951567396288,
+          "ci95": 2.9709358454467187
+        },
+        "leaker_rate_pct": {
+          "mean": 1.6580827355384826,
+          "std": 1.763763333763539,
+          "ci95": 1.5460067265226336
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.802867126464843,
+          "std": 1.6743462197320729,
+          "ci95": 1.4676291703547601
+        },
+        "friendly_collision_count": {
+          "mean": 3.2,
+          "std": 0.7786205751198718,
+          "ci95": 0.6824910255820218
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1256.663330078125,
+          "std": 76.63738286989461,
+          "ci95": 67.17562790418681
+        },
+        "delta_v_total": {
+          "mean": 119633.6546875,
+          "std": 2188.1023257832676,
+          "ci95": 1917.9562525332963
+        },
+        "mean_step_latency_ms": {
+          "mean": 18.629569957868817,
+          "std": 1.5429994221235286,
+          "ci95": 1.3524986260675522
+        },
+        "peak_vram_mb": {
+          "mean": 17.59033203125,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      },
+      "flat_mlp_mappo": {
+        "policy": "flat_mlp_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 64.09845733642578,
+            "leaker_rate_pct": 0.9456781148910522,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.040098190307617,
+            "friendly_collision_count": 1.5,
+            "mean_delta_v_per_intercept": 1248.655517578125,
+            "delta_v_total": 120303.546875,
+            "mean_step_latency_ms": 24.360313653580437,
+            "peak_vram_mb": 24.79248046875
+          },
+          "43": {
+            "intercept_rate_pct": 64.37686157226562,
+            "leaker_rate_pct": 2.81180739402771,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.49238395690918,
+            "friendly_collision_count": 2.5,
+            "mean_delta_v_per_intercept": 1272.499755859375,
+            "delta_v_total": 120323.890625,
+            "mean_step_latency_ms": 27.447565092860973,
+            "peak_vram_mb": 24.79638671875
+          },
+          "44": {
+            "intercept_rate_pct": 63.08892822265625,
+            "leaker_rate_pct": 3.1630752086639404,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.719757080078125,
+            "friendly_collision_count": 1.0,
+            "mean_delta_v_per_intercept": 1287.466552734375,
+            "delta_v_total": 119098.3671875,
+            "mean_step_latency_ms": 28.13240557500681,
+            "peak_vram_mb": 24.79638671875
+          },
+          "45": {
+            "intercept_rate_pct": 66.70397186279297,
+            "leaker_rate_pct": 0.3731343150138855,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.406585693359375,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 1192.147705078125,
+            "delta_v_total": 117770.265625,
+            "mean_step_latency_ms": 28.224127628586107,
+            "peak_vram_mb": 24.79638671875
+          },
+          "46": {
+            "intercept_rate_pct": 60.57000732421875,
+            "leaker_rate_pct": 0.17605634033679962,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.566980361938477,
+            "friendly_collision_count": 2.0,
+            "mean_delta_v_per_intercept": 1343.35693359375,
+            "delta_v_total": 122687.0625,
+            "mean_step_latency_ms": 27.536317357152843,
+            "peak_vram_mb": 24.79638671875
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 63.767645263671874,
+            "std": 2.2241931260817602,
+            "ci95": 1.949591233802578
+          },
+          "leaker_rate_pct": {
+            "mean": 1.4939502745866775,
+            "std": 1.397891325450842,
+            "ci95": 1.225305771315223
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.645161056518555,
+            "std": 1.5805130599530348,
+            "ci95": 1.385380779421425
+          },
+          "friendly_collision_count": {
+            "mean": 1.5,
+            "std": 0.7905694150420949,
+            "ci95": 0.6929646455628166
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1268.82529296875,
+            "std": 55.231865850863265,
+            "ci95": 48.41286497413837
+          },
+          "delta_v_total": {
+            "mean": 120036.6265625,
+            "std": 1816.2667967166797,
+            "ci95": 1592.0280409118407
+          },
+          "mean_step_latency_ms": {
+            "mean": 27.140145861437436,
+            "std": 1.592052241007583,
+            "ci95": 1.3954953175725429
+          },
+          "peak_vram_mb": {
+            "mean": 24.79560546875,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 63.767645263671874,
+          "std": 2.2241931260817602,
+          "ci95": 1.949591233802578
+        },
+        "leaker_rate_pct": {
+          "mean": 1.4939502745866775,
+          "std": 1.397891325450842,
+          "ci95": 1.225305771315223
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.645161056518555,
+          "std": 1.5805130599530348,
+          "ci95": 1.385380779421425
+        },
+        "friendly_collision_count": {
+          "mean": 1.5,
+          "std": 0.7905694150420949,
+          "ci95": 0.6929646455628166
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1268.82529296875,
+          "std": 55.231865850863265,
+          "ci95": 48.41286497413837
+        },
+        "delta_v_total": {
+          "mean": 120036.6265625,
+          "std": 1816.2667967166797,
+          "ci95": 1592.0280409118407
+        },
+        "mean_step_latency_ms": {
+          "mean": 27.140145861437436,
+          "std": 1.592052241007583,
+          "ci95": 1.3954953175725429
+        },
+        "peak_vram_mb": {
+          "mean": 24.79560546875,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      },
+      "attention_mappo": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 66.80064392089844,
+            "leaker_rate_pct": 0.37593984603881836,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.245071411132812,
+            "friendly_collision_count": 4.0,
+            "mean_delta_v_per_intercept": 1183.7872314453125,
+            "delta_v_total": 118358.59375,
+            "mean_step_latency_ms": 28.23513728569164,
+            "peak_vram_mb": 25.2919921875
+          },
+          "43": {
+            "intercept_rate_pct": 63.614288330078125,
+            "leaker_rate_pct": 3.8198719024658203,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.445340156555176,
+            "friendly_collision_count": 1.0,
+            "mean_delta_v_per_intercept": 1279.138916015625,
+            "delta_v_total": 120190.6328125,
+            "mean_step_latency_ms": 26.371384239281983,
+            "peak_vram_mb": 25.2958984375
+          },
+          "44": {
+            "intercept_rate_pct": 62.88932800292969,
+            "leaker_rate_pct": 3.979694366455078,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.801523208618164,
+            "friendly_collision_count": 2.0,
+            "mean_delta_v_per_intercept": 1286.00390625,
+            "delta_v_total": 118965.1640625,
+            "mean_step_latency_ms": 28.220891753562682,
+            "peak_vram_mb": 25.2958984375
+          },
+          "45": {
+            "intercept_rate_pct": 67.08354187011719,
+            "leaker_rate_pct": 0.3731343150138855,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.864694595336914,
+            "friendly_collision_count": 2.25,
+            "mean_delta_v_per_intercept": 1192.10009765625,
+            "delta_v_total": 117916.828125,
+            "mean_step_latency_ms": 27.70350051073527,
+            "peak_vram_mb": 25.2958984375
+          },
+          "46": {
+            "intercept_rate_pct": 60.97757339477539,
+            "leaker_rate_pct": 0.17605634033679962,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.477374076843262,
+            "friendly_collision_count": 3.25,
+            "mean_delta_v_per_intercept": 1328.959716796875,
+            "delta_v_total": 122461.0,
+            "mean_step_latency_ms": 27.3702328928396,
+            "peak_vram_mb": 25.2958984375
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 64.27307510375977,
+            "std": 2.6218512131852454,
+            "ci95": 2.29815391551242
+          },
+          "leaker_rate_pct": {
+            "mean": 1.7449393540620803,
+            "std": 1.9695734103304283,
+            "ci95": 1.7264072126125702
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 12.766800689697266,
+            "std": 1.4997482629793522,
+            "ci95": 1.3145873135423525
+          },
+          "friendly_collision_count": {
+            "mean": 2.5,
+            "std": 1.159202311936963,
+            "ci95": 1.0160856263130582
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1253.9979736328125,
+            "std": 63.3178588822226,
+            "ci95": 55.500550366952325
+          },
+          "delta_v_total": {
+            "mean": 119578.44375,
+            "std": 1824.0763735040625,
+            "ci95": 1598.873436784101
+          },
+          "mean_step_latency_ms": {
+            "mean": 27.580229336422235,
+            "std": 0.7681070095316133,
+            "ci95": 0.6732754790242522
+          },
+          "peak_vram_mb": {
+            "mean": 25.2951171875,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 64.27307510375977,
+          "std": 2.6218512131852454,
+          "ci95": 2.29815391551242
+        },
+        "leaker_rate_pct": {
+          "mean": 1.7449393540620803,
+          "std": 1.9695734103304283,
+          "ci95": 1.7264072126125702
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 12.766800689697266,
+          "std": 1.4997482629793522,
+          "ci95": 1.3145873135423525
+        },
+        "friendly_collision_count": {
+          "mean": 2.5,
+          "std": 1.159202311936963,
+          "ci95": 1.0160856263130582
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1253.9979736328125,
+          "std": 63.3178588822226,
+          "ci95": 55.500550366952325
+        },
+        "delta_v_total": {
+          "mean": 119578.44375,
+          "std": 1824.0763735040625,
+          "ci95": 1598.873436784101
+        },
+        "mean_step_latency_ms": {
+          "mean": 27.580229336422235,
+          "std": 0.7681070095316133,
+          "ci95": 0.6732754790242522
+        },
+        "peak_vram_mb": {
+          "mean": 25.2951171875,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      }
+    }
+  },
+  "ablation_study": {
+    "full_attention_mappo": {
+      "label": "Full (Cross-Attn + TPN + CBF)",
+      "policy": "attention_mappo",
+      "ablation_flags": {
+        "use_cbf": true,
+        "use_kalman": true,
+        "use_residual_rl": true,
+        "use_coord_logits": true
+      },
+      "result": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 52.602481842041016,
+            "leaker_rate_pct": 0.5555555820465088,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.059438705444336,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1430.445068359375,
+            "delta_v_total": 38274.515625,
+            "mean_step_latency_ms": 19.21937385713883,
+            "peak_vram_mb": 13.60302734375
+          },
+          "43": {
+            "intercept_rate_pct": 51.684852600097656,
+            "leaker_rate_pct": 5.173445224761963,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 19.310035705566406,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1443.17724609375,
+            "delta_v_total": 38235.9375,
+            "mean_step_latency_ms": 19.111442321400318,
+            "peak_vram_mb": 13.60693359375
+          },
+          "44": {
+            "intercept_rate_pct": 51.99282455444336,
+            "leaker_rate_pct": 10.862815856933594,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.074970245361328,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1465.77099609375,
+            "delta_v_total": 38383.05859375,
+            "mean_step_latency_ms": 19.187023910706102,
+            "peak_vram_mb": 13.60693359375
+          },
+          "45": {
+            "intercept_rate_pct": 55.597686767578125,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.77822494506836,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1367.0712890625,
+            "delta_v_total": 37887.359375,
+            "mean_step_latency_ms": 19.146787510724803,
+            "peak_vram_mb": 13.60693359375
+          },
+          "46": {
+            "intercept_rate_pct": 52.20930099487305,
+            "leaker_rate_pct": 1.6304347515106201,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.9859619140625,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1491.3077392578125,
+            "delta_v_total": 38799.46875,
+            "mean_step_latency_ms": 19.682543585702206,
+            "peak_vram_mb": 13.60693359375
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 52.81742935180664,
+            "std": 1.58969784855171,
+            "ci95": 1.3934316015943413
+          },
+          "leaker_rate_pct": {
+            "mean": 3.644450283050537,
+            "std": 4.50894039633485,
+            "ci95": 3.9522605152182306
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.641726303100587,
+            "std": 3.5355239658406554,
+            "ci95": 3.0990233940901453
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1439.5544677734374,
+            "std": 46.678754115201926,
+            "ci95": 40.915731984183104
+          },
+          "delta_v_total": {
+            "mean": 38316.06796875,
+            "std": 327.91104235726664,
+            "ci95": 287.4267014631951
+          },
+          "mean_step_latency_ms": {
+            "mean": 19.269434237134455,
+            "std": 0.23449973473212718,
+            "ci95": 0.2055480802461483
+          },
+          "peak_vram_mb": {
+            "mean": 13.60615234375,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 52.81742935180664,
+          "std": 1.58969784855171,
+          "ci95": 1.3934316015943413
+        },
+        "leaker_rate_pct": {
+          "mean": 3.644450283050537,
+          "std": 4.50894039633485,
+          "ci95": 3.9522605152182306
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.641726303100587,
+          "std": 3.5355239658406554,
+          "ci95": 3.0990233940901453
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1439.5544677734374,
+          "std": 46.678754115201926,
+          "ci95": 40.915731984183104
+        },
+        "delta_v_total": {
+          "mean": 38316.06796875,
+          "std": 327.91104235726664,
+          "ci95": 287.4267014631951
+        },
+        "mean_step_latency_ms": {
+          "mean": 19.269434237134455,
+          "std": 0.23449973473212718,
+          "ci95": 0.2055480802461483
+        },
+        "peak_vram_mb": {
+          "mean": 13.60615234375,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      }
+    },
+    "no_cross_attention": {
+      "label": "w/o Cross-Attention (Flat-MLP)",
+      "policy": "flat_mlp_mappo",
+      "ablation_flags": {
+        "use_cbf": true,
+        "use_kalman": true,
+        "use_residual_rl": true,
+        "use_coord_logits": true
+      },
+      "result": {
+        "policy": "flat_mlp_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 50.32916259765625,
+            "leaker_rate_pct": 0.5555555820465088,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.786888122558594,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1517.4908447265625,
+            "delta_v_total": 38588.7890625,
+            "mean_step_latency_ms": 18.016605125012575,
+            "peak_vram_mb": 10.77783203125
+          },
+          "43": {
+            "intercept_rate_pct": 51.732994079589844,
+            "leaker_rate_pct": 5.173445224761963,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 18.77239990234375,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1439.9150390625,
+            "delta_v_total": 38298.69140625,
+            "mean_step_latency_ms": 18.058868592856925,
+            "peak_vram_mb": 10.78173828125
+          },
+          "44": {
+            "intercept_rate_pct": 51.80665588378906,
+            "leaker_rate_pct": 9.173985481262207,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.29898452758789,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1453.43603515625,
+            "delta_v_total": 38488.9453125,
+            "mean_step_latency_ms": 18.217290982145837,
+            "peak_vram_mb": 10.78173828125
+          },
+          "45": {
+            "intercept_rate_pct": 55.63391876220703,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.005376815795898,
+            "friendly_collision_count": 2.0,
+            "mean_delta_v_per_intercept": 1367.81591796875,
+            "delta_v_total": 37732.7734375,
+            "mean_step_latency_ms": 18.137856189278928,
+            "peak_vram_mb": 10.78173828125
+          },
+          "46": {
+            "intercept_rate_pct": 49.78266906738281,
+            "leaker_rate_pct": 1.6304347515106201,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.710872650146484,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 1504.0811767578125,
+            "delta_v_total": 38856.12109375,
+            "mean_step_latency_ms": 18.036678457160956,
+            "peak_vram_mb": 10.78173828125
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 51.857080078125,
+            "std": 2.286928248141805,
+            "ci95": 2.0045809928237563
+          },
+          "leaker_rate_pct": {
+            "mean": 3.30668420791626,
+            "std": 3.8478143904457225,
+            "ci95": 3.3727580204007124
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.714904403686523,
+            "std": 3.729344318527914,
+            "ci95": 3.268914423830569
+          },
+          "friendly_collision_count": {
+            "mean": 0.5,
+            "std": 0.8660254037844386,
+            "ci95": 0.7591047358566536
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1456.547802734375,
+            "std": 59.44147397272042,
+            "ci95": 52.10274918242863
+          },
+          "delta_v_total": {
+            "mean": 38393.0640625,
+            "std": 420.36091981391337,
+            "ci95": 368.4625919809934
+          },
+          "mean_step_latency_ms": {
+            "mean": 18.093459869291046,
+            "std": 0.08311515299008423,
+            "ci95": 0.07285364376208031
+          },
+          "peak_vram_mb": {
+            "mean": 10.78095703125,
+            "std": 0.0017469281074217104,
+            "ci95": 0.0015312499999999996
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 51.857080078125,
+          "std": 2.286928248141805,
+          "ci95": 2.0045809928237563
+        },
+        "leaker_rate_pct": {
+          "mean": 3.30668420791626,
+          "std": 3.8478143904457225,
+          "ci95": 3.3727580204007124
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.714904403686523,
+          "std": 3.729344318527914,
+          "ci95": 3.268914423830569
+        },
+        "friendly_collision_count": {
+          "mean": 0.5,
+          "std": 0.8660254037844386,
+          "ci95": 0.7591047358566536
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1456.547802734375,
+          "std": 59.44147397272042,
+          "ci95": 52.10274918242863
+        },
+        "delta_v_total": {
+          "mean": 38393.0640625,
+          "std": 420.36091981391337,
+          "ci95": 368.4625919809934
+        },
+        "mean_step_latency_ms": {
+          "mean": 18.093459869291046,
+          "std": 0.08311515299008423,
+          "ci95": 0.07285364376208031
+        },
+        "peak_vram_mb": {
+          "mean": 10.78095703125,
+          "std": 0.0017469281074217104,
+          "ci95": 0.0015312499999999996
+        }
+      }
+    },
+    "no_cbf": {
+      "label": "w/o CBF Safety Shield",
+      "policy": "attention_mappo",
+      "ablation_flags": {
+        "use_cbf": false,
+        "use_kalman": true,
+        "use_residual_rl": true,
+        "use_coord_logits": true
+      },
+      "result": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 53.77789306640625,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 11.495668411254883,
+            "friendly_collision_count": 25.25,
+            "mean_delta_v_per_intercept": 1410.025634765625,
+            "delta_v_total": 38061.66015625,
+            "mean_step_latency_ms": 25.007740017882238,
+            "peak_vram_mb": 25.2958984375
+          },
+          "43": {
+            "intercept_rate_pct": 52.39088821411133,
+            "leaker_rate_pct": 3.9473681449890137,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 18.309438705444336,
+            "friendly_collision_count": 9.75,
+            "mean_delta_v_per_intercept": 1418.61279296875,
+            "delta_v_total": 38079.9296875,
+            "mean_step_latency_ms": 21.527846907148223,
+            "peak_vram_mb": 25.2958984375
+          },
+          "44": {
+            "intercept_rate_pct": 50.165828704833984,
+            "leaker_rate_pct": 8.455900192260742,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.447729110717773,
+            "friendly_collision_count": 9.5,
+            "mean_delta_v_per_intercept": 1516.554931640625,
+            "delta_v_total": 38496.91015625,
+            "mean_step_latency_ms": 21.060666342853956,
+            "peak_vram_mb": 25.2958984375
+          },
+          "45": {
+            "intercept_rate_pct": 57.94742202758789,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.763291358947754,
+            "friendly_collision_count": 13.75,
+            "mean_delta_v_per_intercept": 1293.7796630859375,
+            "delta_v_total": 37091.3046875,
+            "mean_step_latency_ms": 27.118501064273914,
+            "peak_vram_mb": 25.2958984375
+          },
+          "46": {
+            "intercept_rate_pct": 53.97509765625,
+            "leaker_rate_pct": 0.54347825050354,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.258512496948242,
+            "friendly_collision_count": 2.5,
+            "mean_delta_v_per_intercept": 1442.443115234375,
+            "delta_v_total": 38424.24609375,
+            "mean_step_latency_ms": 25.99844656429338,
+            "peak_vram_mb": 25.2958984375
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 53.65142593383789,
+            "std": 2.8423002631107477,
+            "ci95": 2.4913860275062185
+          },
+          "leaker_rate_pct": {
+            "mean": 2.589349317550659,
+            "std": 3.669321548352615,
+            "ci95": 3.216302146061121
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.254928016662598,
+            "std": 3.259346218743682,
+            "ci95": 2.8569429252685667
+          },
+          "friendly_collision_count": {
+            "mean": 12.15,
+            "std": 8.367720717136775,
+            "ci95": 7.334630597378438
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1416.2832275390624,
+            "std": 80.29704542166074,
+            "ci95": 70.38346356644689
+          },
+          "delta_v_total": {
+            "mean": 38030.81015625,
+            "std": 560.8199407068817,
+            "ci95": 491.5803521387316
+          },
+          "mean_step_latency_ms": {
+            "mean": 24.14264017929034,
+            "std": 2.7103445196433555,
+            "ci95": 2.3757217186396904
+          },
+          "peak_vram_mb": {
+            "mean": 25.2958984375,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 53.65142593383789,
+          "std": 2.8423002631107477,
+          "ci95": 2.4913860275062185
+        },
+        "leaker_rate_pct": {
+          "mean": 2.589349317550659,
+          "std": 3.669321548352615,
+          "ci95": 3.216302146061121
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.254928016662598,
+          "std": 3.259346218743682,
+          "ci95": 2.8569429252685667
+        },
+        "friendly_collision_count": {
+          "mean": 12.15,
+          "std": 8.367720717136775,
+          "ci95": 7.334630597378438
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1416.2832275390624,
+          "std": 80.29704542166074,
+          "ci95": 70.38346356644689
+        },
+        "delta_v_total": {
+          "mean": 38030.81015625,
+          "std": 560.8199407068817,
+          "ci95": 491.5803521387316
+        },
+        "mean_step_latency_ms": {
+          "mean": 24.14264017929034,
+          "std": 2.7103445196433555,
+          "ci95": 2.3757217186396904
+        },
+        "peak_vram_mb": {
+          "mean": 25.2958984375,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      }
+    },
+    "no_kalman": {
+      "label": "w/o Kalman (Raw Noisy Obs)",
+      "policy": "attention_mappo",
+      "ablation_flags": {
+        "use_cbf": true,
+        "use_kalman": false,
+        "use_residual_rl": true,
+        "use_coord_logits": true
+      },
+      "result": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 10.606648445129395,
+            "leaker_rate_pct": 5.762273788452148,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.376792907714844,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 16494.3671875,
+            "delta_v_total": 38582.44921875,
+            "mean_step_latency_ms": 22.376648764286852,
+            "peak_vram_mb": 25.2958984375
+          },
+          "43": {
+            "intercept_rate_pct": 8.473129272460938,
+            "leaker_rate_pct": 8.803536415100098,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 19.183094024658203,
+            "friendly_collision_count": 0.5,
+            "mean_delta_v_per_intercept": 10235.66796875,
+            "delta_v_total": 38586.0625,
+            "mean_step_latency_ms": 19.1361777785882,
+            "peak_vram_mb": 25.2958984375
+          },
+          "44": {
+            "intercept_rate_pct": 10.512672424316406,
+            "leaker_rate_pct": 23.767559051513672,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 13.201910972595215,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 8125.7451171875,
+            "delta_v_total": 38985.609375,
+            "mean_step_latency_ms": 18.537585624998037,
+            "peak_vram_mb": 25.2958984375
+          },
+          "45": {
+            "intercept_rate_pct": 9.387428283691406,
+            "leaker_rate_pct": 6.783788681030273,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 10.297191619873047,
+            "friendly_collision_count": 0.75,
+            "mean_delta_v_per_intercept": 10222.783203125,
+            "delta_v_total": 38146.03125,
+            "mean_step_latency_ms": 18.767707025017444,
+            "peak_vram_mb": 25.2958984375
+          },
+          "46": {
+            "intercept_rate_pct": 11.369318008422852,
+            "leaker_rate_pct": 2.769151210784912,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 15.333781242370605,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 9670.0361328125,
+            "delta_v_total": 38954.953125,
+            "mean_step_latency_ms": 24.528004264287315,
+            "peak_vram_mb": 25.2958984375
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 10.0698392868042,
+            "std": 1.1388676234701098,
+            "ci95": 0.9982614859934978
+          },
+          "leaker_rate_pct": {
+            "mean": 9.577261829376221,
+            "std": 8.226043739963913,
+            "ci95": 7.210445251470798
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 14.078554153442383,
+            "std": 3.3762079155421967,
+            "ci95": 2.959376718887486
+          },
+          "friendly_collision_count": {
+            "mean": 0.25,
+            "std": 0.3535533905932738,
+            "ci95": 0.3099032106965012
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 10949.719921875,
+            "std": 3216.9024224605646,
+            "ci95": 2819.7392974933828
+          },
+          "delta_v_total": {
+            "mean": 38651.02109375,
+            "std": 342.1477973052079,
+            "ci95": 299.90576738549555
+          },
+          "mean_step_latency_ms": {
+            "mean": 20.669224691435566,
+            "std": 2.660609147294268,
+            "ci95": 2.3321267426438315
+          },
+          "peak_vram_mb": {
+            "mean": 25.2958984375,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 10.0698392868042,
+          "std": 1.1388676234701098,
+          "ci95": 0.9982614859934978
+        },
+        "leaker_rate_pct": {
+          "mean": 9.577261829376221,
+          "std": 8.226043739963913,
+          "ci95": 7.210445251470798
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 14.078554153442383,
+          "std": 3.3762079155421967,
+          "ci95": 2.959376718887486
+        },
+        "friendly_collision_count": {
+          "mean": 0.25,
+          "std": 0.3535533905932738,
+          "ci95": 0.3099032106965012
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 10949.719921875,
+          "std": 3216.9024224605646,
+          "ci95": 2819.7392974933828
+        },
+        "delta_v_total": {
+          "mean": 38651.02109375,
+          "std": 342.1477973052079,
+          "ci95": 299.90576738549555
+        },
+        "mean_step_latency_ms": {
+          "mean": 20.669224691435566,
+          "std": 2.660609147294268,
+          "ci95": 2.3321267426438315
+        },
+        "peak_vram_mb": {
+          "mean": 25.2958984375,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      }
+    },
+    "no_rl_residual_or_logits": {
+      "label": "w/o RL Residual & Coord Logits",
+      "policy": "attention_mappo",
+      "ablation_flags": {
+        "use_cbf": true,
+        "use_kalman": true,
+        "use_residual_rl": false,
+        "use_coord_logits": false
+      },
+      "result": {
+        "policy": "attention_mappo",
+        "seeds": [
+          42,
+          43,
+          44,
+          45,
+          46
+        ],
+        "per_seed": {
+          "42": {
+            "intercept_rate_pct": 50.89734649658203,
+            "leaker_rate_pct": 0.5555555820465088,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.578405380249023,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1459.5191650390625,
+            "delta_v_total": 38363.9453125,
+            "mean_step_latency_ms": 24.949907992866624,
+            "peak_vram_mb": 25.2958984375
+          },
+          "43": {
+            "intercept_rate_pct": 51.075096130371094,
+            "leaker_rate_pct": 5.173445224761963,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 19.27643394470215,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1475.444091796875,
+            "delta_v_total": 38408.15234375,
+            "mean_step_latency_ms": 24.860819521416033,
+            "peak_vram_mb": 25.2958984375
+          },
+          "44": {
+            "intercept_rate_pct": 51.274742126464844,
+            "leaker_rate_pct": 11.487815856933594,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 12.996564865112305,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1462.68310546875,
+            "delta_v_total": 38342.6953125,
+            "mean_step_latency_ms": 25.059908982149995,
+            "peak_vram_mb": 25.2958984375
+          },
+          "45": {
+            "intercept_rate_pct": 56.15324020385742,
+            "leaker_rate_pct": 0.0,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 9.871564865112305,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1353.570556640625,
+            "delta_v_total": 37857.6015625,
+            "mean_step_latency_ms": 24.950117942853467,
+            "peak_vram_mb": 25.2958984375
+          },
+          "46": {
+            "intercept_rate_pct": 51.58430099487305,
+            "leaker_rate_pct": 1.6304347515106201,
+            "duplicate_ownership_rate_pct": 0.0,
+            "false_target_waste_pct": 14.299581527709961,
+            "friendly_collision_count": 0.0,
+            "mean_delta_v_per_intercept": 1490.7359619140625,
+            "delta_v_total": 38779.80078125,
+            "mean_step_latency_ms": 24.985728178564518,
+            "peak_vram_mb": 25.2958984375
+          }
+        },
+        "summary": {
+          "intercept_rate_pct": {
+            "mean": 52.19694519042969,
+            "std": 2.2262953371808867,
+            "ci95": 1.9514339030754928
+          },
+          "leaker_rate_pct": {
+            "mean": 3.769450283050537,
+            "std": 4.760715044984182,
+            "ci95": 4.172950725139516
+          },
+          "duplicate_ownership_rate_pct": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "false_target_waste_pct": {
+            "mean": 13.804510116577148,
+            "std": 3.457282631914619,
+            "ci95": 3.0304418410970646
+          },
+          "friendly_collision_count": {
+            "mean": 0.0,
+            "std": 0.0,
+            "ci95": 0.0
+          },
+          "mean_delta_v_per_intercept": {
+            "mean": 1448.390576171875,
+            "std": 54.41503098664542,
+            "ci95": 47.696877647287465
+          },
+          "delta_v_total": {
+            "mean": 38350.4390625,
+            "std": 328.1819214322944,
+            "ci95": 287.6641374411693
+          },
+          "mean_step_latency_ms": {
+            "mean": 24.961296523570127,
+            "std": 0.07188812491160908,
+            "ci95": 0.06301271975832275
+          },
+          "peak_vram_mb": {
+            "mean": 25.2958984375,
+            "std": 0.0,
+            "ci95": 0.0
+          }
+        },
+        "intercept_rate_pct": {
+          "mean": 52.19694519042969,
+          "std": 2.2262953371808867,
+          "ci95": 1.9514339030754928
+        },
+        "leaker_rate_pct": {
+          "mean": 3.769450283050537,
+          "std": 4.760715044984182,
+          "ci95": 4.172950725139516
+        },
+        "duplicate_ownership_rate_pct": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "false_target_waste_pct": {
+          "mean": 13.804510116577148,
+          "std": 3.457282631914619,
+          "ci95": 3.0304418410970646
+        },
+        "friendly_collision_count": {
+          "mean": 0.0,
+          "std": 0.0,
+          "ci95": 0.0
+        },
+        "mean_delta_v_per_intercept": {
+          "mean": 1448.390576171875,
+          "std": 54.41503098664542,
+          "ci95": 47.696877647287465
+        },
+        "delta_v_total": {
+          "mean": 38350.4390625,
+          "std": 328.1819214322944,
+          "ci95": 287.6641374411693
+        },
+        "mean_step_latency_ms": {
+          "mean": 24.961296523570127,
+          "std": 0.07188812491160908,
+          "ci95": 0.06301271975832275
+        },
+        "peak_vram_mb": {
+          "mean": 25.2958984375,
+          "std": 0.0,
+          "ci95": 0.0
+        }
+      }
+    }
+  }
+}
