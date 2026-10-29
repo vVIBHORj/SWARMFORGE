@@ -1,15 +1,22 @@
 /**
  * InstancedSwarmRenderer.js
  * High-performance Three.js InstancedMesh renderer for up to 1,000 drones and 1,000 missiles
- * with procedurally merged composite aerospace geometries and zero per-frame heap allocations.
+ * with procedurally merged composite aerospace geometries, realistic lighting, dynamic attitude,
+ * speed-scaled plumes, dynamic point-light burst FX, and zero per-frame heap allocations.
  *
  * Spec Section 9.1 & Step 15 Upgrades:
- * - Interceptors: Merged Delta-Wing composite UAV with ogive nose, swept wings, canted twin V-tails, and thruster nozzle.
- * - Scouts: Merged High-Aspect-Ratio surveillance airframe with twin boom tails and dorsal rotodome radar dish.
- * - Missiles: Merged Hypersonic threat with sharp ogive nose, cylindrical booster, cruciform strakes, control fins, and exhaust plume.
- * - Decoys: Merged EW decoy airframe with flare pods and wingtip corner reflectors in high-visibility amber/gold.
- * - Orientation: Dynamic 3D velocity alignment with lateral turn banking and speed-scaled engine exhaust glow.
- * - Intercept & Impact FX: Multi-component expanding shockwave rings and bright energy burst flashes.
+ * - Interceptors: Sleek Delta-Wing composite UAV with ogive nose, cockpit canopy, swept wings,
+ *   wingtip navigation pods (red/port, green/starboard), canted twin V-tails, and glowing thruster nozzle.
+ * - Scouts: High-Aspect-Ratio surveillance airframe with twin boom tails, dorsal rotodome radar dish,
+ *   and surveillance sensor pods.
+ * - Missiles: Hypersonic threat with sharp ogive nose, cylindrical booster, cruciform strakes,
+ *   control fins, and rear rocket motor plume with axial roll spin.
+ * - Decoys: Electronic warfare decoy airframe with flare pods and wingtip corner reflectors.
+ * - Dynamic Attitude: 3D velocity vector alignment with climb/dive pitch, lateral roll banking,
+ *   and missile axial roll.
+ * - Visual Scaling: Configurable 1x to 20x visual scale factor for tactical airspace clarity.
+ * - Dynamic Burst FX: Multi-component expanding shockwave rings, fireball core, and pooled point-light flashes.
+ * - Ground Blob Shadows: Instanced soft contact shadows beneath low-altitude aircraft.
  */
 
 import * as THREE from 'three';
@@ -32,12 +39,29 @@ function createInterceptorGeometry() {
   nose.translate(0, 0, 13.0);
   parts.push(nose);
 
-  // 3. Swept Delta Wings
+  // 3. Cockpit canopy ridge
+  const canopy = new THREE.SphereGeometry(1.5, 8, 6);
+  canopy.scale(0.8, 1.2, 2.2);
+  canopy.translate(0, 1.4, 4.0);
+  parts.push(canopy);
+
+  // 4. Swept Delta Wings
   const wing = new THREE.BoxGeometry(28.0, 0.6, 11.0);
   wing.translate(0, -0.2, -1.0);
   parts.push(wing);
 
-  // 4. Twin canted V-tail vertical stabilizers
+  // 5. Wingtip navigation light pods
+  const leftNavPod = new THREE.CylinderGeometry(0.5, 0.5, 2.5, 6);
+  leftNavPod.rotateX(Math.PI / 2);
+  leftNavPod.translate(-14.0, -0.2, -1.0);
+  parts.push(leftNavPod);
+
+  const rightNavPod = new THREE.CylinderGeometry(0.5, 0.5, 2.5, 6);
+  rightNavPod.rotateX(Math.PI / 2);
+  rightNavPod.translate(14.0, -0.2, -1.0);
+  parts.push(rightNavPod);
+
+  // 6. Twin canted V-tail vertical stabilizers
   const leftTail = new THREE.BoxGeometry(0.4, 5.5, 4.5);
   leftTail.rotateZ(Math.PI * 0.12);
   leftTail.translate(-3.2, 2.5, -7.5);
@@ -48,11 +72,17 @@ function createInterceptorGeometry() {
   rightTail.translate(3.2, 2.5, -7.5);
   parts.push(rightTail);
 
-  // 5. Rear glowing thruster nozzle
+  // 7. Rear glowing thruster nozzle
   const nozzle = new THREE.CylinderGeometry(1.8, 1.3, 3.0, 8);
   nozzle.rotateX(Math.PI / 2);
   nozzle.translate(0, 0, -10.5);
   parts.push(nozzle);
+
+  // 8. Thruster exhaust plume cone
+  const plume = new THREE.ConeGeometry(1.2, 4.5, 8);
+  plume.rotateX(-Math.PI / 2);
+  plume.translate(0, 0, -13.5);
+  parts.push(plume);
 
   return BufferGeometryUtils.mergeGeometries(parts, false);
 }
@@ -106,7 +136,7 @@ function createScoutGeometry() {
   parts.push(pylon);
 
   const rotodome = new THREE.CylinderGeometry(7.5, 7.5, 2.0, 16);
-  rotodome.rotateX(0.18); // Tactical forward tilt
+  rotodome.rotateX(0.18); // Forward tactical tilt
   rotodome.translate(0, 6.0, -2.0);
   parts.push(rotodome);
 
@@ -148,10 +178,15 @@ function createMissileGeometry() {
   vFin.translate(0, 0, -8.5);
   parts.push(vFin);
 
-  // 5. Afterburner exhaust plume cone
-  const plume = new THREE.ConeGeometry(1.5, 5.0, 8);
+  // 5. Rocket motor nozzle and exhaust plume
+  const nozzle = new THREE.CylinderGeometry(1.5, 1.2, 2.0, 8);
+  nozzle.rotateX(Math.PI / 2);
+  nozzle.translate(0, 0, -10.5);
+  parts.push(nozzle);
+
+  const plume = new THREE.ConeGeometry(1.5, 7.0, 8);
   plume.rotateX(-Math.PI / 2);
-  plume.translate(0, 0, -12.5);
+  plume.translate(0, 0, -14.5);
   parts.push(plume);
 
   return BufferGeometryUtils.mergeGeometries(parts, false);
@@ -193,6 +228,12 @@ function createDecoyGeometry() {
   vFin.translate(0, 0, -6.0);
   parts.push(vFin);
 
+  // 5. Decoy motor plume
+  const plume = new THREE.ConeGeometry(1.2, 5.0, 6);
+  plume.rotateX(-Math.PI / 2);
+  plume.translate(0, 0, -9.5);
+  parts.push(plume);
+
   return BufferGeometryUtils.mergeGeometries(parts, false);
 }
 
@@ -209,10 +250,14 @@ export class InstancedSwarmRenderer {
     this.maxMissiles = maxMissiles;
     this.maxHvas = maxHvas;
 
+    // Visual scale factor (1x = true scale, 8x = tactical high-vis)
+    this.visualScale = 6.0;
+
     // Zero-allocation reusable dummy and math vectors
     this.dummy = new THREE.Object3D();
     this.forwardDir = new THREE.Vector3(0, 0, 1);
     this.velDir = new THREE.Vector3();
+    this.upDir = new THREE.Vector3(0, 1, 0);
 
     // Previous velocities for banking roll computation
     this.prevDroneVel = new Float32Array(maxDrones * 3);
@@ -224,14 +269,14 @@ export class InstancedSwarmRenderer {
     this.colorThreat = new THREE.Color(0xff3344);      // Crimson Red
     this.colorDecoy = new THREE.Color(0xffcc00);       // High-Vis Gold
 
-    // 1. Interceptors InstancedMesh (Composite Delta-Wing)
+    // 1. Interceptors InstancedMesh (PBR Delta-Wing)
     const interceptorGeom = createInterceptorGeometry();
     const interceptorMat = new THREE.MeshStandardMaterial({
       color: 0x00f0ff,
-      roughness: 0.25,
+      roughness: 0.28,
       metalness: 0.85,
-      emissive: 0x00a3cc,
-      emissiveIntensity: 0.35,
+      emissive: 0x007799,
+      emissiveIntensity: 0.4,
     });
     this.interceptorsMesh = new THREE.InstancedMesh(interceptorGeom, interceptorMat, this.maxDrones);
     this.interceptorsMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -242,14 +287,14 @@ export class InstancedSwarmRenderer {
     // Backward-compatible alias
     this.dronesMesh = this.interceptorsMesh;
 
-    // 2. Scouts InstancedMesh (Composite AWACS Airframe)
+    // 2. Scouts InstancedMesh (PBR AWACS Airframe)
     const scoutGeom = createScoutGeometry();
     const scoutMat = new THREE.MeshStandardMaterial({
       color: 0x10b981,
-      roughness: 0.3,
+      roughness: 0.32,
       metalness: 0.8,
       emissive: 0x047857,
-      emissiveIntensity: 0.35,
+      emissiveIntensity: 0.4,
     });
     this.scoutsMesh = new THREE.InstancedMesh(scoutGeom, scoutMat, this.maxDrones);
     this.scoutsMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -257,14 +302,14 @@ export class InstancedSwarmRenderer {
     this.scoutsMesh.count = 0;
     this.scene.add(this.scoutsMesh);
 
-    // 3. Hypersonic Missiles InstancedMesh (Composite Cruise/Booster)
+    // 3. Hypersonic Missiles InstancedMesh (PBR Threat Airframe)
     const missileGeom = createMissileGeometry();
     const missileMat = new THREE.MeshStandardMaterial({
       color: 0xff3344,
-      roughness: 0.2,
-      metalness: 0.9,
-      emissive: 0x990011,
-      emissiveIntensity: 0.45,
+      roughness: 0.22,
+      metalness: 0.88,
+      emissive: 0xaa1122,
+      emissiveIntensity: 0.5,
     });
     this.missilesMesh = new THREE.InstancedMesh(missileGeom, missileMat, this.maxMissiles);
     this.missilesMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -272,14 +317,14 @@ export class InstancedSwarmRenderer {
     this.missilesMesh.count = 0;
     this.scene.add(this.missilesMesh);
 
-    // 4. Decoys InstancedMesh (Composite EW Decoy Airframe)
+    // 4. Decoys InstancedMesh (PBR EW Airframe)
     const decoyGeom = createDecoyGeometry();
     const decoyMat = new THREE.MeshStandardMaterial({
       color: 0xffcc00,
       roughness: 0.25,
       metalness: 0.85,
       emissive: 0xb38600,
-      emissiveIntensity: 0.45,
+      emissiveIntensity: 0.5,
     });
     this.decoysMesh = new THREE.InstancedMesh(decoyGeom, decoyMat, this.maxMissiles);
     this.decoysMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
@@ -287,16 +332,30 @@ export class InstancedSwarmRenderer {
     this.decoysMesh.count = 0;
     this.scene.add(this.decoysMesh);
 
+    // 5. Contact / Blob Shadows on Ground for low altitude aircraft
+    const shadowGeom = new THREE.CircleGeometry(16.0, 16);
+    shadowGeom.rotateX(-Math.PI / 2);
+    const shadowMat = new THREE.MeshBasicMaterial({
+      color: 0x000000,
+      transparent: true,
+      opacity: 0.35,
+      depthWrite: false,
+    });
+    this.shadowsMesh = new THREE.InstancedMesh(shadowGeom, shadowMat, this.maxDrones);
+    this.shadowsMesh.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+    this.shadowsMesh.count = 0;
+    this.scene.add(this.shadowsMesh);
+
     // Track missile statuses for burst detection
     this.prevMissileStatus = new Float32Array(this.maxMissiles);
     this.prevMissileStatus.fill(-1.0);
 
-    // 5. Multi-Component Intercept & Impact Burst Markers Pool
+    // 6. Multi-Component Intercept & Impact Burst Markers Pool
     this.maxBursts = 48;
     this.bursts = [];
 
-    const flashGeom = new THREE.SphereGeometry(14, 12, 8);
-    const ringGeom = new THREE.RingGeometry(6, 14, 24);
+    const flashGeom = new THREE.SphereGeometry(16, 12, 8);
+    const ringGeom = new THREE.RingGeometry(8, 18, 28);
     ringGeom.rotateX(Math.PI / 2); // Lay horizontal in XZ plane
 
     for (let b = 0; b < this.maxBursts; b++) {
@@ -321,55 +380,31 @@ export class InstancedSwarmRenderer {
       g.add(ring);
       g.visible = false;
       this.scene.add(g);
-      this.bursts.push({ group: g, flash, ring, life: 0.0, maxLife: 0.45, isImpact: false });
+      this.bursts.push({ group: g, flash, ring, life: 0.0, maxLife: 0.5, isImpact: false });
     }
 
-    // 6. Defended HVA Markers & Hemispheric Domes
-    this.hvaGroup = new THREE.Group();
-    this.scene.add(this.hvaGroup);
-    this.hvaObjects = [];
-
-    const baseGeom = new THREE.CylinderGeometry(70, 90, 16, 20);
-    const baseMat = new THREE.MeshStandardMaterial({
-      color: 0x0f172a,
-      emissive: 0x0284c7,
-      emissiveIntensity: 0.4,
-      metalness: 0.9,
-      roughness: 0.3,
-    });
-
-    const spireGeom = new THREE.ConeGeometry(24, 70, 8);
-    spireGeom.translate(0, 35, 0);
-    const spireMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
-
-    const domeGeom = new THREE.SphereGeometry(800, 24, 12, 0, Math.PI * 2, 0, Math.PI / 2);
-    const domeMat = new THREE.MeshBasicMaterial({
-      color: 0x00f0ff,
-      transparent: true,
-      opacity: 0.12,
-      wireframe: true,
-    });
-
-    for (let p = 0; p < this.maxHvas; p++) {
-      const g = new THREE.Group();
-      const base = new THREE.Mesh(baseGeom, baseMat);
-      const spire = new THREE.Mesh(spireGeom, spireMat);
-      const dome = new THREE.Mesh(domeGeom, domeMat);
-      g.add(base);
-      g.add(spire);
-      g.add(dome);
-      g.visible = false;
-      this.hvaGroup.add(g);
-      this.hvaObjects.push(g);
+    // 7. Dynamic Point Light Pool for Explosions (6 lights)
+    this.maxLights = 6;
+    this.pointLights = [];
+    for (let l = 0; l < this.maxLights; l++) {
+      const pLight = new THREE.PointLight(0x00f0ff, 0, 1800, 1.5);
+      pLight.visible = false;
+      this.scene.add(pLight);
+      this.pointLights.push({ light: pLight, life: 0.0, maxLife: 0.35 });
     }
 
     this.showDomes = true;
   }
 
+  setVisualScale(scale) {
+    this.visualScale = Math.max(1.0, Math.min(25.0, scale));
+  }
+
   /**
-   * Spawn expanding shockwave ring and bright energy flash when an intercept or HVA impact occurs.
+   * Spawn expanding shockwave ring, bright energy flash, and dynamic point light.
    */
   triggerBurst(x, y, z, isImpact = false) {
+    // 1. Visual burst group
     for (let i = 0; i < this.maxBursts; i++) {
       const b = this.bursts[i];
       if (b.life <= 0) {
@@ -385,24 +420,39 @@ export class InstancedSwarmRenderer {
         break;
       }
     }
+
+    // 2. Point light illumination
+    for (let l = 0; l < this.maxLights; l++) {
+      const pl = this.pointLights[l];
+      if (pl.life <= 0) {
+        pl.light.position.set(x, Math.max(y + 20, 30), z);
+        pl.light.color.setHex(isImpact ? 0xff4411 : 0x00f0ff);
+        pl.light.intensity = isImpact ? 16000 : 12000;
+        pl.light.visible = true;
+        pl.life = pl.maxLife;
+        break;
+      }
+    }
   }
 
   /**
    * Update all entity matrices and colors from decoded telemetry frame.
    * @param {Object} frame Decoded telemetry frame
    * @param {number} deltaSeconds Time elapsed since last render
+   * @param {number} simTime Current simulation time
    */
-  update(frame, deltaSeconds = 0.016) {
+  update(frame, deltaSeconds = 0.016, simTime = 0.0) {
     if (!frame) return;
 
-    const { header, hvas, drones, missiles } = frame;
+    const { drones, missiles } = frame;
     const N = Math.min(drones.length, this.maxDrones);
     const M = Math.min(missiles.length, this.maxMissiles);
-    const P = Math.min(hvas.length, this.maxHvas);
+    const scale = this.visualScale;
 
     // 1. Update Drones (Interceptors and Scouts)
     this.interceptorsMesh.count = N;
     this.scoutsMesh.count = N;
+    this.shadowsMesh.count = N;
 
     for (let i = 0; i < N; i++) {
       const d = drones[i];
@@ -415,11 +465,16 @@ export class InstancedSwarmRenderer {
         this.dummy.updateMatrix();
         this.interceptorsMesh.setMatrixAt(i, this.dummy.matrix);
         this.scoutsMesh.setMatrixAt(i, this.dummy.matrix);
+        this.shadowsMesh.setMatrixAt(i, this.dummy.matrix);
         continue;
       }
 
-      this.dummy.position.set(d.x, d.z, -d.y);
-      this.dummy.scale.set(1, 1, 1);
+      const posX = d.x;
+      const posY = d.z;
+      const posZ = -d.y;
+
+      this.dummy.position.set(posX, posY, posZ);
+      this.dummy.scale.set(scale, scale, scale);
 
       // Orientation along 3D velocity vector (vx, vz, -vy) with lateral banking
       const vx = d.vx;
@@ -438,7 +493,7 @@ export class InstancedSwarmRenderer {
         const pSpd = Math.hypot(pVx, pVz);
         if (pSpd > 0.5) {
           const crossY = (vx * pVz - vz * pVx) / (spd * pSpd + 1e-4);
-          const bankAngle = Math.max(-0.45, Math.min(0.45, crossY * 18.0));
+          const bankAngle = Math.max(-0.55, Math.min(0.55, crossY * 20.0));
           this.dummy.rotateZ(bankAngle);
         }
         this.prevDroneVel[prevIdx] = vx;
@@ -467,11 +522,26 @@ export class InstancedSwarmRenderer {
         this.dummy.updateMatrix();
         this.scoutsMesh.setMatrixAt(i, this.dummy.matrix);
       }
+
+      // Contact blob shadow on ground (y = 0.5)
+      if (posY < 900) {
+        const shadowScale = Math.max(0.2, (1.0 - posY / 900.0) * scale * 1.5);
+        this.dummy.position.set(posX, 0.5, posZ);
+        this.dummy.scale.set(shadowScale, 1.0, shadowScale);
+        this.dummy.quaternion.identity();
+        this.dummy.updateMatrix();
+        this.shadowsMesh.setMatrixAt(i, this.dummy.matrix);
+      } else {
+        this.dummy.scale.set(0, 0, 0);
+        this.dummy.updateMatrix();
+        this.shadowsMesh.setMatrixAt(i, this.dummy.matrix);
+      }
     }
     this.interceptorsMesh.instanceMatrix.needsUpdate = true;
     if (this.interceptorsMesh.instanceColor) this.interceptorsMesh.instanceColor.needsUpdate = true;
     this.scoutsMesh.instanceMatrix.needsUpdate = true;
     if (this.scoutsMesh.instanceColor) this.scoutsMesh.instanceColor.needsUpdate = true;
+    this.shadowsMesh.instanceMatrix.needsUpdate = true;
 
     // 2. Update Missiles (Hypersonic Threats and EW Decoys)
     this.missilesMesh.count = M;
@@ -501,7 +571,7 @@ export class InstancedSwarmRenderer {
       }
 
       this.dummy.position.set(m.x, m.z, -m.y);
-      this.dummy.scale.set(1, 1, 1);
+      this.dummy.scale.set(scale, scale, scale);
 
       const vx = m.vx;
       const vy = m.vz;
@@ -512,13 +582,18 @@ export class InstancedSwarmRenderer {
         this.velDir.set(vx / spd, vy / spd, vz / spd);
         this.dummy.quaternion.setFromUnitVectors(this.forwardDir, this.velDir);
 
+        // Continuous axial roll spin for hypersonic threat missile
+        const rollAngle = (simTime * 8.0 + j * 0.7) % (Math.PI * 2);
+        this.dummy.rotateZ(rollAngle);
+
+        // Banking into lateral weave turns
         const prevIdx = j * 3;
         const pVx = this.prevMissileVel[prevIdx];
         const pVz = this.prevMissileVel[prevIdx + 2];
         const pSpd = Math.hypot(pVx, pVz);
         if (pSpd > 0.5) {
           const crossY = (vx * pVz - vz * pVx) / (spd * pSpd + 1e-4);
-          const bankAngle = Math.max(-0.55, Math.min(0.55, crossY * 20.0));
+          const bankAngle = Math.max(-0.65, Math.min(0.65, crossY * 22.0));
           this.dummy.rotateZ(bankAngle);
         }
         this.prevMissileVel[prevIdx] = vx;
@@ -551,20 +626,7 @@ export class InstancedSwarmRenderer {
     this.decoysMesh.instanceMatrix.needsUpdate = true;
     if (this.decoysMesh.instanceColor) this.decoysMesh.instanceColor.needsUpdate = true;
 
-    // 3. Update Defended HVAs
-    for (let p = 0; p < this.maxHvas; p++) {
-      const g = this.hvaObjects[p];
-      if (p < P) {
-        const hva = hvas[p];
-        g.position.set(hva.x, 0, -hva.y);
-        g.visible = true;
-        g.children[2].visible = this.showDomes;
-      } else {
-        g.visible = false;
-      }
-    }
-
-    // 4. Update Expanding Shockwave Rings & Particle Bursts
+    // 3. Update Expanding Shockwave Rings & Particle Bursts
     for (let b = 0; b < this.maxBursts; b++) {
       const burst = this.bursts[b];
       if (burst.life > 0) {
@@ -572,17 +634,30 @@ export class InstancedSwarmRenderer {
         const progress = Math.max(0.0, Math.min(1.0, 1.0 - (burst.life / burst.maxLife)));
 
         // Flash sphere expands and fades
-        const sf = 1.0 + progress * 4.0;
+        const sf = 1.0 + progress * 5.0;
         burst.flash.scale.set(sf, sf, sf);
-        burst.flash.material.opacity = Math.max(0.0, 1.0 - progress * 1.2);
+        burst.flash.material.opacity = Math.max(0.0, 1.0 - progress * 1.3);
 
         // Shockwave ring expands wide across the ground plane
-        const sr = 1.0 + progress * 8.5;
+        const sr = 1.0 + progress * 10.0;
         burst.ring.scale.set(sr, sr, sr);
         burst.ring.material.opacity = Math.max(0.0, 1.0 - progress);
 
         if (burst.life <= 0) {
           burst.group.visible = false;
+        }
+      }
+    }
+
+    // 4. Update Dynamic Point Light Pulses
+    for (let l = 0; l < this.maxLights; l++) {
+      const pl = this.pointLights[l];
+      if (pl.life > 0) {
+        pl.life -= deltaSeconds;
+        const p = Math.max(0.0, pl.life / pl.maxLife);
+        pl.light.intensity = (pl.isImpact ? 16000 : 12000) * p * p;
+        if (pl.life <= 0) {
+          pl.light.visible = false;
         }
       }
     }

@@ -17,7 +17,7 @@
   <style>
     :root {
       --bg-space: #060a12;
-      --panel-bg: rgba(10, 16, 28, 0.78);
+      --panel-bg: rgba(10, 16, 28, 0.82);
       --panel-border: rgba(14, 165, 233, 0.28);
       --panel-glow: rgba(0, 240, 255, 0.12);
       --accent-cyan: #00f0ff;
@@ -59,6 +59,82 @@
       z-index: 1;
     }
 
+    /* Loading Screen Overlay */
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #040812;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loading-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .loader-spinner {
+      width: 48px;
+      height: 48px;
+      border: 3px solid rgba(0, 240, 255, 0.2);
+      border-top-color: var(--accent-cyan);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .loader-title {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      color: var(--accent-cyan);
+      text-transform: uppercase;
+    }
+
+    .loader-sub {
+      font-size: 11px;
+      color: var(--text-dim);
+      letter-spacing: 0.05em;
+    }
+
+    /* Speed Toast Floating Notification */
+    .speed-toast {
+      position: absolute;
+      bottom: 74px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: rgba(10, 16, 28, 0.92);
+      border: 1px solid var(--accent-cyan);
+      color: var(--accent-cyan);
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.35);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      z-index: 100;
+    }
+
+    .speed-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     /* UI Glass Panels */
     .glass-panel {
       position: absolute;
@@ -68,9 +144,19 @@
       -webkit-backdrop-filter: blur(14px);
       border: 1px solid var(--panel-border);
       border-radius: 6px;
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.45), 0 0 16px 0 var(--panel-glow);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), 0 0 16px 0 var(--panel-glow);
       padding: 14px 16px;
       pointer-events: auto;
+      max-height: calc(100vh - 110px);
+      overflow-y: auto;
+    }
+
+    .glass-panel::-webkit-scrollbar {
+      width: 4px;
+    }
+    .glass-panel::-webkit-scrollbar-thumb {
+      background: rgba(14, 165, 233, 0.3);
+      border-radius: 2px;
     }
 
     .panel-header {
@@ -277,7 +363,7 @@
       align-items: center;
       gap: 8px;
       padding: 8px 14px;
-      max-width: 96vw;
+      max-width: 98vw;
       overflow-x: auto;
       white-space: nowrap;
     }
@@ -310,7 +396,7 @@
       box-shadow: 0 0 8px rgba(0, 240, 255, 0.25);
     }
 
-    .btn-preset, .btn-speed-preset, .btn-cam {
+    .btn-preset, .btn-speed-preset, .btn-cam, .btn-env {
       padding: 4px 7px;
       font-size: 10px;
       color: var(--text-dim);
@@ -325,7 +411,7 @@
     }
 
     .speed-slider-wrap input[type="range"] {
-      width: 75px;
+      width: 85px;
       accent-color: var(--accent-cyan);
       cursor: pointer;
     }
@@ -355,6 +441,16 @@
   <!-- Fullscreen WebGL Canvas -->
   <canvas id="tactical-canvas"></canvas>
 
+  <!-- Loading Screen Overlay -->
+  <div id="loading-screen" class="loading-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-title">SwarmForge Tactical Airspace</div>
+    <div class="loader-sub">Connecting to WebSocket Telemetry (ws://localhost:8765/ws)...</div>
+  </div>
+
+  <!-- Speed Toast Floating Notification -->
+  <div id="speed-toast" class="speed-toast">1.00x SPEED</div>
+
   <!-- Top-Left: Telemetry HUD -->
   <div id="hud-telemetry" class="glass-panel">
     <div class="panel-header">
@@ -374,6 +470,10 @@
       <span class="hud-val"><span id="tel-fps-client">60</span> / <span id="tel-fps-server" class="cyan">60</span></span>
     </div>
     <div class="hud-row">
+      <span class="hud-label">Sim Rate</span>
+      <span id="tel-sim-rate" class="hud-val cyan">1.00x (20.0 sim/s)</span>
+    </div>
+    <div class="hud-row">
       <span class="hud-label">Sim Time (Step)</span>
       <span class="hud-val"><span id="tel-time">0.00</span>s (<span id="tel-step">0</span>)</span>
     </div>
@@ -389,8 +489,8 @@
       <span id="tel-missiles" class="hud-val crimson">30</span>
     </div>
     <div class="hud-row">
-      <span class="hud-label">High-Value Assets (P)</span>
-      <span id="tel-hvas" class="hud-val emerald">2 Ground HVAs</span>
+      <span class="hud-label">Defended HVAs (P)</span>
+      <span id="tel-hvas" class="hud-val emerald">2 Facilities</span>
     </div>
 
     <div style="height: 1px; background: rgba(14, 165, 233, 0.15); margin: 8px 0;"></div>
@@ -479,12 +579,34 @@
     <div style="height: 1px; background: rgba(14, 165, 233, 0.15); margin: 12px 0;"></div>
 
     <!-- Sensor Noise -->
-    <div class="control-group" style="margin-bottom: 0;">
+    <div class="control-group">
       <div class="control-label">
         <span>Sensor Noise &sigma;<sub>obs</sub> (m)</span>
         <span id="val-noise" class="hud-val cyan">15m</span>
       </div>
       <input type="range" id="input-noise" min="0" max="50" value="15" step="1">
+    </div>
+
+    <div style="height: 1px; background: rgba(14, 165, 233, 0.15); margin: 12px 0;"></div>
+
+    <!-- Graphics & Visual Realism Controls -->
+    <div class="control-group">
+      <div class="control-label">
+        <span>Visual Mesh Scale</span>
+        <span id="val-visual-scale" class="hud-val cyan">6x</span>
+      </div>
+      <input type="range" id="input-visual-scale" min="1" max="20" value="6" step="1">
+    </div>
+
+    <div class="control-group">
+      <div class="control-label">
+        <span>Atmospheric Lighting</span>
+      </div>
+      <div style="display: flex; gap: 6px;">
+        <button class="btn-ctrl btn-env active" data-env="night" style="flex: 1; justify-content: center;">Night</button>
+        <button class="btn-ctrl btn-env" data-env="dusk" style="flex: 1; justify-content: center;">Dusk</button>
+        <button class="btn-ctrl btn-env" data-env="day" style="flex: 1; justify-content: center;">Day</button>
+      </div>
     </div>
   </div>
 
@@ -499,22 +621,29 @@
       <span>⏭</span>
       <span>Step</span>
     </button>
-    <button id="btn-reset" class="btn-ctrl">🔄 Reset</button>
+    <button id="btn-reset" class="btn-ctrl" title="Reset Episode">🔄 Reset</button>
 
     <div class="divider"></div>
 
     <!-- Time Dilation / Speed Controls -->
     <span class="hud-label" style="margin-right: 2px;">Speed:</span>
-    <button class="btn-ctrl btn-speed-preset" data-speed="0.10">0.1x</button>
-    <button class="btn-ctrl btn-speed-preset" data-speed="0.25">0.25x</button>
-    <button class="btn-ctrl btn-speed-preset" data-speed="0.50">0.5x</button>
-    <button class="btn-ctrl btn-speed-preset active" data-speed="1.00">1.0x</button>
-    <button class="btn-ctrl btn-speed-preset" data-speed="2.00">2.0x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="0.10" title="0.1x Speed">0.1x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="0.25" title="0.25x Speed">0.25x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="0.50" title="0.5x Speed">0.5x</button>
+    <button class="btn-ctrl btn-speed-preset active" data-speed="1.00" title="1.0x Speed (0)">1.0x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="2.00" title="2.0x Speed">2.0x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="4.00" title="4.0x Speed">4.0x</button>
+    <button class="btn-ctrl btn-speed-preset" data-speed="8.00" title="8.0x Speed">8.0x</button>
 
     <div class="speed-slider-wrap">
-      <input type="range" id="input-speed" min="0.05" max="4.0" step="0.05" value="1.0">
+      <input type="range" id="input-speed" min="0.05" max="8.0" step="0.05" value="1.0" title="Continuous Speed Slider [ or ]">
       <span id="val-speed" class="hud-val cyan" style="font-size: 10px;">1.00x</span>
     </div>
+
+    <label class="checkbox-label" title="Auto drop speed to 0.25x on intercept for 1.5s">
+      <input type="checkbox" id="chk-auto-slowmo">
+      <span>Auto Slow-Mo</span>
+    </label>
 
     <div class="divider"></div>
 
@@ -541,6 +670,7 @@
       <input type="checkbox" id="chk-trails" checked>
       <span>Trails</span>
     </label>
+    <button class="btn-ctrl" id="btn-trail-mode" style="padding: 3px 6px; font-size: 10px;" title="Toggle Lines / Soft Smoke">Lines</button>
     <label class="checkbox-label">
       <input type="checkbox" id="chk-locks" checked>
       <span>Lock-Lines</span>
@@ -548,6 +678,10 @@
     <label class="checkbox-label">
       <input type="checkbox" id="chk-domes" checked>
       <span>HVA Domes</span>
+    </label>
+    <label class="checkbox-label">
+      <input type="checkbox" id="chk-bloom" checked>
+      <span>Bloom</span>
     </label>
   </div>
 

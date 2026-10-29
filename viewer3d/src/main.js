@@ -2,23 +2,36 @@
  * main.js
  * Main entrypoint for SwarmForge Three.js 3D Tactical Viewer.
  *
- * Spec Section 9.1 & 9.2 & Step 15:
+ * Spec Section 9.1 & 9.2 & Step 15 Upgrades:
  * - High-performance WebGL renderer with high-performance power preference.
- * - Zero-copy Float32Array binary frame decoder.
- * - 60 FPS sub-frame kinematic interpolation during 0.1x / slow-motion playback.
- * - Camera presets (Overview, Action Cam, Follow Interceptor, Top-Down Radar View).
- * - Keyboard hotkeys (Space to Pause, S to Step, 1-4 for camera views).
- * - Instanced swarm meshes, ring-buffer trails, dynamic lock lines, and Sandbox HUD.
+ * - Zero-copy Float32Array binary frame decoder conforming to frozen binary protocol.
+ * - Client-side snapshot buffer & continuous interpolation clock (PlaybackController).
+ * - Multi-facility architectural HVA compounds with window textures, beacons, and damage states (HvaBuildings).
+ * - PBR composite drones & hypersonic missiles with 3D banking, roll spin, and point-light burst FX (InstancedSwarmRenderer).
+ * - Pre-allocated ring-buffer trajectory trails & dynamic lock lines with soft rocket smoke toggle (TrailAndLockRenderer).
+ * - Atmospheric lighting environments (Day / Dusk / Night) and textured terrain.
+ * - Post-processing UnrealBloomPass neon glow on engines, lasers, and bursts.
+ * - Interactive Speed controls (0.1x to 8x, continuous slider, hotkeys [, ], 0, toast notifications).
+ * - Auto-fallback Standalone Demo Mode (MockTelemetry) with URL override (?demo=1).
  */
 
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+import { OutputPass } from 'three/addons/postprocessing/OutputPass.js';
+
 import { InstancedSwarmRenderer } from './InstancedSwarmRenderer.js';
 import { TrailAndLockRenderer } from './TrailAndLockRenderer.js';
 import { SandboxHUD } from './SandboxHUD.js';
+import { PlaybackController } from './PlaybackController.js';
+import { HvaBuildings } from './HvaBuildings.js';
+import { MockTelemetry } from './MockTelemetry.js';
 
 /**
  * Pure zero-copy decoder parsing binary telemetry frame into structured JavaScript object.
+ * Layout: 16-float header, 4*P HVA floats, 10*(N+M) entity floats.
  *
  * @param {ArrayBuffer} arrayBuffer Raw bytes received from WebSocket
  * @returns {Object|null} Decoded frame object
@@ -126,7 +139,7 @@ function initApp() {
     45,
     window.innerWidth / window.innerHeight,
     10,
-    80000
+    90000
   );
   camera.position.set(0, 5200, 10500);
 
@@ -143,8 +156,110 @@ function initApp() {
   controls.dampingFactor = 0.05;
   controls.maxPolarAngle = Math.PI / 2 - 0.02; // Keep camera above ground plane
   controls.minDistance = 50;
-  controls.maxDistance = 55000;
+  controls.maxDistance = 60000;
   controls.target.set(0, 400, 0);
+
+  // 2. Post-Processing Bloom Setup
+  let bloomEnabled = true;
+  const composer = new EffectComposer(renderer);
+  const renderPass = new RenderPass(scene, camera);
+  composer.addPass(renderPass);
+
+  const bloomPass = new UnrealBloomPass(
+    new THREE.Vector2(window.innerWidth, window.innerHeight),
+    0.7, // intensity
+    0.35, // radius
+    0.85  // threshold
+  );
+  composer.addPass(bloomPass);
+
+  const outputPass = new OutputPass();
+  composer.addPass(outputPass);
+
+  // 3. Lighting & Environments (Night, Dusk, Day)
+  const ambientLight = new THREE.AmbientLight(0x1e293b, 0.5);
+  scene.add(ambientLight);
+
+  const dirLight = new THREE.DirectionalLight(0x38bdf8, 0.85);
+  dirLight.position.set(4000, 7500, 3000);
+  scene.add(dirLight);
+
+  function setEnvironment(env) {
+    if (env === 'day') {
+      scene.background.setHex(0x78a5c2);
+      scene.fog.color.setHex(0x8cb6d1);
+      scene.fog.density = 0.000025;
+      ambientLight.color.setHex(0xcedeee);
+      ambientLight.intensity = 1.2;
+      dirLight.color.setHex(0xfffaed);
+      dirLight.intensity = 2.0;
+      dirLight.position.set(4000, 9000, 4000);
+    } else if (env === 'dusk') {
+      scene.background.setHex(0x1e1528);
+      scene.fog.color.setHex(0x1e1528);
+      scene.fog.density = 0.00003;
+      ambientLight.color.setHex(0x55354e);
+      ambientLight.intensity = 0.8;
+      dirLight.color.setHex(0xff7b00);
+      dirLight.intensity = 1.7;
+      dirLight.position.set(8000, 2200, 4000);
+    } else {
+      // Night (default)
+      scene.background.setHex(0x060a14);
+      scene.fog.color.setHex(0x060a14);
+      scene.fog.density = 0.000035;
+      ambientLight.color.setHex(0x1e293b);
+      ambientLight.intensity = 0.5;
+      dirLight.color.setHex(0x38bdf8);
+      dirLight.intensity = 0.85;
+      dirLight.position.set(4000, 7500, 3000);
+    }
+  }
+
+  // 4. Ground Plane with PBR Terrain Texture & Tactical Airspace Grid
+  const textureLoader = new THREE.TextureLoader();
+  const terrainTex = textureLoader.load('/assets/textures/grasslight-big.jpg');
+  terrainTex.wrapS = THREE.RepeatWrapping;
+  terrainTex.wrapT = THREE.RepeatWrapping;
+  terrainTex.repeat.set(36, 36);
+
+  const terrainNorm = textureLoader.load('/assets/textures/grasslight-big-nm.jpg');
+  terrainNorm.wrapS = THREE.RepeatWrapping;
+  terrainNorm.wrapT = THREE.RepeatWrapping;
+  terrainNorm.repeat.set(36, 36);
+
+  const terrainGeom = new THREE.PlaneGeometry(10000, 10000);
+  terrainGeom.rotateX(-Math.PI / 2);
+  const terrainMat = new THREE.MeshStandardMaterial({
+    map: terrainTex,
+    normalMap: terrainNorm,
+    roughness: 0.85,
+    metalness: 0.1,
+    color: 0x334155,
+  });
+  const terrainMesh = new THREE.Mesh(terrainGeom, terrainMat);
+  terrainMesh.position.y = -0.5;
+  scene.add(terrainMesh);
+
+  // Overlay tactical grid lines
+  const gridHelper = new THREE.GridHelper(10000, 50, 0x00f0ff, 0x1e293b);
+  gridHelper.position.y = 0.5;
+  scene.add(gridHelper);
+
+  // Tactical bounding box (10km x 3km x 10km airspace)
+  const boxGeom = new THREE.BoxGeometry(10000, 3000, 10000);
+  const boxWire = new THREE.LineSegments(
+    new THREE.EdgesGeometry(boxGeom),
+    new THREE.LineBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.25 })
+  );
+  boxWire.position.set(0, 1500, 0);
+  scene.add(boxWire);
+
+  // 5. Tactical Renderers & Subsystems
+  const swarmRenderer = new InstancedSwarmRenderer(scene, 1000, 1000, 16);
+  const trailAndLockRenderer = new TrailAndLockRenderer(scene, 1600, 24, 1000);
+  const hvaBuildings = new HvaBuildings(scene, 16);
+  const playback = new PlaybackController({ bufferCapacity: 8, targetLagSeconds: 0.08 });
 
   // Camera presets
   let cameraMode = 'overview'; // 'overview', 'action', 'follow', 'topdown'
@@ -163,47 +278,62 @@ function initApp() {
     }
     controls.update();
 
-    // Update active button state in HUD
-    document.querySelectorAll('.btn-cam').forEach(b => {
+    document.querySelectorAll('.btn-cam').forEach((b) => {
       b.classList.toggle('active', b.getAttribute('data-cam') === mode);
     });
   }
 
-  // 2. Tactical Airspace Grid & Bounding Box
-  const gridHelper = new THREE.GridHelper(10000, 50, 0x00f0ff, 0x1e293b);
-  gridHelper.position.y = 0;
-  scene.add(gridHelper);
-
-  const boxGeom = new THREE.BoxGeometry(10000, 3000, 10000);
-  const boxWire = new THREE.LineSegments(
-    new THREE.EdgesGeometry(boxGeom),
-    new THREE.LineBasicMaterial({ color: 0x0ea5e9, transparent: true, opacity: 0.22 })
-  );
-  boxWire.position.set(0, 1500, 0);
-  scene.add(boxWire);
-
-  // 3. Lighting
-  const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-  scene.add(ambientLight);
-
-  const dirLight = new THREE.DirectionalLight(0xffffff, 1.3);
-  dirLight.position.set(4000, 8000, 4000);
-  scene.add(dirLight);
-
-  // 4. Tactical Renderers & Telemetry HUD
-  const swarmRenderer = new InstancedSwarmRenderer(scene, 1000, 1000, 16);
-  const trailAndLockRenderer = new TrailAndLockRenderer(scene, 1600, 24, 1000);
-
+  // 6. WebSocket Connection & Standalone Demo Mode Setup
   let socket = null;
+  let isDemoMode = false;
+  let mockTelemetry = null;
+  let mockLastTick = performance.now();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const forceDemo = urlParams.get('demo') === '1';
+
   const sendCommand = (cmdObj) => {
     if (socket && socket.readyState === WebSocket.OPEN) {
       socket.send(JSON.stringify(cmdObj));
+    } else if (isDemoMode && mockTelemetry) {
+      // Direct mock telemetry handling
+      if (cmdObj.type === 'set_algorithm') {
+        const idMap = { greedy: 0, hungarian: 1, auction: 2, attention_mappo: 3 };
+        mockTelemetry.algoId = idMap[cmdObj.algorithm] ?? 2;
+      } else if (cmdObj.type === 'reset') {
+        mockTelemetry.reset(
+          cmdObj.num_interceptors || 16,
+          cmdObj.num_scouts || 4,
+          cmdObj.num_missiles || 30,
+          2
+        );
+        playback.reset();
+        trailAndLockRenderer.resetHistory();
+      } else if (cmdObj.type === 'spawn_salvo') {
+        mockTelemetry.spawnSalvo(
+          cmdObj.count || 15,
+          cmdObj.speed || 450,
+          cmdObj.weave_freq || 1.5,
+          cmdObj.decoy_fraction || 0.15
+        );
+      } else if (cmdObj.type === 'set_params') {
+        if (cmdObj.sigma_obs !== undefined) mockTelemetry.sigmaObs = cmdObj.sigma_obs;
+      }
     }
   };
 
-  const hud = new SandboxHUD(sendCommand);
+  const hud = new SandboxHUD(sendCommand, {
+    onSpeedChange: (spd) => playback.setSpeed(spd),
+    onPauseChange: (p) => playback.setPaused(p),
+    onStepOnce: () => playback.stepOnce(),
+    onAutoSlowMoChange: (en) => playback.setAutoSlowMo(en),
+    onVisualScaleChange: (sc) => swarmRenderer.setVisualScale(sc),
+    onEnvironmentChange: (env) => setEnvironment(env),
+    onTrailModeChange: (m) => trailAndLockRenderer.setTrailMode(m),
+    onBloomChange: (b) => { bloomEnabled = b; },
+  });
 
-  // Bind checkbox visibility toggles
+  // Checkbox layer toggles
   if (hud.chkTrails) {
     hud.chkTrails.addEventListener('change', (e) => {
       trailAndLockRenderer.showTrails = e.target.checked;
@@ -216,18 +346,93 @@ function initApp() {
   }
   if (hud.chkDomes) {
     hud.chkDomes.addEventListener('change', (e) => {
-      swarmRenderer.showDomes = e.target.checked;
+      hvaBuildings.showDomes = e.target.checked;
     });
   }
 
-  // Bind camera view buttons
-  document.querySelectorAll('.btn-cam').forEach(btn => {
+  // Camera buttons
+  document.querySelectorAll('.btn-cam').forEach((btn) => {
     btn.addEventListener('click', () => {
       applyCameraPreset(btn.getAttribute('data-cam'));
+      btn.blur();
     });
   });
 
-  // Keyboard Shortcuts: Space (Pause/Resume), S (Step 1 Frame), 1-4 (Camera Views)
+  // Activate Demo Mode
+  function activateDemoMode() {
+    if (isDemoMode) return;
+    console.log('[SwarmForge] Activating standalone demo mode.');
+    isDemoMode = true;
+    mockTelemetry = new MockTelemetry({ N: 20, M: 30, P: 2 });
+    mockLastTick = performance.now();
+    hud.setConnected(false, true);
+  }
+
+  // 7. WebSocket Streaming Connection with 3-second Auto Demo Fallback
+  let connectionTimeout = null;
+
+  function connectWebSocket() {
+    if (forceDemo) {
+      activateDemoMode();
+      return;
+    }
+
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    const host = window.location.host || 'localhost:8765';
+    const wsUrl = `${protocol}//${host}/ws`;
+
+    console.log(`[SwarmForge] Connecting to WebSocket: ${wsUrl}`);
+    socket = new WebSocket(wsUrl);
+    socket.binaryType = 'arraybuffer';
+
+    connectionTimeout = setTimeout(() => {
+      if (!socket || socket.readyState !== WebSocket.OPEN) {
+        console.warn('[SwarmForge] WebSocket connection timed out after 3.0s. Falling back to Demo Mode.');
+        activateDemoMode();
+      }
+    }, 3000);
+
+    socket.onopen = () => {
+      console.log('[SwarmForge] WebSocket connected.');
+      if (connectionTimeout) {
+        clearTimeout(connectionTimeout);
+        connectionTimeout = null;
+      }
+      isDemoMode = false;
+      hud.setConnected(true, false);
+    };
+
+    socket.onmessage = (event) => {
+      if (event.data instanceof ArrayBuffer) {
+        const frame = parseBinaryFrame(event.data);
+        if (frame) {
+          playback.pushFrame(frame);
+        }
+      }
+    };
+
+    socket.onclose = () => {
+      console.warn('[SwarmForge] WebSocket closed.');
+      if (!isDemoMode) {
+        hud.setConnected(false, false);
+        // Fallback to demo mode if disconnected
+        setTimeout(() => {
+          if (!socket || socket.readyState !== WebSocket.OPEN) {
+            activateDemoMode();
+          }
+        }, 1500);
+      }
+    };
+
+    socket.onerror = (err) => {
+      console.error('[SwarmForge] WebSocket error:', err);
+      socket.close();
+    };
+  }
+
+  connectWebSocket();
+
+  // 8. Keyboard Hotkeys
   window.addEventListener('keydown', (e) => {
     if (e.target && (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT')) {
       return;
@@ -238,6 +443,16 @@ function initApp() {
     } else if (e.code === 'KeyS') {
       e.preventDefault();
       hud.stepOnce();
+    } else if (e.code === 'BracketLeft') {
+      e.preventDefault();
+      hud.adjustSpeedStep(-1);
+    } else if (e.code === 'BracketRight') {
+      e.preventDefault();
+      hud.adjustSpeedStep(1);
+    } else if (e.code === 'Digit0') {
+      e.preventDefault();
+      hud.setSpeedMultiplier(1.0);
+      hud.showSpeedToast('1.00x SPEED');
     } else if (e.code === 'Digit1') {
       applyCameraPreset('overview');
     } else if (e.code === 'Digit2') {
@@ -249,137 +464,16 @@ function initApp() {
     }
   });
 
-  // 5. WebSocket Telemetry Streaming Connection
-  let latestFrame = null;
-  let lastPacketTime = performance.now();
-  let reconnectTimeout = null;
-
-  // Zero-allocation interpolated frame structure
-  const interpFrame = {
-    header: null,
-    hvas: [],
-    drones: [],
-    missiles: [],
-  };
-
-  function getInterpolatedFrame(baseFrame, subDt, speedMult) {
-    interpFrame.header = baseFrame.header;
-    interpFrame.hvas = baseFrame.hvas;
-
-    const N = baseFrame.drones.length;
-    if (interpFrame.drones.length !== N) {
-      interpFrame.drones = new Array(N);
-      for (let i = 0; i < N; i++) {
-        interpFrame.drones[i] = { ...baseFrame.drones[i] };
-      }
-    }
-
-    const dArr = interpFrame.drones;
-    for (let i = 0; i < N; i++) {
-      const src = baseFrame.drones[i];
-      const dst = dArr[i];
-      dst.id = src.id;
-      dst.type = src.type;
-      dst.status = src.status;
-      dst.assigned_id = src.assigned_id;
-      dst.vx = src.vx;
-      dst.vy = src.vy;
-      dst.vz = src.vz;
-      if (src.status > 0.5) {
-        dst.x = src.x + src.vx * subDt * speedMult;
-        dst.y = src.y + src.vy * subDt * speedMult;
-        dst.z = src.z + src.vz * subDt * speedMult;
-      } else {
-        dst.x = src.x;
-        dst.y = src.y;
-        dst.z = src.z;
-      }
-    }
-
-    const M = baseFrame.missiles.length;
-    if (interpFrame.missiles.length !== M) {
-      interpFrame.missiles = new Array(M);
-      for (let j = 0; j < M; j++) {
-        interpFrame.missiles[j] = { ...baseFrame.missiles[j] };
-      }
-    }
-
-    const mArr = interpFrame.missiles;
-    for (let j = 0; j < M; j++) {
-      const src = baseFrame.missiles[j];
-      const dst = mArr[j];
-      dst.id = src.id;
-      dst.type = src.type;
-      dst.status = src.status;
-      dst.assigned_id = src.assigned_id;
-      dst.vx = src.vx;
-      dst.vy = src.vy;
-      dst.vz = src.vz;
-      if (src.status === 0.0) {
-        dst.x = src.x + src.vx * subDt * speedMult;
-        dst.y = src.y + src.vy * subDt * speedMult;
-        dst.z = src.z + src.vz * subDt * speedMult;
-      } else {
-        dst.x = src.x;
-        dst.y = src.y;
-        dst.z = src.z;
-      }
-    }
-
-    return interpFrame;
-  }
-
-  function connectWebSocket() {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const host = window.location.host || 'localhost:8765';
-    const wsUrl = `${protocol}//${host}/ws`;
-
-    console.log(`[SwarmForge] Connecting to WebSocket: ${wsUrl}`);
-    socket = new WebSocket(wsUrl);
-    socket.binaryType = 'arraybuffer';
-
-    socket.onopen = () => {
-      console.log('[SwarmForge] WebSocket connected.');
-      hud.setConnected(true);
-      if (reconnectTimeout) {
-        clearTimeout(reconnectTimeout);
-        reconnectTimeout = null;
-      }
-    };
-
-    socket.onmessage = (event) => {
-      if (event.data instanceof ArrayBuffer) {
-        const frame = parseBinaryFrame(event.data);
-        if (frame) {
-          latestFrame = frame;
-          lastPacketTime = performance.now();
-        }
-      }
-    };
-
-    socket.onclose = () => {
-      console.warn('[SwarmForge] WebSocket disconnected. Reconnecting in 1.5s...');
-      hud.setConnected(false);
-      reconnectTimeout = setTimeout(connectWebSocket, 1500);
-    };
-
-    socket.onerror = (err) => {
-      console.error('[SwarmForge] WebSocket error:', err);
-      socket.close();
-    };
-  }
-
-  connectWebSocket();
-
-  // 6. Window Resize Handler
+  // 9. Window Resize
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    composer.setSize(window.innerWidth, window.innerHeight);
   });
 
-  // 7. High-Performance Render Loop
+  // 10. High-Performance Render Loop
   let lastTime = performance.now();
   let frameCount = 0;
   let fpsTimer = performance.now();
@@ -399,18 +493,31 @@ function initApp() {
       fpsTimer = now;
     }
 
-    // Kinematic sub-frame interpolation for smooth 60 FPS motion at slow speeds
-    let displayFrame = latestFrame;
-    if (latestFrame) {
-      const speedMult = hud.speedMultiplier || 1.0;
-      const isPaused = hud.isPaused;
-      const subDt = isPaused ? 0.0 : Math.max(0.0, Math.min((now - lastPacketTime) / 1000.0, 0.5));
-
-      if (!isPaused && speedMult < 0.99 && subDt > 0.001) {
-        displayFrame = getInterpolatedFrame(latestFrame, subDt, speedMult);
+    // Update demo telemetry if in demo mode
+    if (isDemoMode && mockTelemetry) {
+      const mockDt = (now - mockLastTick) / 1000.0;
+      if (mockDt >= 0.05) { // 20 Hz simulation tick
+        mockLastTick = now;
+        if (!playback.isPaused) {
+          const rawBuf = mockTelemetry.step(mockDt * playback.speedMultiplier);
+          const frame = parseBinaryFrame(rawBuf.buffer);
+          if (frame) {
+            playback.pushFrame(frame);
+          }
+        }
       }
+    }
 
-      // Follow Camera Mode: track primary active interceptor
+    // Advance continuous client-side interpolation clock
+    const { frame: displayFrame, simDt } = playback.update(dt);
+
+    if (displayFrame) {
+      const simTime = displayFrame.header ? displayFrame.header.timestamp : 0.0;
+
+      // Auto slow-mo on intercept trigger
+      playback.checkAutoSlowMo(displayFrame);
+
+      // Follow Camera: track primary active interceptor
       if (cameraMode === 'follow' && displayFrame.drones.length > 0) {
         let activeInt = null;
         for (let i = 0; i < displayFrame.drones.length; i++) {
@@ -428,8 +535,8 @@ function initApp() {
 
           const spd = Math.hypot(activeInt.vx, activeInt.vz, -activeInt.vy);
           if (spd > 0.5) {
-            const chaseDist = 180.0;
-            const chaseHeight = 55.0;
+            const chaseDist = 220.0;
+            const chaseHeight = 65.0;
             const cx = tx - (activeInt.vx / spd) * chaseDist;
             const cy = ty + chaseHeight;
             const cz = tz - (-activeInt.vy / spd) * chaseDist;
@@ -438,21 +545,30 @@ function initApp() {
         }
       }
 
-      swarmRenderer.update(displayFrame, dt);
-      trailAndLockRenderer.update(displayFrame);
-      hud.update(latestFrame, currentClientFps);
+      // Update Subsystems
+      swarmRenderer.update(displayFrame, dt, simTime);
+      hvaBuildings.update(displayFrame, simDt);
+      trailAndLockRenderer.update(displayFrame, playback.isPaused);
+      hud.update(displayFrame, currentClientFps, playback.getEffectiveSimRate());
     }
 
     controls.update();
-    renderer.render(scene, camera);
+
+    if (bloomEnabled) {
+      composer.render();
+    } else {
+      renderer.render(scene, camera);
+    }
   }
 
   animate();
 }
 
-// Start application when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initApp);
-} else {
-  initApp();
+// Start application when DOM is ready in browser
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+  } else {
+    initApp();
+  }
 }

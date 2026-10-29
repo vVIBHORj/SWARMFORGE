@@ -28,6 +28,7 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
 - [x] **M4: Cross-attention MAPPO & curriculum learning** (Done)
 - [x] **M5: Three.js Instanced 3D Tactical Viewer & Binary WebSocket Server** (Done)
 - [x] **M6: Full-Horizon Engagement Benchmarks, Multi-Seed Statistical Tables & Final Release** (100% Complete)
+- [x] **Visual & Tactical Realism Upgrade: PBR Aerospace Meshes, Continuous Interpolation Clock, Defended Facilities & Standalone Demo Mode** (100% Complete)
 
 ## Env API (`VectorizedSwarmEnv`)
 - Public methods:
@@ -202,6 +203,26 @@ Abstract, synthetic simulation where N defending drones coordinate to intercept 
   - Clamped effective distance $d_{\text{eff}} \ge 25.0\text{ m}$ in relative kinematics to eliminate the terminal LOS-rate singularity ($\omega \to \infty$) at CPA.
   - Added receding threat penalty ($+500 + 2 \cdot d$) when $V_c < -20\text{ m/s}$ and $d > 100\text{ m}$, preventing interceptors from chasing faster 450 m/s threats from behind, alongside $+5000$ decoy cost penalty.
   - Dynamic terminal commitment lock when $d < 800\text{ m}$ and $V_c > 0\text{ m/s}$, strictly enforcing 1 target per drone ($\sum_m z_{i,m} \le 1$).
+
+## Visual & Tactical Realism Engine (`viewer3d`)
+- **Zero-Allocation 60 FPS Three.js Engine**: Renders up to 1,000 defending UAVs and 1,000 inbound threats using GPU `InstancedMesh` with 0 heap allocations in the hot render loop.
+- **Client-Side Snapshot Buffer & Interpolation Clock (`src/PlaybackController.js`)**: Buffers up to 8 snapshots, maintains continuous monotonic simulation clock, detects server time scaling vs client dilation, and powers smooth 60 FPS sub-frame interpolation at any playback speed (`0.05x` to `8.0x`).
+- **Defended Facility Compounds (`src/HvaBuildings.js`)**: 5 architectural compounds (HQ Command Tower, Airbase Hangars & Runway, Energy Facility & Cooling Towers, Early-Warning Radar with rotating dish, and Urban District) with window-grid canvas textures, mast beacons, damage state flashing, hit counter billboards, and 800m defense domes.
+- **PBR Aerospace Airframes (`src/InstancedSwarmRenderer.js`)**:
+  - Delta-wing interceptors with wingtip navigation lights (red/green) and afterburner plumes.
+  - AWACS surveillance gliders with dorsal rotodomes.
+  - Hypersonic threat missiles with cruciform strakes and continuous axial roll spin.
+  - Electronic warfare decoys with wingtip flare dispensers.
+  - Contact blob shadows beneath low-altitude aircraft.
+  - Intercept & impact bursts with expanding shockwave rings, fireball cores, and pooled dynamic PointLight terrain illumination.
+- **Atmospheric Lighting & Terrain**: Textured terrain plane (PBR normal map) with tactical grid, switchable Night/Dusk/Day lighting, and post-processing UnrealBloomPass.
+- **Interactive Sandbox & Controls (`src/SandboxHUD.js`)**:
+  - Speed buttons `0.1x`–`8.0x`, slider, `[`, `]`, `0` hotkeys, Space (pause), S (step once), speed toast notification.
+  - Auto slow-mo on intercept (automatically drops to 0.25x for 1.5s on intercept).
+  - Effective "Sim rate" display in HUD.
+  - Live algorithm hot-swap, salvo threat launcher, sensor noise slider, visual mesh scale slider (`1x`–`20x`), and soft smoke vs lines trail mode switcher.
+- **Standalone Demo Mode (`src/MockTelemetry.js`)**: Full standalone client simulation activated via `?demo=1` or 3s connection timeout fallback.
+
 
 
 
