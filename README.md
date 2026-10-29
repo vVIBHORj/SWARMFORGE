@@ -4,7 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.4%2Bcu126-EE4C2C.svg?style=flat&logo=pytorch&logoColor=white)](https://pytorch.org/)
 [![CUDA](https://img.shields.io/badge/CUDA-12.6-76B900.svg?style=flat&logo=nvidia&logoColor=white)](https://developer.nvidia.com/cuda-zone)
 [![PettingZoo](https://img.shields.io/badge/PettingZoo-ParallelEnv-blueviolet.svg?style=flat)](https://pettingzoo.farama.org/)
-[![Tests](https://img.shields.io/badge/Tests-148%20Passed-brightgreen.svg?style=flat)](tests/)
+[![Tests](https://img.shields.io/badge/Tests-151%20Passed-brightgreen.svg?style=flat)](tests/)
 [![Milestones](https://img.shields.io/badge/Milestones-M0--M6%20Complete-success.svg?style=flat)](PROJECT_CONTEXT.md)
 [![Platform](https://img.shields.io/badge/Platform-WSL2%20Ubuntu%20%7C%20Win11-orange.svg?style=flat)](https://ubuntu.com/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat)](LICENSE)
@@ -19,11 +19,18 @@ Built from the ground up for vectorized PyTorch GPU physics, intra-step continuo
 
 ## 3D Tactical Instanced Viewer
 
-SWARMFORGE includes a zero-build Three.js client connected via binary `Float32Array` WebSockets streaming at 60 Hz. The instanced renderer draws up to 2,000 entities in just **2 GPU draw calls**, with ring-buffer trajectory trails, live assignment lock lines, real-time telemetry HUD, and red-team salvo injection.
+SWARMFORGE includes a zero-build Three.js client connected via binary `Float32Array` WebSockets streaming at 60 Hz. The instanced renderer draws up to 2,000 entities in just **2 GPU draw calls**, featuring architectural facility compounds, dynamic defense domes, continuous time-scale controls, and procedural PBR aerospace geometries:
 
 ![3D Tactical Web Viewer](runs/benchmarks/viewer_screenshot.png)
 
-*Live tactical display at `http://localhost:8765`: Obsidian HUD, interceptor assignment lock lines (cyan), red-team saturation salvo (crimson), HVA defense domes, and real-time telemetry.*
+*Live tactical display at `http://localhost:8765`: 5 architectural defended facility compounds (HQ tower, Airbase hangars/runway, Refinery cooling towers/spheres, Radar station with rotating dish, Urban district) with procedural window illumination grids, pulsing defense domes, delta-wing interceptors with assignment lock lines (cyan), hypersonic threats with thruster plumes (crimson), kinetic CPA burst effects, and Obsidian telemetry HUD with interactive playback controls.*
+
+### Key Viewer Features
+- **Architectural Defended Facility Compounds (5 HVAs)**: High-Value Assets are rendered as distinct structural complexes rather than simple markers—including Command HQ tower, Airbase hangars with asphalt runway and taxiway, Energy Refinery cooling towers and pressurized spherical tanks, Phased-Array Radar station with rotating dish, and Urban High-Rise District. Compounds feature canvas-generated window illumination grids, flashing red FAA beacons, glowing defense perimeter domes, structural health rings, and real-time damage states with hit counters.
+- **PBR Aerospace Geometries**: High-detail procedural instanced geometries featuring delta-wing interceptors with twin canted vertical stabilizers, high-altitude radar scout pickets, hypersonic cruise/ballistic threats with continuous axial roll and radiant thruster exhaust plumes, and electronic warfare decoys.
+- **Continuous 60 FPS Interpolation & Working Playback Controls**: Decoupled client-side `PlaybackController` uses an accumulator clock for butter-smooth 60 FPS position/orientation interpolation across variable simulation tick rates and time scales (`0.05x`, `0.1x`, `0.25x`, `0.5x`, `1.0x`, `2.0x`, `4.0x`, `8.0x`), automatic slow-motion during terminal kinetic intercepts, single-step inspection, and instant pause/resume.
+- **Atmospheric Environments & Lighting**: Dynamic tactical lighting presets (Night, Dusk, Day) with normal-mapped ground terrain, soft smoke puff particle trails behind incoming threats, and dynamic point-light explosion bursts upon kinetic Closest Point of Approach (CPA) intercepts.
+- **Standalone Offline Demo Mode**: Zero-dependency client-side simulation fallback accessible via `?demo=1` or triggered automatically after a 3-second connection timeout, allowing full inspection of swarm dynamics, 3D models, camera presets, and controls without a running Python backend.
 
 ---
 
@@ -245,7 +252,7 @@ SWARMFORGE/
 │   ├── evaluation/                 # Metrics, win-rate trackers, benchmarks
 │   └── server/                     # FastAPI / WebSocket binary telemetry server
 ├── viewer3d/                       # Three.js 3D web client
-├── tests/                          # Pytest test suite (109 passed tests)
+├── tests/                          # Pytest test suite (151 passed tests)
 ├── scripts/                        # Operational & validation scripts
 │   ├── setup_wsl.sh                # Automated WSL2 environment setup
 │   └── check_gpu.py                # GPU verification & matrix multiplication benchmark
@@ -260,13 +267,22 @@ SWARMFORGE/
 
 ## Quickstart & Operational Commands
 
+> **Important**: Always execute operational commands from the repository root directory (`cd ~/swarmforge`) so the virtual environment `.venv` and modules are properly resolved.
+
 ### 1. Environment Verification & Test Suite
 ```bash
+# Ensure working directory is repo root
+cd ~/swarmforge
+
 # Verify GPU acceleration and strictly bounded VRAM allocation (< 250 MB)
 .venv/bin/python scripts/check_gpu.py
 
-# Run complete pytest validation suite (148 tests passing across CPU/CUDA)
+# Run complete pytest validation suite (151 tests passing across CPU/CUDA)
 .venv/bin/pytest -q
+
+# Run frontend viewer unit tests (5 Node.js tests passing)
+export PATH="$HOME/.local/node/bin:$PATH"
+node --test viewer3d/tests/*.test.js
 ```
 
 ### 2. Train Production Cross-Attention MAPPO Checkpoint
@@ -274,7 +290,7 @@ SWARMFORGE/
 # Train on CUDA with 3-stage automated curriculum and CTDE PPO
 .venv/bin/python scripts/train.py --updates 20 --num-envs 16 --rollout-steps 128 --device cuda
 
-# Checkpoints saved to: runs/mappo/best.pt (87.5% peak win rate) and latest.pt
+# Checkpoints saved to: runs/mappo/best.pt (88.9% peak win rate) and latest.pt
 ```
 
 ### 3. Run Multi-Seed Statistical Benchmark & Ablation Suite
@@ -288,13 +304,18 @@ SWARMFORGE/
 
 ### 4. Launch 3D Tactical Instanced Viewer & WebSocket Telemetry Server
 ```bash
-# Start FastAPI binary WebSocket server at 60 Hz
-.venv/bin/python scripts/demo_server.py --port 8765
+# Start FastAPI binary WebSocket server at 60 Hz from repo root
+PYTHONPATH=. .venv/bin/python scripts/demo_server.py --port 8765
 
-# Open browser at http://localhost:8765 to access:
+# Open your browser at http://localhost:8765 to access:
 # - Three.js InstancedMesh rendering (<2 GPU draw calls for 2,000 entities)
+# - 5 Defended facility complexes with structural health and hit counters
 # - Interactive Red-Team Salvo Threat Spawner & Trajectory Trails
-# - Real-time algorithm hot-swapping (Greedy / Hungarian / Auction / MAPPO)
+# - Smooth variable-speed playback (0.05x to 8x) and Auto-Slow-Mo
+# - Real-time algorithm hot-swapping (Greedy / Hungarian / Auction / Attention-MAPPO)
+#
+# Standalone offline demo mode is also available directly at:
+# http://localhost:8765/?demo=1
 ```
 
 ---

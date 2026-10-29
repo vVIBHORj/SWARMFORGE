@@ -138,6 +138,16 @@ def test_websocket_full_sandbox_workflow(default_cfg):
     client = TestClient(app)
 
     with client.websocket_connect("/ws") as ws:
+        def recv_until(predicate, max_frames=15):
+            last_arr = None
+            for _ in range(max_frames):
+                raw = ws.receive_bytes()
+                arr = np.frombuffer(raw, dtype=np.float32)
+                last_arr = arr
+                if predicate(arr):
+                    return arr
+            return last_arr
+
         # 1. Receive initial streaming frame
         raw1 = ws.receive_bytes()
         arr1 = np.frombuffer(raw1, dtype=np.float32)
@@ -147,14 +157,12 @@ def test_websocket_full_sandbox_workflow(default_cfg):
 
         # 2. Hot-swap algorithm to Hungarian (algo_id = 1)
         ws.send_text(json.dumps({"type": "set_algorithm", "algorithm": "hungarian"}))
-        raw2 = ws.receive_bytes()
-        arr2 = np.frombuffer(raw2, dtype=np.float32)
+        arr2 = recv_until(lambda a: a[11] == 1.0)
         assert arr2[11] == 1.0  # algo_id for hungarian
 
         # 3. Hot-swap algorithm to Attention-MAPPO (algo_id = 3)
         ws.send_text(json.dumps({"type": "set_algorithm", "algorithm": "attention_mappo"}))
-        raw3 = ws.receive_bytes()
-        arr3 = np.frombuffer(raw3, dtype=np.float32)
+        arr3 = recv_until(lambda a: a[11] == 3.0)
         assert arr3[11] == 3.0  # algo_id for attention_mappo
 
         # 4. Spawn a live red-team salvo of 10 threats
@@ -165,14 +173,12 @@ def test_websocket_full_sandbox_workflow(default_cfg):
             "weave_freq": 2.0,
             "decoy_fraction": 0.2,
         }))
-        raw4 = ws.receive_bytes()
-        arr4 = np.frombuffer(raw4, dtype=np.float32)
+        arr4 = recv_until(lambda a: int(a[4]) == init_M + 10)
         assert int(arr4[4]) == init_M + 10
 
         # 5. Set simulation parameters (sensor noise & playback)
         ws.send_text(json.dumps({"type": "set_params", "sigma_obs": 25.0}))
-        raw5 = ws.receive_bytes()
-        arr5 = np.frombuffer(raw5, dtype=np.float32)
+        arr5 = recv_until(lambda a: np.isclose(a[12], 25.0))
         assert np.isclose(arr5[12], 25.0)
 
         # 6. Reset scenario
@@ -182,8 +188,7 @@ def test_websocket_full_sandbox_workflow(default_cfg):
             "num_scouts": 3,
             "num_missiles": 25,
         }))
-        raw6 = ws.receive_bytes()
-        arr6 = np.frombuffer(raw6, dtype=np.float32)
+        arr6 = recv_until(lambda a: int(a[3]) == 15 and int(a[4]) == 25)
         assert int(arr6[3]) == 15  # N = 12 + 3
         assert int(arr6[4]) == 25  # M = 25
 

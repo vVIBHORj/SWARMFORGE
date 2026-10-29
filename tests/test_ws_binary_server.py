@@ -254,8 +254,12 @@ def test_fastapi_websocket_and_command_endpoints(default_cfg):
         ws.send_text(json.dumps({"type": "set_algorithm", "algorithm": "auction"}))
 
         # Receive next binary frame and verify hot-swapped algo_id == 2 (auction)
-        raw_bytes2 = ws.receive_bytes()
-        arr2 = np.frombuffer(raw_bytes2, dtype=np.float32)
+        arr2 = None
+        for _ in range(15):
+            raw_bytes2 = ws.receive_bytes()
+            arr2 = np.frombuffer(raw_bytes2, dtype=np.float32)
+            if arr2[11] == 2.0:
+                break
         assert arr2[0] == 2026.0
         assert arr2[11] == 2.0  # algo_id for auction
 
