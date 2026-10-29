@@ -121,7 +121,11 @@ function createLabelSprite(text) {
   ctx.strokeStyle = '#00f0ff';
   ctx.lineWidth = 4;
   ctx.beginPath();
-  ctx.roundRect(8, 8, 496, 112, 16);
+  if (ctx.roundRect) {
+    ctx.roundRect(8, 8, 496, 112, 16);
+  } else {
+    ctx.rect(8, 8, 496, 112);
+  }
   ctx.fill();
   ctx.stroke();
 
@@ -456,7 +460,11 @@ export class HvaBuildings {
     ctx.strokeStyle = '#f87171';
     ctx.lineWidth = 4;
     ctx.beginPath();
-    ctx.roundRect(8, 8, 496, 112, 16);
+    if (ctx.roundRect) {
+      ctx.roundRect(8, 8, 496, 112, 16);
+    } else {
+      ctx.rect(8, 8, 496, 112);
+    }
     ctx.fill();
     ctx.stroke();
 
@@ -547,3 +555,4 @@ export class HvaBuildings {
     }
   }
 }
+

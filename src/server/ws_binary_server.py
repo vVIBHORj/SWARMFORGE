@@ -533,6 +533,14 @@ def create_app(
         if cand.exists():
             vpath = cand
     if vpath.exists():
+        public_dir = vpath / "public"
+        if public_dir.exists():
+            assets_dir = public_dir / "assets"
+            if assets_dir.exists():
+                app.mount("/assets", StaticFiles(directory=str(assets_dir)), name="assets")
+            draco_dir = public_dir / "draco"
+            if draco_dir.exists():
+                app.mount("/draco", StaticFiles(directory=str(draco_dir)), name="draco")
         app.mount("/", StaticFiles(directory=str(vpath), html=True), name="viewer3d")
 
     return app

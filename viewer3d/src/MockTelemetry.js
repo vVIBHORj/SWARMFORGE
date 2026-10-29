@@ -387,3 +387,4 @@ export class MockTelemetry {
     return buffer;
   }
 }
+

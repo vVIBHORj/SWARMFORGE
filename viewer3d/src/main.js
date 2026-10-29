@@ -366,6 +366,7 @@ function initApp() {
     mockTelemetry = new MockTelemetry({ N: 20, M: 30, P: 2 });
     mockLastTick = performance.now();
     hud.setConnected(false, true);
+    hud.hideLoadingScreen();
   }
 
   // 7. WebSocket Streaming Connection with 3-second Auto Demo Fallback
@@ -400,9 +401,11 @@ function initApp() {
       }
       isDemoMode = false;
       hud.setConnected(true, false);
+      hud.hideLoadingScreen();
     };
 
     socket.onmessage = (event) => {
+      hud.hideLoadingScreen();
       if (event.data instanceof ArrayBuffer) {
         const frame = parseBinaryFrame(event.data);
         if (frame) {
@@ -546,17 +549,39 @@ function initApp() {
       }
 
       // Update Subsystems
-      swarmRenderer.update(displayFrame, dt, simTime);
-      hvaBuildings.update(displayFrame, simDt);
-      trailAndLockRenderer.update(displayFrame, playback.isPaused);
-      hud.update(displayFrame, currentClientFps, playback.getEffectiveSimRate());
+      try {
+        swarmRenderer.update(displayFrame, dt, simTime);
+      } catch (err) {
+        console.warn('[SwarmForge] swarmRenderer update error:', err);
+      }
+      try {
+        hvaBuildings.update(displayFrame, simDt);
+      } catch (err) {
+        console.warn('[SwarmForge] hvaBuildings update error:', err);
+      }
+      try {
+        trailAndLockRenderer.update(displayFrame, playback.isPaused);
+      } catch (err) {
+        console.warn('[SwarmForge] trailAndLockRenderer update error:', err);
+      }
+      try {
+        hud.update(displayFrame, currentClientFps, playback.getEffectiveSimRate());
+      } catch (err) {
+        console.warn('[SwarmForge] hud update error:', err);
+      }
     }
 
     controls.update();
 
-    if (bloomEnabled) {
-      composer.render();
-    } else {
+    try {
+      if (bloomEnabled) {
+        composer.render();
+      } else {
+        renderer.render(scene, camera);
+      }
+    } catch (e) {
+      console.warn('[SwarmForge] Bloom pass failed, falling back to standard renderer:', e);
+      bloomEnabled = false;
       renderer.render(scene, camera);
     }
   }

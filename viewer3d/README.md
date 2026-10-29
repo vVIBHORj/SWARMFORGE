@@ -101,3 +101,4 @@ All external assets are documented with links, licenses, and dates in [`public/a
 - **Building Models**: Kenney Space Kit & City Kit (Creative Commons CC0 1.0 Universal).
 - **PBR Textures**: Three.js Examples Repository (Creative Commons CC0 1.0 Universal / MIT).
 - **Draco Decoders**: Google Draco 3D Compression Library (Apache License 2.0).
+

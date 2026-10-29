@@ -36,3 +36,4 @@ test('MockTelemetry steps simulation and intercepts threats', () => {
   mock.handleCommand({ type: 'spawn_salvo', count: 5 });
   assert.equal(mock.missiles.length, 35);
 });
+

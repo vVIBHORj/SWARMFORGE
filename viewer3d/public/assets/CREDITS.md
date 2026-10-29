@@ -33,3 +33,4 @@ All external assets used in this application are sourced under permissive open-s
   - **Missiles**: Hypersonic threat with sharp nosecone, cruciform strakes, control fins, and animated exhaust plumes.
   - **Decoys**: Compact EW munition with flare pods and corner reflectors.
   - **HVA Compounds**: Procedural command towers, hangars, cooling towers, and radar dishes with procedural window emissive textures.
+

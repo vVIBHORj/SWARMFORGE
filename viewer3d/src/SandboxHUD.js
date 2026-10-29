@@ -131,6 +131,9 @@ export class SandboxHUD {
     if (this.hasHiddenLoading || !this.loadingScreen) return;
     this.hasHiddenLoading = true;
     this.loadingScreen.classList.add('hidden');
+    setTimeout(() => {
+      if (this.loadingScreen) this.loadingScreen.style.display = 'none';
+    }, 550);
   }
 
   bindEvents() {

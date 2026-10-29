@@ -165,6 +165,29 @@ export class PlaybackController {
   }
 
   /**
+   * Enable or disable auto slow-motion on intercepts.
+   * @param {boolean} enabled
+   */
+  setAutoSlowMo(enabled) {
+    this.autoSlowMoEnabled = !!enabled;
+  }
+
+  /**
+   * Check if any missile transitioned to intercept or impact and trigger auto slow-mo.
+   * @param {Object} frame Display frame
+   */
+  checkAutoSlowMo(frame) {
+    if (!this.autoSlowMoEnabled || this.autoSlowMoTimer > 0.0 || !frame || !frame.missiles) return;
+    const missiles = frame.missiles;
+    for (let m = 0; m < missiles.length; m++) {
+      if (missiles[m].status === 1.0 || missiles[m].status === 2.0) {
+        this.triggerAutoSlowMo();
+        break;
+      }
+    }
+  }
+
+  /**
    * Set user-requested speed multiplier.
    * @param {number} speed Multiplier (0.05 to 8.0)
    */
@@ -357,12 +380,26 @@ export class PlaybackController {
 
     // Interpolate Drones
     const numDrones = Math.min(frameB.drones.length, 1000);
+    while (target.drones.length < numDrones) {
+      target.drones.push({
+        id: target.drones.length,
+        type: 0,
+        x: 0, y: 0, z: 0,
+        vx: 0, vy: 0, vz: 0,
+        status: 0,
+        assigned_id: -1,
+      });
+    }
     target.drones.length = numDrones;
 
     for (let i = 0; i < numDrones; i++) {
       const dA = frameA.drones[i] || frameB.drones[i];
       const dB = frameB.drones[i];
-      const dOut = target.drones[i];
+      let dOut = target.drones[i];
+      if (!dOut) {
+        dOut = { id: i, type: 0, x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, status: 0, assigned_id: -1 };
+        target.drones[i] = dOut;
+      }
 
       dOut.id = dB.id;
       dOut.type = dB.type;
@@ -391,12 +428,26 @@ export class PlaybackController {
 
     // Interpolate Missiles
     const numMissiles = Math.min(frameB.missiles.length, 1000);
+    while (target.missiles.length < numMissiles) {
+      target.missiles.push({
+        id: target.missiles.length,
+        type: 2,
+        x: 0, y: 0, z: 0,
+        vx: 0, vy: 0, vz: 0,
+        status: 0,
+        assigned_id: -1,
+      });
+    }
     target.missiles.length = numMissiles;
 
     for (let j = 0; j < numMissiles; j++) {
       const mA = frameA.missiles[j] || frameB.missiles[j];
       const mB = frameB.missiles[j];
-      const mOut = target.missiles[j];
+      let mOut = target.missiles[j];
+      if (!mOut) {
+        mOut = { id: j, type: 2, x: 0, y: 0, z: 0, vx: 0, vy: 0, vz: 0, status: 0, assigned_id: -1 };
+        target.missiles[j] = mOut;
+      }
 
       mOut.id = mB.id;
       mOut.type = mB.type;
